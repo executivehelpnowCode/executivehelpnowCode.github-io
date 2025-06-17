@@ -1047,6 +1047,19 @@
 //         link: "https://executivehelpnow.org/team-members#423d4fb6-9d88-4cda-b89b-ea331c9ce766"
 //  },
  {
+        name: "Renee",
+        experience: "5+ years",
+        hours: "21-30 hours",
+        certificate: "None",
+        certificationInfo: "",
+        originalSkills: [], 
+        standardizedSkills: [],
+        tools: [],
+        otherNeedsReview:[],  
+        remarks: "",
+        link: "https://executivehelpnow.org/team-members#7fc239c0-64c7-41ba-9424-20eb2aaf391c"
+ },
+ {
         name: "Raquel",
         experience: "5+ years",
         hours: "21-30 hours",
@@ -1202,6 +1215,9 @@
         
         return matchExperience && matchCertificate && matchSkills && matchTools && matchAvailability;
       });
+
+      // ✅ Sort alphabetically by name
+      filtered.sort((a, b) => a.name.localeCompare(b.name));
 
       filteredResults = filtered;
 
