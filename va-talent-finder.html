@@ -174,7 +174,7 @@
   <div class="filters row g-4">
 
     <!-- Experience -->
-    <div class="col-md-4">
+    <div class="col-12 col-md-3">
       <label for="experience" class="form-label">Years of Experience:</label>
       <select id="experience" class="form-select">
         <option value="">-- Select --</option>
@@ -185,7 +185,7 @@
     </div>
 
     <!-- Availability -->
-    <div class="col-md-4">
+    <div class="col-12 col-md-3">
       <label for="availability" class="form-label">Weekly Availablity:</label>
       <select id="availability" class="form-select">
         <option value="">-- Select --</option>
@@ -197,8 +197,8 @@
     </div>
 
     <!-- Certificate -->
-    <div class="col-md-4">
-      <label class="form-label d-block">With *Certificate:</label>
+    <div class="col-12 col-md-3">
+      <label class="form-label d-block">With Certificate*:</label>
       <label class="form-label d-block notes-label">*Refers to certificates from reputable platforms, reflecting up-to-date skills and a commitment to continuous learning.</label>
       <div class="form-check form-check-inline">
         <input type="radio" id="certYes" name="certificate" value="Yes" class="form-check-input">
@@ -207,6 +207,20 @@
       <div class="form-check form-check-inline">
         <input type="radio" id="certNone" name="certificate" value="None" class="form-check-input">
         <label for="certNone" class="form-check-label ">No</label>
+      </div>
+    </div>
+
+    <!-- Education -->
+    <div class="col-12 col-md-3">
+      <label class="form-label d-block">With Education*:</label>
+      <!-- <label class="form-label d-block notes-label">*Refers to certificates from reputable platforms, reflecting up-to-date skills and a commitment to continuous learning.</label> -->
+      <div class="form-check form-check-inline">
+        <input type="radio" id="educationYes" name="educationLevel" value="Yes" class="form-check-input">
+        <label for="educationYes" class="form-check-label">Yes</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input type="radio" id="educationNone" name="educationLevel" value="None" class="form-check-input">
+        <label for="educationNone" class="form-check-label ">No</label>
       </div>
     </div>
 
@@ -260,7 +274,7 @@
       "Business Strategy & Planning","Calendar Management","Content & Copywriting",
       "CRM Tools","Customer Service","Data Entry & Management",
       "Digital Marketing","Education & Academic Support","Email Management","Event Planning",
-      "Executive & Administrative Support","Google Workspace","Graphic Design",
+      "Executive and Administrative Support","Google Workspace","Graphic Design",
       "Grant Writing","HR & Payroll Support","Inventory & Procurement",
       "Marketing Communications","Microsoft Office","Operations & Facility Support",
       "Performance & Metrics Tracking","Podcast Production","Presentation & Slide Design",
@@ -274,6 +288,30 @@
       "Canva", "Slack", "Adobe", "Zoom", "Asana", "Trello", "QuickBooks", "Photoshop", "ADP", "CapCut",
       "Pro", "Teams", "CRM", "ChatGPT", "ClickUp", "Descript", "HubSpot", "Platforms", "Suite", "WordPress"
     ];
+
+    const getBadge = (level) => {
+    const levels = {
+      "Growth Starter": "bg-success bg-opacity-50",
+      "Momentum Builder": "bg-success",
+      "Elite Growth": "bg-primary"
+    };
+
+    const badgeClass = levels[level] || "bg-secondary";
+
+    return `
+      <span class="badge ${badgeClass}">
+        ${level}
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+             class="bi bi-award ms-1" viewBox="0 0 16 16">
+          <path d="M9.669.864 8 0 6.331.864l-1.858.282-.842 1.68-1.337 1.32L2.6 6l-.306 
+                   1.854 1.337 1.32.842 1.68 1.858.282L8 12l1.669-.864 
+                   1.858-.282.842-1.68 1.337-1.32L13.4 6l.306-1.854-1.337-1.32-.842-1.68z"/>
+          <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 
+                   13.126l-1.982-.926L4 11.794z"/>
+        </svg>
+      </span>
+    `;
+  };
     
 
     const vaList = [
@@ -282,7 +320,9 @@
         experience: "5+ years",
         hours: "11-20 hours",
         certificate: "Yes",
-        certificationInfo: "Certification in Art Direction Certification in Media production",
+        certificationInfo: `Certification in Art Direction, Certification in Media Production ${getBadge("Growth Starter")}`,
+        educationLevel:"Yes",
+        educationInfo:"Bachelor’s Degree: Radio, Television and Digital Media",
         originalSkills: ["Administrative Support & Data Entry", "Audio", "Video & Multimedia Production", "Camera Operation", "Videography & Photography", "Canva & Design Tools","Content Creation & Strategy (Instagram, LinkedIn, TikTok)", "Copywriting", "Creative Writing & Editing", "Digital Marketing (Email, Social, Organic & Paid Ads)", "Email & Social Media Campaign Management", "Event Planning & Coordination", "Graphic & Web Design", "Marketing & Brand Strategy", "Presentation & Slideshow Design", "Project & Team Management (Asana, Trello, Notion)", "Real Estate Photo Editing (Photoshop, Lightroom)", "Talent Management", "Training & Onboarding", "Workflow & Process Optimization"],
         standardizedSkills: [
                             "Advocacy & Social Services",
@@ -298,6 +338,7 @@
                             "Education & Academic Support",
                             "Email Management",
                             "Event Planning",
+                            "Executive and Administrative Support",
                             "Google Workspace",
                             "Grant Writing",
                             "Graphic Design",
@@ -330,6 +371,8 @@
         hours: "0-10 hours",
         certificate: "None",
         certificationInfo: "",
+        educationLevel:"Yes",
+        educationInfo:"Bachelor’s Degree: Education Major: Elementary Education (Grades 1-8) Minor: English",
         originalSkills: ["Adaptability & Problem-Solving", "Attention to Detail, Collaboration & Relationship Building", "Communication & Public Speaking", "Compassion & Emotional Intelligence", "Conflict Resolution & Mediation", "Curriculum Development", "Data Management & Organization", "Decision-Making & Leadership", "Educational Program Development","Event Planning & Coordination", "Instructional Design & Teaching", "Logistics & Operational Planning, Mentorship & Training", "Office Administration", "Project & Volunteer Management", "Research & Analysis", "Technology Proficiency", "Time Management & Prioritization", "Trauma-Informed & Inclusive Education"],
         standardizedSkills: [
   "Artificial Intelligence",
@@ -340,6 +383,7 @@
   "Education & Academic Support",
   "Email Management",
   "Event Planning",
+  "Executive and Administrative Support",
   "Google Workspace",
   "Microsoft Office",
   "Presentation & Slide Design",
@@ -357,8 +401,10 @@
         name: "Angelica",
         experience: "5+ years",
         hours: "31-40 hours",
-        certificate: "Yes",
-        certificationInfo: "VA Training Philippines VA/SMM Training ProVA Philippines General Virtual Assistance Training ProVA Philippines Executive Assistant Training ProVA Philippines Lead Generation and Email Marketing Training",
+        certificate: "Yes",        
+        certificationInfo: `VA Training Philippines VA/SMM Training ProVA Philippines General Virtual Assistance Training ProVA Philippines Executive Assistant Training ProVA Philippines Lead Generation and Email Marketing Training ${getBadge("Growth Starter")}`,
+        educationLevel:"Yes",
+        educationInfo:"Associate’s Degree: Computer Technology",
         originalSkills: ["Administrative Support", "Basic Graphic Design (Canva, Adobe Photoshop)", "Calendar & Meeting Management", "Coaching and Mentoring", "Customer Support & Communication", "Data Collection & Research", "Data Entry & Organization", "Email Handling & Inbox Optimization", "Email & Calendar Management", "Google Suite (Docs, Drive, Forms, Sheets, Slides)", "Microsoft Office (Excel, Outlook, PowerPoint, Word)", "Post Scheduling & Social Media Management", "SurveyMonkey"],
         standardizedSkills: ["Artificial Intelligence",
   "Business Operations",
@@ -367,7 +413,8 @@
   "CRM Tools",
   "Customer Service",
   "Data Entry & Management",
-  "Email Management",
+  "Education & Academic Support",
+  "Executive and Administrative Support",
   "Google Workspace",
   "Graphic Design",
   "Microsoft Office",
@@ -387,6 +434,8 @@
         hours: "21-30 hours",
         certificate: "None",
         certificationInfo: "",
+        educationLevel:"None",
+        educationInfo:"",
         originalSkills: ["Asana & Trello", "Board Vantage Software", "Box & Dropbox", "Concur & Expensify", "DealCloud", "G Suite Applications (Drive, Docs, Sheets, etc.)" ,"GoToMeeting & WebEx", "LinkSquares Software", "Microsoft Office 365 (Word, Excel, PowerPoint, Outlook, Teams)", "QuickBooks", "Salesforce & Zoho CRM", "SharePoint", "Slack & Team Communication Tools (Zoom, Teams, WebEx, Slack)", "SurveyMonkey", "Windows 11"],
         standardizedSkills: [
   "Artificial Intelligence",
@@ -398,6 +447,7 @@
   "Education & Academic Support",
   "Email Management",
   "Event Planning",
+  "Executive and Administrative Support",
   "Google Workspace",
   "HR & Payroll Support",
   "Microsoft Office",
@@ -425,6 +475,8 @@
         hours: "0-10 hours",
         certificate: "None",
         certificationInfo: "",
+        educationLevel:"Yes",
+        educationInfo:"Bachelor’s Degree: Electrical Engineering",
         originalSkills: ["Audience Research & Market Analysis", "Blog & eBook Writing", "Brand Marketing & Community Management", "Calendar Scheduling & Task Management","Communication", "Coordination & Customer Support", "Compliance & Quality Control", "Content Research & Copywriting", "Cost Reduction & Process Optimization","Creative Storytelling & Topic Outlining", "Data Analysis & Research Documentation", "Data Entry & File Organization", "Email Management & Technical Assistance","Facebook & Instagram Management", "Graphic, Layout & Cover Design", "Infographic & Poster Creation", "Manufacturing Process Improvement & Automation", "Podcast Graphics Creation & Design", "Podcast Setup", "Problem-Solving & Workflow Organization", "Process Analysis & Yield Improvement", "Social Media Content Creation & Engagement", "Social Media Strategy & Brand Development"],
         standardizedSkills: [
   "Artificial Intelligence",
@@ -433,6 +485,7 @@
   "CRM Tools",
   "Data Entry & Management",
   "Digital Marketing",
+  "Executive and Administrative Support",
   "Google Workspace",
   "Graphic Design",
   "Microsoft Office",
@@ -454,6 +507,8 @@
         hours: "31-40 hours",
         certificate: "None",
         certificationInfo: "",
+        educationLevel:"Yes",
+        educationInfo:"Master of Arts - MA, International Relations and Politics",
         originalSkills: ["Audience Research & Market Analysis", "Blog & eBook Writing", "Brand Marketing & Community Management", "Calendar Scheduling & Task Management","Communication", "Coordination & Customer Support", "Compliance & Quality Control", "Content Research & Copywriting", "Cost Reduction & Process Optimization","Creative Storytelling & Topic Outlining", "Data Analysis & Research Documentation", "Data Entry & File Organization", "Email Management & Technical Assistance","Facebook & Instagram Management", "Graphic, Layout & Cover Design", "Infographic & Poster Creation", "Manufacturing Process Improvement & Automation", "Podcast Graphics Creation & Design", "Podcast Setup", "Problem-Solving & Workflow Organization", "Process Analysis & Yield Improvement", "Social Media Content Creation & Engagement", "Social Media Strategy & Brand Development"],
         standardizedSkills: [
   "Artificial Intelligence",
@@ -466,6 +521,7 @@
   "Digital Marketing",
   "Email Management",
   "Event Planning",
+  "Executive and Administrative Support",
   "Travel Coordination",
   "Google Workspace",
   "Microsoft Office",
@@ -486,6 +542,8 @@
         hours: "0-10 hours",
         certificate: "None",
         certificationInfo: "",
+        educationLevel:"None",
+        educationInfo:"",
         originalSkills: ["Accounts payable and financial management","Appointment and calendar management","Business process improvement","Client relationship management","CRM and scheduling software proficiency","Data entry and records management","Drafting and preparing correspondence","Event planning and coordination","Expense tracking and reimbursement processing","Financial auditing and compliance","IT troubleshooting and technical support","Merchandising and inventory management","Microsoft Office Suite (Excel, Word, Outlook, PowerPoint)","Multitasking and time management","Office organization and task prioritization","Problem-solving and conflict resolution","Sales consulting, support, and upselling","Strong verbal and written communication","Supporting executive-level leadership","Training and coaching employees"],       
         standardizedSkills: [
   "Artificial Intelligence",
@@ -498,7 +556,8 @@
   "Data Entry & Management",
   "Digital Marketing",
   "Email Management",
-  "Event Planning",
+  "Event Planning",  
+  "Executive and Administrative Support",
   "Google Workspace",
   "Graphic Design",
   "HR & Payroll Support",
@@ -534,13 +593,16 @@
         experience: "5+ years",
         hours: "0-10 hours",
         certificate: "None",  
-        certificationInfo: "",      
+        certificationInfo: "",
+        educationLevel:"Yes",
+        educationInfo:"Doctorate: Juris Doctor (Law)",     
         originalSkills: ["Administrative Support", "Advocacy & Client Support", "Antitrust & Competition Law", "Asylum & Immigration Applications", "Case Management", "Child Welfare & Adoption Advocacy", "Court Support & Representation", "Ethics & Policy Evaluation", "Fee Waiver & Financial Relief Requests", "Immigration & Legal Research", "Judicial & Legal Document Drafting", "Legal Interpretation & Translation", "Legal Writing & Report Preparation", "Mentorship & Training", "Office & Case Management Software", "Policy & Legislative Research", "Regulatory Compliance & Reporting", "Social Service Coordination", "Technology & Productivity Tools", "Trial & Hearing Preparation"],          
         standardizedSkills: [
   "Advocacy & Social Services",
   "Artificial Intelligence",
   "Business Operations",
   "Customer Service",
+  "Executive and Administrative Support",
   "Google Workspace",
   "Microsoft Office",
   "Presentation & Slide Design",
@@ -559,7 +621,9 @@
         experience: "5+ years",
         hours: "31-40 hours",
         certificate: "Yes",
-        certificationInfo: "Online Learning Course in Canva, Online Learning Course in Data Entry, Online Learning Course in Graphics Design, Online Learning Course in Lead Generation, Online Learning Course in Facebook Advertising, Online Learning Course in Social Media Management, 5-Hour QuickBooks Online Advance Training, Administrative Assistant Course, Freelance Artist Course, General Virtual Assistant Course, Real Estate Virtual Assistant Course, Social Media Management Course, Share Data Through the Art of Visualization, Analyze Data to Answer Questions, Process Data from Dirty to Clean, Prepare Data for Exploration, Ask Questions to Make Data-Driven Decisions, Foundations: Data, Data, Everywhere, Webinar on Data Analytics with Excel for Beginners, 15-hour e-Commerce Course, Webinar on Data Analytics with Excel for Beginners",
+        educationLevel:"Yes",
+        educationInfo:"Bachelor’s Degree: Food Technology",
+        certificationInfo: `Online Learning Course in Canva, Online Learning Course in Data Entry, Online Learning Course in Graphics Design, Online Learning Course in Lead Generation, Online Learning Course in Facebook Advertising, Online Learning Course in Social Media Management, 5-Hour QuickBooks Online Advance Training, Administrative Assistant Course, Freelance Artist Course, General Virtual Assistant Course, Real Estate Virtual Assistant Course, Social Media Management Course, Share Data Through the Art of Visualization, Analyze Data to Answer Questions, Process Data from Dirty to Clean, Prepare Data for Exploration, Ask Questions to Make Data-Driven Decisions, Foundations: Data, Data, Everywhere, Webinar on Data Analytics with Excel for Beginners, 15-hour e-Commerce Course, Webinar on Data Analytics with Excel for Beginners ${getBadge("Elite Growth")}`,
         originalSkills: ["Administrative Support", "Basic Graphic Design (Canva, Adobe Photoshop)", "Cash Handling & Security Procedures", "Customer Service", "Data Encoding & Management", "Document & File Management", "Event Coordination & Planning", "Financial & Sales Analysis", "Google Spreadsheet Proficiency", "Inventory & Stock Management", "Leadership & Team Supervision", "Marketing & Sales Knowledge", "Microsoft Office (Word, Excel, PowerPoint)", "Operations & Process Improvement", "Report Preparation & Documentation", "Store Setup & Maintenance", "Task Delegation & Workforce Scheduling", "Team Training & Coaching"], 
         standardizedSkills: [
   "Artificial Intelligence",
@@ -568,6 +632,7 @@
   "Digital Marketing",
   "Education & Academic Support",
   "Email Management",
+  "Executive and Administrative Support",
   "Google Workspace",
   "Graphic Design",
   "Microsoft Office",
@@ -587,6 +652,8 @@
         hours: "21-30 hours",
         certificate: "None",
         certificationInfo: "",
+        educationLevel:"Yes",
+        educationInfo:"Bachelor’s Degree: Hotel and Restaurant Management",
         originalSkills: ["Basic Graphic Design", "Bookkeeping", "Calendar and Schedule Management", "Canva Design Skills", "Caption Writing with Hashtags", "Client and Team Communication", "Competitor Analysis & Market Research", "Conflict Resolution", "Content Creation & Social Media Management", "CRM Tools Experience", "Customer Inquiry Handling", "Data Entry & Organization", "Document Creation & Formatting", "Email Inbox & Newsletter Management", "File Management", "Google Workspace & Microsoft Office Proficiency", "Managing Multiple Projects & Meeting deadlines", "Media Production", "Meeting Coordination & Follow-up", "Prioritizing Tasks & Professional Email Writing"],  
        standardizedSkills: [
   "Artificial Intelligence",
@@ -598,6 +665,8 @@
   "Customer Service",
   "Data Entry & Management",
   "Email Management",
+  "Event Planning",
+  "Executive and Administrative Support",
   "Google Workspace",
   "Graphic Design",
   "Microsoft Office",
@@ -617,6 +686,8 @@
         hours: "11-20 hours",
         certificate: "None",
         certificationInfo: "",
+        educationLevel:"Yes",
+        educationInfo:"Bachelor’s Degree: Information Technology (IT)",
         originalSkills: ["Adobe After Effects", "Adobe Photoshop", "Adobe Premiere", "Airtable", "Appointment Setting & Calendar Management", "Canva", "Commitment & Independence", "Communication & Organization", "Concentration & Attention to Detail", "Google Calendar", "Google Docs", "Google Gmail", "Google Sheets", "Google Slides", "Macro Excel & Microsoft Excel", "Microsoft OneDrive", "Microsoft Outlook", "Microsoft PowerPoint", "Microsoft SharePoint", "MS Dynamics & Zendesk"],  
         standardizedSkills: [
   "Artificial Intelligence",
@@ -626,6 +697,7 @@
   "Customer Service",
   "Data Entry & Management",
   "Email Management",
+  "Executive and Administrative Support",
   "Google Workspace",
   "Graphic Design",
   "Microsoft Office",
@@ -648,6 +720,8 @@
         hours: "0-10 hours",
         certificate: "None",
         certificationInfo: "",
+        educationLevel:"Yes",
+        educationInfo:"Bachelor’s Degree: Biology and Psychology",
         originalSkills: ["Administrative Support & Office Organization", "Appointment, Calendar & Task Management", "Budget Reconciliation & Invoice Processing", "Client Communication & Customer Service", "Data Collection, Analysis & Reporting", "Database & Records Management", "Document Preparation & Filing", "Event Coordination & Scheduling", "Human Resources Assistance", "Interview Facilitation & Hiring Support", "Job Posting, Applicant Tracking & Onboarding", "Process Improvement & Workflow Optimization", "Project Coordination & Management", "Reception, Phone & Email Handling", "Team Collaboration & Time Management"],  
         standardizedSkills: [
   "Artificial Intelligence",
@@ -659,6 +733,7 @@
   "Data Entry & Management",
   "Email Management",
   "Event Planning",
+  "Executive and Administrative Support",
   "Google Workspace",
   "HR & Payroll Support",
   "Microsoft Office",
@@ -679,6 +754,8 @@
         hours: "0-10 hours",
         certificate: "None",
         certificationInfo: "",
+        educationLevel:"Yes",
+        educationInfo:"Bachelor’s Degree: Healthcare Management and Policy",
         originalSkills: ["Academic Advising & Student Support", "Administrative Organization & Workflow Management", "Classroom Management & Curriculum Development", "Client Relations & Customer Outreach", "Compliance, Auditing & Data Management", "Content Creation & Copywriting", "Digital Marketing & Sales Campaigns", "Email Marketing & Newsletter Creation", "Employee Recruitment & Onboarding", "English Language Instruction & Exam Preparation", "Event Coordination & Public Speaking", "Market Research & Survey Analysis", "Social Media Management & Strategy", "Training & Professional Development", "Resume Screening & Interview Scheduling"],   
         standardizedSkills: [
   "Artificial Intelligence",
@@ -690,6 +767,7 @@
   "Education & Academic Support",
   "Email Management",
   "Event Planning",
+  "Executive and Administrative Support",
   "Google Workspace",
   "Microsoft Office",
   "Team Communication Tools",
@@ -733,6 +811,8 @@
         hours: "0-10 hours",
         certificate: "None",
         certificationInfo: "",
+        educationLevel:"Yes",
+        educationInfo:"Associate’s Degree: Human Resource Management",
         originalSkills: ["Active Listening", "Call Handling", "Coaching and Mentoring", "Communication Skills", "Conflict Resolution", "Customer Service", "Data Entry and Documentation", "Email Correspondence", "Interpersonal Skills", "Multitasking", "Performance Evaluation", "Problem-Solving", "Process Improvement", "Quality Assurance", "Team Leadership", "Technical Support", "Time Management", "Training and Development", "Workplace Adaptability", "Workflow Optimization"   ],  
         standardizedSkills: [
   "Artificial Intelligence",
@@ -740,6 +820,7 @@
   "Customer Service",
   "Data Entry & Management",
   "Email Management",
+  "Executive and Administrative Support",
   "Performance & Metrics Tracking",
   "Team Communication Tools",
   "Training & Development Support"
@@ -755,11 +836,14 @@
         hours: "0-10 hours",
         certificate: "None",
         certificationInfo: "",
+        educationLevel:"Yes",
+        educationInfo:"Bachelor’s Degree: Finance, Master’s Degree: Business Administration, Certification: Certified Management Accountant",
         originalSkills: ["Audit & Compliance", "Budgeting & Forecasting", "Business Continuity & Risk Management", "Business Strategy & Development", "Cash Flow & Treasury Management", "Change & Process Management", "Conflict Resolution & Problem-Solving", "Contract & Procurement Management", "Cross-Functional Collaboration", "Data Analysis & Performance Metrics", "Decision-Making & Leadership", "Employee Development & Training", "Financial Modeling & Reporting", "Operational Budgeting & Cost Efficiency", "Organizational Development", "Policy Development & Implementation", "Project Management & Execution", "Quality Assurance & Control"  ],  
         standardizedSkills: [
   "Artificial Intelligence",
   "Bookkeeping",
   "Business Operations",
+  "Executive and Administrative Support",
   "Inventory & Procurement",
   "Project Management",
   "Research & Data Analysis",
@@ -775,18 +859,21 @@
         name: "Louie",
         experience: "5+ years",
         hours: "11-20 hours",
-        certificate: "Yes",
-        certificationInfo: "Scrum Fundamentals Certified (SFC), Six Sigma Yellow Belt, Shopify E-Commerce Websites for Beginners & Freelancers",
+        certificate: "Yes",       
+        certificationInfo: `Scrum Fundamentals Certified (SFC), Six Sigma Yellow Belt, Shopify E-Commerce Websites for Beginners & Freelancers ${getBadge("Growth Starter")}`,
+        educationLevel:"Yes",
+        educationInfo:"Bachelor’s Degree: Information Technology (IT), Associate’s Degree: Computer Electronics Technology",
         originalSkills: ["Code Review & Release Management", "Communication & Stakeholder Management", "Documentation & Issue Tracking", "Front-End & Back-End Integration", "IT Consulting & Technology Optimization", "Leading Development Teams", "Managing Project Life Cycle", "Merging Code & Version Control", "Process Improvement in SDLC", "Project Planning & Timeline Management", "Project Scope & Deliverables Definition", "Quality Assurance & Testing Oversight", "Software Development Lifecycle (SDLC) Management", "System Setup & Maintenance", "Team Collaboration & Leadership", "UI/UX Design & Prototyping", "Website Design & Development", "Workstream Monitoring & Escalation"], 
         standardizedSkills: [
   "Artificial Intelligence",
-  "Business Operations",
   "Data Entry & Management",
+  "Executive and Administrative Support",
   "Graphic Design",
-  "Operations & Facility Support",
   "Project Management",
+  "Research & Data Analysis",
   "Team Communication Tools",
-  "Training & Development Support"
+  "Training & Development Support",
+  "Web & Content Management"
 ],
         tools: ["Adobe Photoshop", "CSS3", "DaVinci Resolve", "Elementor", "Google Calendar", "Google Docs", "Google Sheets", "Google Slides", "HTML5", "JavaScript", "Microsoft Excel", "Microsoft Outlook", "Microsoft Powerpoint", "Microsoft Word", "PHP", "ReactJS", "Sony Vegas Pro", "WordPress"],
         otherNeedsReview:["Code Review & Release Management", "Front-End & Back-End Integration", "IT Consulting & Technology Optimization", "Merging Code & Version Control", "Process Improvement in SDLC", "Quality Assurance & Testing Oversight", "Workstream Monitoring & Escalation"],  
@@ -798,11 +885,14 @@
         name: "Mae",
         experience: "5+ years",
         hours: "0-10 hours",
-        certificate: "Yes",
-        certificationInfo: "LinkedIn Certification, Delegating from a Distance, Project Management Skills for Leaders",
+        certificate: "Yes",   
+        certificationInfo: `LinkedIn Certification, Delegating from a Distance, Project Management Skills for Leaders ${getBadge("Growth Starter")}`,
+        educationLevel:"Yes",
+        educationInfo:"Bachelor’s Degree: Computer Science",
         originalSkills: ["Claims Processing & Dispute Resolution", "Coaching, Mentoring & Leadership", "Content Creation, Copywriting & Podcast Production", "Curriculum Design & Training Facilitation", "Customer Service & Support", "Data Entry & Management", "Facebook Ads & Social Media Marketing", "General Technical Support & Troubleshooting", "Media Production", "Onboarding & Training Facilitation", "Process Documentation & Record Keeping", "Sales, Upselling & Customer Retention", "Social Media Engagement & Community Management", "Social Media Management & Strategy", "Teaching & Development Programs", "Workflow Optimization & Efficiency"], 
         standardizedSkills: [
   "Artificial Intelligence",
+  "Bilingual",
   "Business Operations",
   "Calendar Management",
   "Content & Copywriting",
@@ -811,6 +901,7 @@
   "Digital Marketing",
   "Education & Academic Support",
   "Email Management",
+  "Executive and Administrative Support",
   "Google Workspace",
   "Graphic Design",
   "Microsoft Office",
@@ -834,16 +925,18 @@
         hours: "0-10 hours",
         certificate: "None",
         certificationInfo: "",
+        educationLevel:"Yes",
+        educationInfo:"Bachelor’s Degree: Arts, Master’s Degree: Organizational Leadership",
         originalSkills: ["Calendar, Scheduling & Travel Coordination", "CEO & Executive Support", "Communication, Correspondence & Presentation Preparation", "Confidential Information Handling & Data Security", "Conflict Resolution, Mediation & Team Leadership", "Corporate & Event Planning", "Customer Support & Satisfaction Enhancement", "Data Entry, Documentation Accuracy & Record Maintenance", "Decision-Making, Strategy Execution & Goal Alignment", "Employee Training, Development & Motivation", "Financial Tracking, Expense Reporting & Invoice Processing", "HR Policy Enforcement, Talent Acquisition & Recruitment"], 
         standardizedSkills: [
-          "Artificial Intelligence",
-          "Bookkeeping",
+          "Artificial Intelligence",        
           "Business Operations",
           "Business Strategy & Planning",
           "Calendar Management",
           "Customer Service",
           "Data Entry & Management",
           "Event Planning",
+          "Executive and Administrative Support",
           "HR & Payroll Support",
           "Team Communication Tools",
           "Training & Development Support",
@@ -860,6 +953,8 @@
         hours: "0-10 hours",
         certificate: "None",
         certificationInfo: "",
+        educationLevel:"Yes",
+        educationInfo:"Bachelor’s Degree: Forensic Sciences and Criminology",
         originalSkills: ["Administrative Task Execution", "Advanced Calendar & Schedule Management", "Advanced MS Office Suite Proficiency", "Audit-Readiness & Compliance", "Billing, Invoicing & Payment Follow-Ups", "Bookkeeping & Financial Transaction Management", "Confidential Information & Financial Data Security", "Customer Inquiry Resolution & Guest Satisfaction", "Daily Sales Report Reconciliation & Financial Accuracy", "Front Desk & Guest Check-In/Out Management", "Meeting Coordination & Reservation Management", "Reservation System & Booking Process Optimization (Ericsoft Suite 5)", "Room Allocation & Travel Itinerary Coordination", "Travel & Accommodation Coordination", "Financial Documentation & Report Preparation"], 
         standardizedSkills: [
           "Artificial Intelligence",
@@ -867,7 +962,7 @@
           "CRM Tools",
           "Customer Service",
           "Data Entry & Management",
-          "Executive & Administrative Support",
+          "Executive and Administrative Support",
           "Google Workspace",
           "Microsoft Office"],
         tools: ["Ericsoft Suite 5", "Microsoft Excel", "Microsoft Outlook", "Microsoft Powerpoint", "Microsoft Word", "Xero"],
@@ -879,8 +974,10 @@
         name: "Racheed",
         experience: "3-4 years",
         hours: "31-40 hours",
-        certificate: "Yes",
-        certificationInfo: "City & Guilds (2023) Level 3 Award in Customer Service (First Class Pass)",
+        certificate: "Yes",       
+        certificationInfo: `City & Guilds (2023) Level 3 Award in Customer Service (First Class Pass) ${getBadge("Growth Starter")}`,
+        educationLevel:"Yes",
+        educationInfo:"Bachelor’s Degree: Human Resource Management, Minor: Management Studies",
         originalSkills: ["Business Development", "Client Relationship Management", "Communication & Interpersonal Skills", "CRM & Database Management", "Customer Service", "Data Analysis & Reporting", "Exam Registration & Processing", "Invoicing & Financial Coordination", "Market Research & Analysis", "Marketing & Public Relations", "Microsoft Office Suite", "Negotiation & Persuasion", "Onboarding & Client Training", "Operations Management", "Performance Tracking", "Presentation & Public Speaking", "Project & Task Management", "Sales Strategy & Execution", "Stakeholder Engagement", "Training Material Development"], 
         standardizedSkills: ["Artificial Intelligence",
           "Business Operations",
@@ -890,7 +987,7 @@
           "Customer Service",
           "Data Entry & Management",
           "Email Management",
-          "Executive & Administrative Support",
+          "Executive and Administrative Support",
           "Google Workspace",
           "Microsoft Office",
           "Presentation & Slide Design",
@@ -909,6 +1006,8 @@
         hours: "0-10 hours",
         certificate: "None",
         certificationInfo: "",
+        educationLevel:"Yes",
+        educationInfo:"Bachelor’s Degree: Business Administration, Associate’s Degree: Business Management",
         originalSkills: ["Call Center Management", "Client Relationship Management", "Coaching & Team Leadership", "Compliance & Risk Management", "Construction Management & Oversight", "Continuous Improvement & Process Optimization", "Cross-Functional Collaboration", "Customer Experience Enhancement", "Employee Training & Development", "Executive Engagement & Stakeholder Management", "Forecasting & Strategic Planning", "Growth Strategy & Market Expansion", "High-Performance Team Development", "Operational Efficiency & Scalability", "Performance Metrics & KPI Management", "Project Management & Scheduling", "Quality Control & Assurance", "Sales & Revenue Growth", "Strategic Leadership & Thought Leadership", "Workforce Optimization & Productivity"], 
         standardizedSkills: ["Artificial Intelligence",
             "Bookkeeping",
@@ -921,7 +1020,7 @@
             "Data Entry & Management",
             "Email Management",
             "Event Planning",
-            "Executive & Administrative Support",
+            "Executive and Administrative Support",
             "Google Workspace",
             "Grant Writing",
             "Graphic Design",
@@ -952,11 +1051,14 @@
         hours: "0-10 hours",
         certificate: "None",
         certificationInfo: "",
+        educationLevel:"Yes",
+        educationInfo:"Bachelor’s Degree: Business Communications, Associate’s Degree: Business Administration",
         originalSkills: ["Asana & Slack", "Calendar & Travel Management", "Cross-Functional Collaboration", "Event Planning & Coordination", "Executive Support & Strategic Coordination", "GoDaddy & Etsy Management", "Google Suite (Docs, Sheets, Drive)", "Microsoft Office (Excel, PowerPoint, Word)", "Project Management", "Stakeholder Engagement", "Task & Workflow Organization", "Team & Communication Tools (Zoom, Skype)"], 
         standardizedSkills: ["Artificial Intelligence",
             "Business Operations",
             "Calendar Management",
             "Event Planning",
+            "Executive and Administrative Support",
             "Google Workspace",
             "Microsoft Office",
             "Project Management",
@@ -974,6 +1076,8 @@
         hours: "0-10 hours",
         certificate: "None",
         certificationInfo: "",
+        educationLevel:"Yes",
+        educationInfo:"Associate’s Degree: Visual Communications",
         originalSkills: ["Administrative Support", "Business Communication", "Compliance & Confidentiality", "Customer Service & Conflict Resolution", "Contract & Legal Documentation", "Data & Database Management", "Event & Employee Engagement", "Expense & Budget Management", "Financial Transactions & Processing", "IT & Software Proficiency", "Marketing & Sales Support", "Process Improvement & Efficiency", "Real Estate & Referral Coordination", "Report Generation & Data Analysis", "Travel & Logistics Coordination" ],
         standardizedSkills: ["Artificial Intelligence",
             "Bookkeeping",
@@ -981,6 +1085,7 @@
             "Customer Service",
             "Data Entry & Management",
             "Event Planning",
+            "Executive and Administrative Support",
             "Real Estate Agent Support",
             "Real Estate Investor Support",
             "Research & Data Analysis",
@@ -997,11 +1102,14 @@
         hours: "0-10 hours",
         certificate: "None",
         certificationInfo: "",
+        educationLevel:"Yes",
+        educationInfo:"Bachelor’s Degree: Engineering",
         originalSkills: ["A/B Testing", "Brand Engagement", "Business Consulting", "Campaign Management", "Client Management", "Content Creation", "Copywriting", "Data Interpretation", "Email Marketing", "Graphic Design", "Market Research", "Process Improvement", "Project Management", "SEO Optimization", "Social Media Advertising", "Social Media Analytics", "Social Media Management", "Social Media Strategy", "Stakeholder Communication", "Workflow Optimization"], 
         standardizedSkills: ["Artificial Intelligence",
             "Business Operations",
             "Content & Copywriting",
             "Digital Marketing",
+            "Executive and Administrative Support",
             "Graphic Design",
             "Project Management",
             "Research & Data Analysis",
@@ -1017,6 +1125,8 @@
         hours: "0-10 hours",
         certificate: "None",
         certificationInfo: "",
+        educationLevel:"Yes",
+        educationInfo:"Bachelor’s Degree: Sociology, Minor: Gender and Women's Studies",
         originalSkills: ["Artistic Design & Product Development", "Auditing, Financial Management & Bookkeeping", "Business Operations & Self-Employment", "Cash Handling, Transaction Processing & Sales", "Cleaning, Facility Maintenance & Organization", "Creative Problem-Solving & Critical Thinking", "Customer Service & Relationship Building", "Data Entry, Record-Keeping & Scheduling", "Leadership, Team Management & Mentoring", "Marketing, Branding & Social Media Strategy", "Microsoft Office & Digital Tools Proficiency", "Multitasking, Time Management & Efficiency"], 
         standardizedSkills: ["Artificial Intelligence",
           "Bookkeeping",
@@ -1024,6 +1134,7 @@
           "Customer Service",
           "Data Entry & Management",
           "Digital Marketing",
+          "Executive and Administrative Support",
           "Google Workspace",
           "Inventory & Procurement",
           "Microsoft Office",
@@ -1052,6 +1163,8 @@
         hours: "21-30 hours",
         certificate: "None",
         certificationInfo: "",
+        educationLevel:"Yes",
+        educationInfo:"Bachelor’s Degree: Business Management",
         originalSkills: [], 
         standardizedSkills: [],
         tools: [],
@@ -1063,9 +1176,11 @@
         name: "Raquel",
         experience: "5+ years",
         hours: "21-30 hours",
-        certificate: "Yes",
-        certificationInfo: "Certification in Brand Management",
-        originalSkills: ["Marketing Communications", "Calendar Management", "Content Strategy & Copywriting", "Content Management Systems (WordPress, SharePoint, AEM)", "Email Marketing & Campaign Management", "Video Editing & Graphic Design", "Microsoft 365 Suiteicor", "Project Management", "Executive & Administrative Support", "Event Planning & Coordination", "Stakeholder Engagement", "Digital Analytics & Reporting", "Bilingual"], 
+        certificate: "Yes",        
+        certificationInfo: `Certification in Brand Management ${getBadge("Growth Starter")}`,
+        educationLevel:"Yes",
+        educationInfo:"Bachelor’s Degree: Arts, Spanish, and Psychology",
+        originalSkills: ["Marketing Communications", "Calendar Management", "Content Strategy & Copywriting", "Content Management Systems (WordPress, SharePoint, AEM)", "Email Marketing & Campaign Management", "Video Editing & Graphic Design", "Microsoft 365 Suiteicor", "Project Management", "Executive and Administrative Support", "Event Planning & Coordination", "Stakeholder Engagement", "Digital Analytics & Reporting", "Bilingual"], 
         standardizedSkills: ["Artificial Intelligence",
             "Bilingual",
             "Business Operations",
@@ -1076,8 +1191,7 @@
             "Data Entry & Management",
             "Digital Marketing",
             "Email Management",
-            "Executive & Administrative Support",
-            "Executive & Administrative Support",
+            "Executive and Administrative Support",            
             "Google Workspace",
             "Microsoft Office",
             "Operations & Facility Support",
@@ -1103,6 +1217,7 @@
     const toolSuggestions = document.getElementById('toolSuggestions');
     const selectedToolsContainer = document.getElementById('selectedTools');
     const certificateRadios = document.getElementsByName('certificate');
+    const educationRadios = document.getElementsByName('educationLevel');
 
     let selectedCategories = [];
     let selectedTools = [];
@@ -1182,16 +1297,19 @@
     experienceSelect.addEventListener('change', filterResults);
     availabilitySelect.addEventListener('change', filterResults);
     certificateRadios.forEach(radio => radio.addEventListener('change', filterResults));
+    educationRadios.forEach(radio => radio.addEventListener('change', filterResults));
 
     function filterResults() {
       const experience = experienceSelect.value;
       const availability = availabilitySelect.value;
       const certificate = Array.from(certificateRadios).find(r => r.checked)?.value;
+      const educationLevel = Array.from(educationRadios).find(r => r.checked)?.value;
       resultsContainer.innerHTML = '';
 
       const filtered = vaList.filter(va => {
         const matchExperience = !experience || va.experience === experience;
         const matchCertificate = !certificate || va.certificate === certificate;
+        const matchEducationLevel = !educationLevel || va.educationLevel === educationLevel;
         const matchSkills = selectedCategories.length === 0 || selectedCategories.some(cat => va.standardizedSkills.includes(cat));
         const matchTools = selectedTools.length === 0 || selectedTools.every(selectedTool => 
           va.tools.some(t => t.toLowerCase().includes(selectedTool.toLowerCase()))
@@ -1213,7 +1331,7 @@
           matchAvailability = vaHourValue >= selectedHourValue;
         }
         
-        return matchExperience && matchCertificate && matchSkills && matchTools && matchAvailability;
+        return matchExperience && matchCertificate && matchEducationLevel && matchSkills && matchTools && matchAvailability;
       });
 
       // ✅ Sort alphabetically by name
@@ -1231,6 +1349,7 @@
         card.className = 'va-card';
         card.id = `va-card-${index}`;
         const certificationHTML = va.certificate !== "None" && va.certificationInfo ? `<p><strong>List of Certificates:</strong> ${va.certificationInfo}</p>` : '';
+        const educationHTML = va.educationLevel !== "None" && va.educationInfo ? `<p><strong>List of Education:</strong> ${va.educationInfo}</p>` : '';
         
         let selectionControls = '';
         if (filtered.length > 2) {
@@ -1256,6 +1375,8 @@
           <p><strong>Weekly Availablity:</strong> ${va.hours}</p>
           <p><strong>Certificate:</strong> ${va.certificate}</p>
           ${certificationHTML}
+          <p><strong>Education Level:</strong> ${va.educationLevel}</p>
+          ${educationHTML}
           <p><strong>Skills:</strong> ${va.standardizedSkills.join(', ')}</p>
           <p><strong>Tools:</strong> ${va.tools.join(', ')}</p>
           
@@ -1386,6 +1507,11 @@
     <strong>Certification:</strong> ${va.certificationInfo || ''}
   </p>
 `;
+const educationInfo = `
+    <p class="${va.educationLevel === "None" ? 'hidden' : ''}">
+      <strong>Education:</strong> ${va.educationInfo || ''}
+    </p>
+  `;
       tempDiv.innerHTML += `
         <div class="va-card">
           <h3>${va.name} (${priority})</h3>
@@ -1393,6 +1519,7 @@
           <p><strong>Hours Available:</strong> ${va.hours}</p>
           <p><strong>Certificate:</strong> ${va.certificate}</p>
           ${certInfo}
+          ${educationInfo}
           <p><strong>Skills:</strong> ${va.standardizedSkills.join(', ')}</p>
           <p><strong>Tools:</strong> ${va.tools.join(', ')}</p>
           <p><strong>Remarks:</strong> ${va.remarks}</p>
