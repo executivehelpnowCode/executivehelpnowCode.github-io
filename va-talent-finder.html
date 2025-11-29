@@ -1,59 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Talent Finder</title>
   <style>
-    body { font-family: Arial, sans-serif; padding: 20px; }
-    .filters, .results { margin-bottom: 30px; }
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    .filters,
+    .results {
+      margin-bottom: 30px;
+    }
+
     /* .checkbox-group { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 10px; } */
     .checkbox-group {
-  display: grid;
-  grid-template-columns: 1fr; /* Change to 1 column */
-  gap: 10px;
-  margin-top: 10px; 
-  max-height: 300px; /* or any height you prefer */
-  overflow-y: auto;  /* Enable vertical scrolling */
-}
-
-    .checkbox-group label { display: flex; align-items: center; font-size: 11px !important; }
-    .va-card { border: 1px solid #ccc; border-radius: 8px; padding: 15px; margin-bottom: 15px; position: relative;  }
-    .va-card h3 { margin-top: 0; }
-    .va-card.highlighted { background-color: #f0f8ff; border-color: #4CAF50; border-width: 2px; }
-    .selection-controls { 
-      position: absolute; 
-      top: 10px; 
-      right: 10px; 
-      display: flex; 
-      flex-direction: column; 
-      gap: 5px; 
+      display: grid;
+      grid-template-columns: 1fr;
+      /* Change to 1 column */
+      gap: 10px;
+      margin-top: 10px;
+      max-height: 300px;
+      /* or any height you prefer */
+      overflow-y: auto;
+      /* Enable vertical scrolling */
     }
-    .selection-controls label { 
-      display: flex; 
-      align-items: center; 
-      font-size: 0.9em; 
+
+    .checkbox-group label {
+      display: flex;
+      align-items: center;
+      font-size: 11px !important;
+    }
+
+    .va-card {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 15px;
+      position: relative;
+    }
+
+    .va-card h3 {
+      margin-top: 0;
+    }
+
+    .va-card.highlighted {
+      background-color: #f0f8ff;
+      border-color: #4CAF50;
+      border-width: 2px;
+    }
+
+    .selection-controls {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .selection-controls label {
+      display: flex;
+      align-items: center;
+      font-size: 0.9em;
       cursor: pointer;
     }
-    .selection-controls input[type="radio"] { 
-      margin-right: 5px; 
+
+    .selection-controls input[type="radio"] {
+      margin-right: 5px;
     }
-    form { margin-top: 30px; padding: 15px; border: 1px solid #ccc; border-radius: 8px; }
-    form label { display: block; margin-bottom: 10px; }
-    form input, form textarea { width: 100%; padding: 8px; margin-top: 5px; box-sizing: border-box; }
+
+    form {
+      margin-top: 30px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    form label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    form input,
+    form textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      box-sizing: border-box;
+    }
+
     form button {
       margin-top: 10px;
       padding: 10px 20px;
       cursor: pointer;
     }
+
     form button:disabled {
       opacity: 0.6;
       cursor: not-allowed;
     }
+
     .tool-search-container {
       margin-top: 20px;
       position: relative;
     }
+
     .tool-search-container input {
       width: 100%;
       padding: 8px;
@@ -62,6 +117,7 @@
       border: 1px solid #ccc;
       border-radius: 6px;
     }
+
     .tool-suggestions {
       list-style: none;
       padding: 0;
@@ -76,19 +132,23 @@
       z-index: 10;
       display: none;
     }
+
     .tool-suggestions li {
       padding: 8px;
       cursor: pointer;
     }
+
     .tool-suggestions li:hover {
       background-color: #f0f0f0;
     }
+
     .selected-tags {
       margin-top: 0.5rem;
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
     }
+
     .selected-tags span {
       background-color: #038388;
       padding: 4px 8px;
@@ -99,283 +159,299 @@
       align-items: center;
       gap: 4px;
     }
+
     .selected-tags span .remove {
       cursor: pointer;
       font-weight: bold;
     }
+
     .hidden {
-  display: none;
-}
-/* Basic styling for the checkbox group */
-.checkbox-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  padding: 10px;
-}
+      display: none;
+    }
 
-/* Each label (checkbox option) */
-.checkbox-group label {
-   flex: 1 1 calc(25% - 12px); /* 4 columns on desktop */
-  display: flex;
-  align-items: center;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  background-color: #f9f9f9;
-  font-size: 14px;
-  cursor: pointer;
-}
+    /* Basic styling for the checkbox group */
+    .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 10px;
+    }
 
-/* Improve checkbox visibility */
-.checkbox-group input[type="checkbox"] {
-  margin-right: 8px;
-}
+    /* Each label (checkbox option) */
+    .checkbox-group label {
+      flex: 1 1 calc(25% - 12px);
+      /* 4 columns on desktop */
+      display: flex;
+      align-items: center;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      background-color: #f9f9f9;
+      font-size: 14px;
+      cursor: pointer;
+    }
 
-/* Responsive behavior for smaller screens */
-@media (max-width: 600px) {
-  .checkbox-group label {
-    flex: 1 1 100%; /* Stack vertically on small screens */
-    font-size: 16px;
-  }
-}
-#toolSuggestions {
-  list-style-type: none; /* Remove bullets */
-  padding-left: 0;        /* Remove default left padding */
-  margin-top: 0.5rem;
-}
+    /* Improve checkbox visibility */
+    .checkbox-group input[type="checkbox"] {
+      margin-right: 8px;
+    }
 
-#toolSuggestions li {
-  padding: 8px 12px;
-  cursor: pointer;
-  border-bottom: 1px solid #ddd;
-}
+    /* Responsive behavior for smaller screens */
+    @media (max-width: 600px) {
+      .checkbox-group label {
+        flex: 1 1 100%;
+        /* Stack vertically on small screens */
+        font-size: 16px;
+      }
+    }
 
-#toolSuggestions li:hover {
-  background-color: #f1f1f1;
-}
+    #toolSuggestions {
+      list-style-type: none;
+      /* Remove bullets */
+      padding-left: 0;
+      /* Remove default left padding */
+      margin-top: 0.5rem;
+    }
 
-.notes{
-  font-size: 12px;
-  font-style: italic;
-  margin-top: -5px;
-  color: #4C5265;
-}
-.notes-label{
-  font-size: 12px;
-  margin-top: -10px;
-  font-style: italic;
-  color: #4C5265;
-}
-h1, h2 {
-            color: #0056b3 !important;
-            margin-bottom: 20px;
-            font-weight: 600;
-        }
+    #toolSuggestions li {
+      padding: 8px 12px;
+      cursor: pointer;
+      border-bottom: 1px solid #ddd;
+    }
 
-        @media (max-width: 1181px){
-.va-card {
-           flex: 0 0 auto;
+    #toolSuggestions li:hover {
+      background-color: #f1f1f1;
+    }
+
+    .notes {
+      font-size: 12px;
+      font-style: italic;
+      margin-top: -5px;
+      color: #4C5265;
+    }
+
+    .notes-label {
+      font-size: 12px;
+      margin-top: -10px;
+      font-style: italic;
+      color: #4C5265;
+    }
+
+    h1,
+    h2 {
+      color: #0056b3 !important;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    @media (max-width: 1181px) {
+      .va-card {
+        flex: 0 0 auto;
         width: 47.666667% ! IMPORTANT;
-}
-}
-        @media (max-width: 1000px){
-.va-card {
-           flex: 0 0 auto;
+      }
+    }
+
+    @media (max-width: 1000px) {
+      .va-card {
+        flex: 0 0 auto;
         width: 98% ! IMPORTANT;
-}
-}
-.profile-img {
+      }
+    }
+
+    .profile-img {
       width: 40px;
       height: 40px;
       object-fit: cover;
       border-radius: 50%;
     }
-
   </style>
   <!-- Include Bootstrap CSS (if not already included) -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <script>
     emailjs.init('dg0On3YROtJY-u4fQ'); // Replace with your actual public key
   </script>
 </head>
+
 <body>
   <div class="container-fluid my-5">
-  <h1 class="mb-4 text-center">Talent Finder</h1>
+    <h1 class="mb-4 text-center">Talent Finder</h1>
 
 
-  <div class="card">
-    <div class="card-header">
-      <h5 class="text-primary">Filter Virtual Assistants</h5>
+    <div class="card">
+      <div class="card-header">
+        <h5 class="text-primary">Filter Virtual Assistants</h5>
+      </div>
+      <!-- Filters Section -->
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <div class="filters row g-4 pt-4">
+            <!-- Experience -->
+            <div class="col-12 col-md-3">
+              <h6 for="experience" class="form-label">Years of Experience:</h6>
+              <select id="experience" class="form-select">
+                <!-- <option value="">-- Select --</option> -->
+                <option value="">Any</option>
+                <option value="5+ years">5+ years</option>
+                <option value="3-4 years">3-4 years</option>
+                <option value="1-2 years">1-2 years</option>
+              </select>
+            </div>
+
+            <!-- Availability -->
+            <div class="col-12 col-md-3">
+              <h6 for="availability" class="form-label">Weekly Availablity:</h6>
+              <select id="availability" class="form-select">
+                <!-- <option value="">-- Select --</option> -->
+                <option value="">Any</option>
+                <option value="0-10 hours">0-10 hours</option>
+                <option value="11-20 hours">11-20 hours</option>
+                <option value="21-30 hours">21-30 hours</option>
+                <option value="31-40 hours">31-40 hours</option>
+              </select>
+            </div>
+
+            <!-- Certificate -->
+            <div class="col-12 col-md-3">
+              <h6 class="form-label d-block">With Certificate*:</h6>
+              <label class="form-label d-block notes-label">*Refers to certificates from reputable platforms, reflecting
+                up-to-date skills and a commitment to continuous learning.</label>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="certificate" id="certAny" value="" checked>
+                <label class="form-check-label" for="certAny">Any</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input type="radio" id="certYes" name="certificate" value="Yes" class="form-check-input">
+                <label for="certYes" class="form-check-label">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input type="radio" id="certNone" name="certificate" value="None" class="form-check-input">
+                <label for="certNone" class="form-check-label ">No</label>
+              </div>
+            </div>
+
+            <!-- Education -->
+            <div class="col-12 col-md-3">
+              <h6 class="form-label d-block">College Degree Required*:</h6>
+              <!-- <label class="form-label d-block notes-label">*Refers to certificates from reputable platforms, reflecting up-to-date skills and a commitment to continuous learning.</label> -->
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="educationLevel" id="eduAny" value="" checked>
+                <label class="form-check-label" for="eduAny">Any</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input type="radio" id="educationYes" name="educationLevel" value="Yes" class="form-check-input">
+                <label for="educationYes" class="form-check-label">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input type="radio" id="educationNone" name="educationLevel" value="None" class="form-check-input">
+                <label for="educationNone" class="form-check-label ">No</label>
+              </div>
+            </div>
+
+            <!-- Categories -->
+            <div class="col-12 col-lg-8">
+              <h6>Choose as many categories as you want – no limits!</h6>
+              <p class="notes">Note: More selections may refine but limit your results, while fewer may lead to faster,
+                broader options.</p>
+              <div class="checkbox-group row g-2" id="categoryCheckboxes">
+                <!-- Dynamically inserted checkboxes go here -->
+              </div>
+            </div>
+
+            <!-- Tool Search -->
+            <div class="col-12 col-12 col-lg-4">
+              <div class="tool-search-container mb-3">
+                <h6 for="toolInput" class="form-label">Filter by Tools:</h6>
+                <input type="text" id="toolInput" class="form-control" placeholder="Type to search tools..."
+                  autocomplete="off">
+                <ul id="toolSuggestions" class="list-group mt-2"></ul>
+                <div id="selectedTools" class="selected-tags mt-2"></div>
+              </div>
+            </div>
+          </div>
+
+        </li>
+
+      </ul>
     </div>
-  <!-- Filters Section -->
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">
-        <div class="filters row g-4 pt-4">
-          <!-- Experience -->
-          <div class="col-12 col-md-3">
-            <h6 for="experience" class="form-label">Years of Experience:</h6>
-            <select id="experience" class="form-select">
-              <!-- <option value="">-- Select --</option> -->
-              <option value="">Any</option>
-              <option value="5+ years">5+ years</option>
-              <option value="3-4 years">3-4 years</option>
-              <option value="1-2 years">1-2 years</option>
-            </select>
-          </div>
-      
-          <!-- Availability -->
-          <div class="col-12 col-md-3">
-            <h6 for="availability" class="form-label">Weekly Availablity:</h6>
-            <select id="availability" class="form-select">
-              <!-- <option value="">-- Select --</option> -->
-              <option value="">Any</option>
-              <option value="0-10 hours">0-10 hours</option>
-              <option value="11-20 hours">11-20 hours</option>
-              <option value="21-30 hours">21-30 hours</option>
-              <option value="31-40 hours">31-40 hours</option>
-            </select>
-          </div>
-      
-          <!-- Certificate -->
-          <div class="col-12 col-md-3">
-            <h6 class="form-label d-block">With Certificate*:</h6>
-            <label class="form-label d-block notes-label">*Refers to certificates from reputable platforms, reflecting up-to-date skills and a commitment to continuous learning.</label>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="certificate" id="certAny" value="" checked>
-              <label class="form-check-label" for="certAny">Any</label>
-          </div>
-            <div class="form-check form-check-inline">
-              <input type="radio" id="certYes" name="certificate" value="Yes" class="form-check-input">
-              <label for="certYes" class="form-check-label">Yes</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input type="radio" id="certNone" name="certificate" value="None" class="form-check-input">
-              <label for="certNone" class="form-check-label ">No</label>
-            </div>
-          </div>
-      
-          <!-- Education -->
-          <div class="col-12 col-md-3">
-            <h6 class="form-label d-block">College Degree Required*:</h6>
-            <!-- <label class="form-label d-block notes-label">*Refers to certificates from reputable platforms, reflecting up-to-date skills and a commitment to continuous learning.</label> -->
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="educationLevel" id="eduAny" value="" checked>
-              <label class="form-check-label" for="eduAny">Any</label>
-          </div>
-            <div class="form-check form-check-inline">
-              <input type="radio" id="educationYes" name="educationLevel" value="Yes" class="form-check-input">
-              <label for="educationYes" class="form-check-label">Yes</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input type="radio" id="educationNone" name="educationLevel" value="None" class="form-check-input">
-              <label for="educationNone" class="form-check-label ">No</label>
-            </div>
-          </div>
-      
-          <!-- Categories -->
-          <div class="col-12 col-lg-8">
-            <h6>Choose as many categories as you want – no limits!</h6>
-            <p class="notes">Note: More selections may refine but limit your results, while fewer may lead to faster, broader options.</p>
-            <div class="checkbox-group row g-2" id="categoryCheckboxes">
-              <!-- Dynamically inserted checkboxes go here -->
-            </div>
-          </div>
-      
-          <!-- Tool Search -->
-          <div class="col-12 col-12 col-lg-4">
-            <div class="tool-search-container mb-3">
-              <h6 for="toolInput" class="form-label">Filter by Tools:</h6>
-              <input type="text" id="toolInput" class="form-control" placeholder="Type to search tools..." autocomplete="off">
-              <ul id="toolSuggestions" class="list-group mt-2"></ul>
-              <div id="selectedTools" class="selected-tags mt-2"></div>
-            </div>
-          </div>
-        </div>
-        
-      </li>
-    
-    </ul>
-  </div>
 
 
-  <div class="card mt-3">
-    <div class="card-header">
-      <h5 class="text-primary">Matching Virtual Assistants</h5>      
+    <div class="card mt-3">
+      <div class="card-header">
+        <h5 class="text-primary">Matching Virtual Assistants</h5>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <!-- Results Display -->
+          <div class="results mt-4 row" id="results">
+            <!-- Search results will appear here -->
+          </div>
+
+        </li>
+
+      </ul>
     </div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">
-         <!-- Results Display -->
-      <div class="results mt-4 row" id="results">
-        <!-- Search results will appear here -->
+
+
+
+    <!-- Email Form -->
+    <form id="userForm" class="mt-5">
+      <h4>Send Results</h4>
+
+      <div class="mb-3">
+        <label for="userEmail" class="form-label">Your Email:</label>
+        <input type="email" id="userEmail" class="form-control" required>
       </div>
 
-      </li>
-      
-    </ul>
+      <div class="mb-3">
+        <label for="userRemarks" class="form-label">Additional Remarks:</label>
+        <textarea id="userRemarks" class="form-control" rows="4"></textarea>
+      </div>
+
+      <button type="submit" id="submitBtn" class="btn btn-primary">Send VA Results</button>
+    </form>
+
   </div>
-
- 
-
-  <!-- Email Form -->
-  <form id="userForm" class="mt-5">
-    <h4>Send Results</h4>
-
-    <div class="mb-3">
-      <label for="userEmail" class="form-label">Your Email:</label>
-      <input type="email" id="userEmail" class="form-control" required>
-    </div>
-
-    <div class="mb-3">
-      <label for="userRemarks" class="form-label">Additional Remarks:</label>
-      <textarea id="userRemarks" class="form-control" rows="4"></textarea>
-    </div>
-
-    <button type="submit" id="submitBtn" class="btn btn-primary">Send VA Results</button>
-  </form>
-
-</div>
 
   <script>
     const categories = [
-    "Advocacy & Social Services","Artificial Intelligence","Bookkeeping","Business Operations","Bilingual",
-      "Business Strategy & Planning","Calendar Management","Content & Copywriting",
-      "CRM Tools","Customer Service","Data Entry & Management",
-      "Digital Marketing","Education & Academic Support","Email Management","Event Planning",
-      "Executive and Administrative Support","Google Workspace","Graphic Design",
-      "Grant Writing","HR & Payroll Support","Inventory & Procurement",
-      "Marketing Communications","Microsoft Office","Operations & Facility Support",
-      "Performance & Metrics Tracking","Podcast Production","Presentation & Slide Design",
-      "Process Improvement & Workflow Optimization","Project Management","Real Estate Agent Support",
-      "Real Estate Investor Support","Research & Data Analysis","Specialized Software",
-      "Stakeholder Engagement","Survey & Form Management","Team Communication Tools",
-      "Training & Development Support","Travel Coordination","Vendor Management","Web & Content Management"
+      "Advocacy & Social Services", "Artificial Intelligence", "Bookkeeping", "Business Operations", "Bilingual",
+      "Business Strategy & Planning", "Calendar Management", "Content & Copywriting",
+      "CRM Tools", "Customer Service", "Data Entry & Management",
+      "Digital Marketing", "Education & Academic Support", "Email Management", "Event Planning",
+      "Executive and Administrative Support", "Google Workspace", "Graphic Design",
+      "Grant Writing", "HR & Payroll Support", "Inventory & Procurement",
+      "Marketing Communications", "Microsoft Office", "Operations & Facility Support",
+      "Performance & Metrics Tracking", "Podcast Production", "Presentation & Slide Design",
+      "Process Improvement & Workflow Optimization", "Project Management", "Real Estate Agent Support",
+      "Real Estate Investor Support", "Research & Data Analysis", "Specialized Software",
+      "Stakeholder Engagement", "Survey & Form Management", "Team Communication Tools",
+      "Training & Development Support", "Travel Coordination", "Vendor Management", "Web & Content Management"
     ];
     const tools = [
-      "Microsoft", "Google", "Ericsoft Suite 5", "Excel", "Outlook", "PowerPoint", "Word", "Docs", "Sheets", "Calendar", "Slides","Zapier","Adobe After Effects","Elementor","HTML5","JavaScript","Square","Stripe","Typeform","Weebly",
-      "Canva", "Slack", "Adobe", "Zoom", "Asana", "Trello", "QuickBooks", "Photoshop", "ADP", "CapCut","InShot","StreamYard","Zendesk","Adobe Premiere","Power BI","PHP","ReactJS","Loom","Meta Business Suite","Qualtrics",
-      "Pro", "Teams", "CRM", "ChatGPT", "ClickUp", "Descript", "HubSpot", "Platforms", "Suite", "WordPress","AI Chatbots","Airtable", "MS Dynamics","SQL","Zoho","Sony Vegas Pro","Jitsi","Jotform","Shopify","SharePoint",
-      "Aspect", "Avaya POM/CMS", "CosmoCom", "Embrace", "Gmail","Google Calendar", "Google Docs", "Google Sheets","Pixlr","Adobe Lightroom","Constant Contact","Evernote","Monday.com","iCalendar","iOS platform", "Smartsheets",
-      "Google Slides", "GPT-powered Solutions", "IVR Systems", "LiveChat", "Microsoft Excel", "Microsoft Outlook", "HubSpot CRM","17 Hats","Adobe Photoshop & Lightroom","Fathom","Poppulo","Clockify","FunnelStreams","Ringy",
-      "Microsoft PowerPoint", "Microsoft Word", "NICE", "Real-Time Analytics Dashboards", "Salesforce", "Tableau","Freshdesk","Beautiful AI","Dialpad","PandaDoc","Pipedrive","Peoplesoft","Camtasia","Calendly","Facebook","Dropbox",
-      "Verint","ViciDial", "WFM Systems", "Workforce Analytics Platforms", "Zenefits", "Workday", "ServiceNow","Final Cut Pro","Pixieset","Wix","CSS3","DaVinci Resolve","Cortana","LastPass","Campaign Monitor","Buffer","Stata","Instagram",
-      "Paylocity","Harvest","Adobe Photoshop","Notion","SurveyMonkey","Talkpush","WebEx","Board Vantage Software","DealCloud","Figma","Vyond","Squarespace","GoDaddy","1Password","Concur","GroupMe","Otter AI","Siri","TripIt","Twitter","Netsuite with OpenAir",
-      "Expensify","LinkSquares Software","Microsoft SharePoint","ADP Payroll","MailChimp","MailerLite","WiseStamp","Adobe Premiere Pro","VideoBolt","Xero","SAP","Adobe Creative Suite","Adobe Experience Manager","Acuity Scheduling","LinkedIn"
+      "Microsoft", "Google", "Ericsoft Suite 5", "Excel", "Outlook", "PowerPoint", "Word", "Docs", "Sheets", "Calendar", "Slides", "Zapier", "Adobe After Effects", "Elementor", "HTML5", "JavaScript", "Square", "Stripe", "Typeform", "Weebly",
+      "Canva", "Slack", "Adobe", "Zoom", "Asana", "Trello", "QuickBooks", "Photoshop", "ADP", "CapCut", "InShot", "StreamYard", "Zendesk", "Adobe Premiere", "Power BI", "PHP", "ReactJS", "Loom", "Meta Business Suite", "Qualtrics",
+      "Pro", "Teams", "CRM", "ChatGPT", "ClickUp", "Descript", "HubSpot", "Platforms", "Suite", "WordPress", "AI Chatbots", "Airtable", "MS Dynamics", "SQL", "Zoho", "Sony Vegas Pro", "Jitsi", "Jotform", "Shopify", "SharePoint",
+      "Aspect", "Avaya POM/CMS", "CosmoCom", "Embrace", "Gmail", "Google Calendar", "Google Docs", "Google Sheets", "Pixlr", "Adobe Lightroom", "Constant Contact", "Evernote", "Monday.com", "iCalendar", "iOS platform", "Smartsheets",
+      "Google Slides", "GPT-powered Solutions", "IVR Systems", "LiveChat", "Microsoft Excel", "Microsoft Outlook", "HubSpot CRM", "17 Hats", "Adobe Photoshop & Lightroom", "Fathom", "Poppulo", "Clockify", "FunnelStreams", "Ringy",
+      "Microsoft PowerPoint", "Microsoft Word", "NICE", "Real-Time Analytics Dashboards", "Salesforce", "Tableau", "Freshdesk", "Beautiful AI", "Dialpad", "PandaDoc", "Pipedrive", "Peoplesoft", "Camtasia", "Calendly", "Facebook", "Dropbox",
+      "Verint", "ViciDial", "WFM Systems", "Workforce Analytics Platforms", "Zenefits", "Workday", "ServiceNow", "Final Cut Pro", "Pixieset", "Wix", "CSS3", "DaVinci Resolve", "Cortana", "LastPass", "Campaign Monitor", "Buffer", "Stata", "Instagram",
+      "Paylocity", "Harvest", "Adobe Photoshop", "Notion", "SurveyMonkey", "Talkpush", "WebEx", "Board Vantage Software", "DealCloud", "Figma", "Vyond", "Squarespace", "GoDaddy", "1Password", "Concur", "GroupMe", "Otter AI", "Siri", "TripIt", "Twitter", "Netsuite with OpenAir",
+      "Expensify", "LinkSquares Software", "Microsoft SharePoint", "ADP Payroll", "MailChimp", "MailerLite", "WiseStamp", "Adobe Premiere Pro", "VideoBolt", "Xero", "SAP", "Adobe Creative Suite", "Adobe Experience Manager", "Acuity Scheduling", "LinkedIn"
     ];
 
     const getBadge = (level) => {
-    const levels = {
-      "Growth Starter": "bg-success bg-opacity-50",
-      "Momentum Builder": "bg-success",
-      "Elite Growth": "bg-primary"
-    };
+      const levels = {
+        "Growth Starter": "bg-success bg-opacity-50",
+        "Momentum Builder": "bg-success",
+        "Elite Growth": "bg-primary"
+      };
 
-    const badgeClass = levels[level] || "bg-secondary";
+      const badgeClass = levels[level] || "bg-secondary";
 
-    return `
+      return `
       <span class="badge ${badgeClass}">
         ${level}
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -388,768 +464,768 @@ h1, h2 {
         </svg>
       </span>
     `;
-  };
-    
+    };
+
 
     const vaList = [
-    {
-        name: "Amber",
-        profileImage:"https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Screenshot%202025-03-26%20114829.png/:/cr=t:0%25,l:3.07%25,w:93.87%25,h:100%25/rs=w:424,h:424,cg:true",
-        experience: "5+ years",
-        hours: "11-20 hours",
-        certificate: "Yes",
-        certificationInfo: `Certification in Art Direction, Certification in Media Production, Certificate for ClickUp Novice Certificate Exam ${getBadge("Growth Starter")}`,
-        educationLevel:"Yes",
-        educationInfo:"Bachelor’s Degree: Radio, Television and Digital Media",
-        originalSkills: ["Administrative Support & Data Entry", "Audio", "Video & Multimedia Production", "Camera Operation", "Videography & Photography", "Canva & Design Tools","Content Creation & Strategy (Instagram, LinkedIn, TikTok)", "Copywriting", "Creative Writing & Editing", "Digital Marketing (Email, Social, Organic & Paid Ads)", "Email & Social Media Campaign Management", "Event Planning & Coordination", "Graphic & Web Design", "Marketing & Brand Strategy", "Presentation & Slideshow Design", "Project & Team Management (Asana, Trello, Notion)", "Real Estate Photo Editing (Photoshop, Lightroom)", "Talent Management", "Training & Onboarding", "Workflow & Process Optimization"],
-        standardizedSkills: [
-"Advocacy & Social Services",
-"Artificial Intelligence",
-"Bilingual",
-"Business Operations",
-"Business Strategy & Planning",
-"Calendar Management",
-"Content & Copywriting",
-"CRM Tools",
-"Customer Service",
-"Data Entry & Management",
-"Digital Marketing",
-"Education & Academic Support",
-"Email Management",
-"Event Planning",
-"Executive and Administrative Support",
-"Google Workspace",
-"Grant Writing",
-"Graphic Design",
-"Inventory & Procurement",
-"Marketing Communications",
-"Microsoft Office",
-"Operations & Facility Support",
-"Performance & Metrics Tracking",
-"Podcast Production",
-"Presentation & Slide Design",
-"Process Improvement & Workflow Optimization",
-"Project Management",
-"Real Estate Agent Support",
-"Real Estate Investor Support",
-"Research & Data Analysis",
-"Specialized Software",
-"Stakeholder Engagement",
-"Survey & Form Management",
-"Team Communication Tools",
-"Training & Development Support",
-"Travel Coordination",
-"Web & Content Management"
-],
+      // {
+      //   name: "Amber",
+      //   profileImage: "https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Screenshot%202025-03-26%20114829.png/:/cr=t:0%25,l:3.07%25,w:93.87%25,h:100%25/rs=w:424,h:424,cg:true",
+      //   experience: "5+ years",
+      //   hours: "11-20 hours",
+      //   certificate: "Yes",
+      //   certificationInfo: `Certification in Art Direction, Certification in Media Production, Certificate for ClickUp Novice Certificate Exam ${getBadge("Growth Starter")}`,
+      //   educationLevel: "Yes",
+      //   educationInfo: "Bachelor’s Degree: Radio, Television and Digital Media",
+      //   originalSkills: ["Administrative Support & Data Entry", "Audio", "Video & Multimedia Production", "Camera Operation", "Videography & Photography", "Canva & Design Tools", "Content Creation & Strategy (Instagram, LinkedIn, TikTok)", "Copywriting", "Creative Writing & Editing", "Digital Marketing (Email, Social, Organic & Paid Ads)", "Email & Social Media Campaign Management", "Event Planning & Coordination", "Graphic & Web Design", "Marketing & Brand Strategy", "Presentation & Slideshow Design", "Project & Team Management (Asana, Trello, Notion)", "Real Estate Photo Editing (Photoshop, Lightroom)", "Talent Management", "Training & Onboarding", "Workflow & Process Optimization"],
+      //   standardizedSkills: [
+      //     "Advocacy & Social Services",
+      //     "Artificial Intelligence",
+      //     "Bilingual",
+      //     "Business Operations",
+      //     "Business Strategy & Planning",
+      //     "Calendar Management",
+      //     "Content & Copywriting",
+      //     "CRM Tools",
+      //     "Customer Service",
+      //     "Data Entry & Management",
+      //     "Digital Marketing",
+      //     "Education & Academic Support",
+      //     "Email Management",
+      //     "Event Planning",
+      //     "Executive and Administrative Support",
+      //     "Google Workspace",
+      //     "Grant Writing",
+      //     "Graphic Design",
+      //     "Inventory & Procurement",
+      //     "Marketing Communications",
+      //     "Microsoft Office",
+      //     "Operations & Facility Support",
+      //     "Performance & Metrics Tracking",
+      //     "Podcast Production",
+      //     "Presentation & Slide Design",
+      //     "Process Improvement & Workflow Optimization",
+      //     "Project Management",
+      //     "Real Estate Agent Support",
+      //     "Real Estate Investor Support",
+      //     "Research & Data Analysis",
+      //     "Specialized Software",
+      //     "Stakeholder Engagement",
+      //     "Survey & Form Management",
+      //     "Team Communication Tools",
+      //     "Training & Development Support",
+      //     "Travel Coordination",
+      //     "Web & Content Management"
+      //   ],
 
-        tools: ["ADP","Asana","Google Calendar","Google Docs","Google Sheets","Google Slides","Harvest","Microsoft Excel","Microsoft Outlook","Microsoft Powerpoint","Microsoft Word","Paylocity","ServiceNow","Slack","Trello","Workday","Zenefits"],
-        otherNeedsReview:["Talent Management, Training & Onboarding","Workflow & Process Optimization"],        
-        remarks: "I have not used Paylocity, ServiceNow, Workday, or Zenefits before in my work, and ADP I just started using with EHN for billing my own work I have not set it up before for other employees; I have used property finder before to update listings for real estate work in another country but I don't know what website would be the US equivalent. I haven't supported real estate investors before either-- just marketing and social media needs for real estate agents/ company. Also for the top of my resume I have 12 years of work experience.  I have some business management experience but it's not my strongest suit.--- the skills you mentioned in the first bio ( Amber) you created for me are more along my background experience (unless you are adjusting it specifically for real estate clients) = ALL GOOD",
-        link: "https://executivehelpnow.org/team-members#423d4fb6-9d88-4cda-b89b-ea331c9ce766"
-      },
+      //   tools: ["ADP", "Asana", "Google Calendar", "Google Docs", "Google Sheets", "Google Slides", "Harvest", "Microsoft Excel", "Microsoft Outlook", "Microsoft Powerpoint", "Microsoft Word", "Paylocity", "ServiceNow", "Slack", "Trello", "Workday", "Zenefits"],
+      //   otherNeedsReview: ["Talent Management, Training & Onboarding", "Workflow & Process Optimization"],
+      //   remarks: "I have not used Paylocity, ServiceNow, Workday, or Zenefits before in my work, and ADP I just started using with EHN for billing my own work I have not set it up before for other employees; I have used property finder before to update listings for real estate work in another country but I don't know what website would be the US equivalent. I haven't supported real estate investors before either-- just marketing and social media needs for real estate agents/ company. Also for the top of my resume I have 12 years of work experience.  I have some business management experience but it's not my strongest suit.--- the skills you mentioned in the first bio ( Amber) you created for me are more along my background experience (unless you are adjusting it specifically for real estate clients) = ALL GOOD",
+      //   link: "https://executivehelpnow.org/team-members#423d4fb6-9d88-4cda-b89b-ea331c9ce766"
+      // },
       {
         name: "Angela",
-        profileImage:"https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Screenshot%202025-03-26%20115524.png/:/cr=t:5.29%25,l:19.23%25,w:64.94%25,h:60.49%25/rs=w:598,h:598,cg:true,m",
+        profileImage: "https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Screenshot%202025-03-26%20115524.png/:/cr=t:5.29%25,l:19.23%25,w:64.94%25,h:60.49%25/rs=w:598,h:598,cg:true,m",
         experience: "5+ years",
         hours: "0-10 hours",
-        certificate: "Yes",       
+        certificate: "Yes",
         certificationInfo: `Certificate for ClickUp Novice Certificate Exam ${getBadge("Growth Starter")}`,
-        educationLevel:"Yes",
-        educationInfo:"Bachelor’s Degree: Education Major: Elementary Education (Grades 1-8) Minor: English",
-        originalSkills: ["Adaptability & Problem-Solving", "Attention to Detail, Collaboration & Relationship Building", "Communication & Public Speaking", "Compassion & Emotional Intelligence", "Conflict Resolution & Mediation", "Curriculum Development", "Data Management & Organization", "Decision-Making & Leadership", "Educational Program Development","Event Planning & Coordination", "Instructional Design & Teaching", "Logistics & Operational Planning, Mentorship & Training", "Office Administration", "Project & Volunteer Management", "Research & Analysis", "Technology Proficiency", "Time Management & Prioritization", "Trauma-Informed & Inclusive Education"],
+        educationLevel: "Yes",
+        educationInfo: "Bachelor’s Degree: Education Major: Elementary Education (Grades 1-8) Minor: English",
+        originalSkills: ["Adaptability & Problem-Solving", "Attention to Detail, Collaboration & Relationship Building", "Communication & Public Speaking", "Compassion & Emotional Intelligence", "Conflict Resolution & Mediation", "Curriculum Development", "Data Management & Organization", "Decision-Making & Leadership", "Educational Program Development", "Event Planning & Coordination", "Instructional Design & Teaching", "Logistics & Operational Planning, Mentorship & Training", "Office Administration", "Project & Volunteer Management", "Research & Analysis", "Technology Proficiency", "Time Management & Prioritization", "Trauma-Informed & Inclusive Education"],
         standardizedSkills: [
-  "Artificial Intelligence",
-  "Business Operations",
-  "Calendar Management",
-  "Customer Service",
-  "Data Entry & Management",
-  "Education & Academic Support",
-  "Email Management",
-  "Event Planning",
-  "Executive and Administrative Support",
-  "Google Workspace",
-  "Microsoft Office",
-  "Presentation & Slide Design",
-  "Research & Data Analysis",
-  "Survey & Form Management",
-  "Travel Coordination"
-],
+          "Artificial Intelligence",
+          "Business Operations",
+          "Calendar Management",
+          "Customer Service",
+          "Data Entry & Management",
+          "Education & Academic Support",
+          "Email Management",
+          "Event Planning",
+          "Executive and Administrative Support",
+          "Google Workspace",
+          "Microsoft Office",
+          "Presentation & Slide Design",
+          "Research & Data Analysis",
+          "Survey & Form Management",
+          "Travel Coordination"
+        ],
 
-        tools: ["Google Calendar","Google Docs","Google Sheets","Google Slides","Microsoft Excel","Microsoft Outlook","Microsoft Powerpoint","Microsoft Word"],
-        otherNeedsReview:["Adaptability & Problem-Solving","Attention to Detail","Compassion & Emotional Intelligence","Conflict Resolution & Mediation","Data Management & Organization","Decision-Making & Leadership","Technology Proficiency","Time Management & Prioritization","Trauma-Informed & Inclusive Education"],  
+        tools: ["Google Calendar", "Google Docs", "Google Sheets", "Google Slides", "Microsoft Excel", "Microsoft Outlook", "Microsoft Powerpoint", "Microsoft Word"],
+        otherNeedsReview: ["Adaptability & Problem-Solving", "Attention to Detail", "Compassion & Emotional Intelligence", "Conflict Resolution & Mediation", "Data Management & Organization", "Decision-Making & Leadership", "Technology Proficiency", "Time Management & Prioritization", "Trauma-Informed & Inclusive Education"],
         remarks: "I also have 20 years of experience in curriculum design and program development I am NOT a graphic designer and would need that removed from my competencies - ALL GOOD",
         link: "https://executivehelpnow.org/team-members#c67c219c-bb12-45d3-b426-a485e4ef49ca"
       },
       {
         name: "Angelica",
-        profileImage:"https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Angelica.jpg/:/cr=t:10.89%25,l:0%25,w:100%25,h:71.83%25/rs=w:730,h:730,cg:true",
+        profileImage: "https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Angelica.jpg/:/cr=t:10.89%25,l:0%25,w:100%25,h:71.83%25/rs=w:730,h:730,cg:true",
         experience: "5+ years",
         hours: "21-30 hours",
-        certificate: "Yes",        
+        certificate: "Yes",
         certificationInfo: `VA Training Philippines VA/SMM Training ProVA Philippines General Virtual Assistance Training ProVA Philippines Executive Assistant Training ProVA Philippines Lead Generation and Email Marketing Training, Certificate for ClickUp Novice Certificate Exam ${getBadge("Growth Starter")}`,
-        educationLevel:"Yes",
-        educationInfo:"Associate’s Degree: Computer Technology",
+        educationLevel: "Yes",
+        educationInfo: "Associate’s Degree: Computer Technology",
         originalSkills: ["Administrative Support", "Basic Graphic Design (Canva, Adobe Photoshop)", "Calendar & Meeting Management", "Coaching and Mentoring", "Customer Support & Communication", "Data Collection & Research", "Data Entry & Organization", "Email Handling & Inbox Optimization", "Email & Calendar Management", "Google Suite (Docs, Drive, Forms, Sheets, Slides)", "Microsoft Office (Excel, Outlook, PowerPoint, Word)", "Post Scheduling & Social Media Management", "SurveyMonkey"],
         standardizedSkills: ["Artificial Intelligence",
-  "Business Operations",
-  "Calendar Management",
-  "Content & Copywriting",
-  "CRM Tools",
-  "Customer Service",
-  "Data Entry & Management",
-  "Email Management",
-  "Executive and Administrative Support",
-  "Google Workspace",
-  "Graphic Design",
-  "Microsoft Office",
-  "Performance & Metrics Tracking",
-  "Presentation & Slide Design",
-  "Research & Data Analysis",
-  "Survey & Form Management",
-  "Training & Development Support"],
-        tools: ["Adobe Photoshop","Canva","CapCut","ChatGPT","Google Calendar","Google Docs","Google Sheets","Google Slides","Microsoft Excel","Microsoft Outlook","Microsoft Powerpoint","Microsoft Word","Notion","Slack","SurveyMonkey","Talkpush","Teams","Trello","WebEx","Zoom"],
-        otherNeedsReview:["Administrative Support","Graphic Design"],  
+          "Business Operations",
+          "Calendar Management",
+          "Content & Copywriting",
+          "CRM Tools",
+          "Customer Service",
+          "Data Entry & Management",
+          "Email Management",
+          "Executive and Administrative Support",
+          "Google Workspace",
+          "Graphic Design",
+          "Microsoft Office",
+          "Performance & Metrics Tracking",
+          "Presentation & Slide Design",
+          "Research & Data Analysis",
+          "Survey & Form Management",
+          "Training & Development Support"],
+        tools: ["Adobe Photoshop", "Canva", "CapCut", "ChatGPT", "Google Calendar", "Google Docs", "Google Sheets", "Google Slides", "Microsoft Excel", "Microsoft Outlook", "Microsoft Powerpoint", "Microsoft Word", "Notion", "Slack", "SurveyMonkey", "Talkpush", "Teams", "Trello", "WebEx", "Zoom"],
+        otherNeedsReview: ["Administrative Support", "Graphic Design"],
         remarks: "all good",
         link: "https://executivehelpnow.org/team-members-2#69191187-ecf2-4e22-b457-d97e672ee86b"
       },
       {
         name: "Ann",
-        profileImage:"https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Ann.jpg/:/cr=t:3.56%25,l:0%25,w:100%25,h:92.89%25/rs=w:730,h:730,cg:true",
+        profileImage: "https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Ann.jpg/:/cr=t:3.56%25,l:0%25,w:100%25,h:92.89%25/rs=w:730,h:730,cg:true",
         experience: "5+ years",
         hours: "21-30 hours",
         certificate: "Yes",
         certificationInfo: `Certificate for ClickUp Novice Certificate Exam ${getBadge("Growth Starter")}`,
-        educationLevel:"None",
-        educationInfo:"",
-        originalSkills: ["Asana & Trello", "Board Vantage Software", "Box & Dropbox", "Concur & Expensify", "DealCloud", "G Suite Applications (Drive, Docs, Sheets, etc.)" ,"GoToMeeting & WebEx", "LinkSquares Software", "Microsoft Office 365 (Word, Excel, PowerPoint, Outlook, Teams)", "QuickBooks", "Salesforce & Zoho CRM", "SharePoint", "Slack & Team Communication Tools (Zoom, Teams, WebEx, Slack)", "SurveyMonkey", "Windows 11"],
+        educationLevel: "None",
+        educationInfo: "",
+        originalSkills: ["Asana & Trello", "Board Vantage Software", "Box & Dropbox", "Concur & Expensify", "DealCloud", "G Suite Applications (Drive, Docs, Sheets, etc.)", "GoToMeeting & WebEx", "LinkSquares Software", "Microsoft Office 365 (Word, Excel, PowerPoint, Outlook, Teams)", "QuickBooks", "Salesforce & Zoho CRM", "SharePoint", "Slack & Team Communication Tools (Zoom, Teams, WebEx, Slack)", "SurveyMonkey", "Windows 11"],
         standardizedSkills: [
-  "Artificial Intelligence",
-  "Business Operations",
-  "Calendar Management",
-  "CRM Tools",
-  "Customer Service",
-  "Data Entry & Management",
-  "Education & Academic Support",
-  "Email Management",
-  "Event Planning",
-  "Executive and Administrative Support",
-  "Google Workspace",
-  "HR & Payroll Support",
-  "Microsoft Office",
-  "Operations & Facility Support",
-  "Presentation & Slide Design",
-  "Project Management",
-  "Real Estate Agent Support",
-  "Real Estate Investor Support",
-  "Specialized Software",
-  "Survey & Form Management",
-  "Team Communication Tools",
-  "Training & Development Support",
-  "Travel Coordination",
-  "Vendor Management",
-  "Web & Content Management"
-],
-        tools: ["Asana","Board Vantage Software","DealCloud","Expensify","Google Calendar","Google Docs","Google Sheets","Google Slides","LinkSquares Software","Microsoft Excel","Microsoft Outlook","Microsoft Powerpoint","Microsoft SharePoint","Microsoft Word","QuickBooks","Salesforce","SurveyMonkey","Trello"],
-        otherNeedsReview:["Board Vantage Software","Box & Dropbox","GoToMeeting & WebEx","SharePoint","Windows 11"],  
+          "Artificial Intelligence",
+          "Business Operations",
+          "Calendar Management",
+          "CRM Tools",
+          "Customer Service",
+          "Data Entry & Management",
+          "Education & Academic Support",
+          "Email Management",
+          "Event Planning",
+          "Executive and Administrative Support",
+          "Google Workspace",
+          "HR & Payroll Support",
+          "Microsoft Office",
+          "Operations & Facility Support",
+          "Presentation & Slide Design",
+          "Project Management",
+          "Real Estate Agent Support",
+          "Real Estate Investor Support",
+          "Specialized Software",
+          "Survey & Form Management",
+          "Team Communication Tools",
+          "Training & Development Support",
+          "Travel Coordination",
+          "Vendor Management",
+          "Web & Content Management"
+        ],
+        tools: ["Asana", "Board Vantage Software", "DealCloud", "Expensify", "Google Calendar", "Google Docs", "Google Sheets", "Google Slides", "LinkSquares Software", "Microsoft Excel", "Microsoft Outlook", "Microsoft Powerpoint", "Microsoft SharePoint", "Microsoft Word", "QuickBooks", "Salesforce", "SurveyMonkey", "Trello"],
+        otherNeedsReview: ["Board Vantage Software", "Box & Dropbox", "GoToMeeting & WebEx", "SharePoint", "Windows 11"],
         remarks: "all good",
         link: "https://executivehelpnow.org/team-members-2#177079b0-8ed4-440b-9256-b7748d1e7816"
       },
       {
         name: "April",
-        profileImage:"https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/April.png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:730,h:730,cg:true",
+        profileImage: "https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/April.png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:730,h:730,cg:true",
         experience: "5+ years",
         hours: "0-10 hours",
         certificate: "Yes",
         certificationInfo: `Certificate for ClickUp Novice Certificate Exam ${getBadge("Growth Starter")}`,
-        educationLevel:"Yes",
-        educationInfo:"Bachelor’s Degree: Electrical Engineering",
-        originalSkills: ["Audience Research & Market Analysis", "Blog & eBook Writing", "Brand Marketing & Community Management", "Calendar Scheduling & Task Management","Communication", "Coordination & Customer Support", "Compliance & Quality Control", "Content Research & Copywriting", "Cost Reduction & Process Optimization","Creative Storytelling & Topic Outlining", "Data Analysis & Research Documentation", "Data Entry & File Organization", "Email Management & Technical Assistance","Facebook & Instagram Management", "Graphic, Layout & Cover Design", "Infographic & Poster Creation", "Manufacturing Process Improvement & Automation", "Podcast Graphics Creation & Design", "Podcast Setup", "Problem-Solving & Workflow Organization", "Process Analysis & Yield Improvement", "Social Media Content Creation & Engagement", "Social Media Strategy & Brand Development"],
+        educationLevel: "Yes",
+        educationInfo: "Bachelor’s Degree: Electrical Engineering",
+        originalSkills: ["Audience Research & Market Analysis", "Blog & eBook Writing", "Brand Marketing & Community Management", "Calendar Scheduling & Task Management", "Communication", "Coordination & Customer Support", "Compliance & Quality Control", "Content Research & Copywriting", "Cost Reduction & Process Optimization", "Creative Storytelling & Topic Outlining", "Data Analysis & Research Documentation", "Data Entry & File Organization", "Email Management & Technical Assistance", "Facebook & Instagram Management", "Graphic, Layout & Cover Design", "Infographic & Poster Creation", "Manufacturing Process Improvement & Automation", "Podcast Graphics Creation & Design", "Podcast Setup", "Problem-Solving & Workflow Organization", "Process Analysis & Yield Improvement", "Social Media Content Creation & Engagement", "Social Media Strategy & Brand Development"],
         standardizedSkills: [
-  "Artificial Intelligence",
-  "Business Operations",
-  "Content & Copywriting",
-  "CRM Tools",
-  "Data Entry & Management",
-  "Digital Marketing",
-  "Executive and Administrative Support",
-  "Google Workspace",
-  "Graphic Design",
-  "Microsoft Office",
-  "Podcast Production",
-  "Presentation & Slide Design",
-  "Process Improvement & Workflow Optimization",
-  "Research & Data Analysis",
-  "Survey & Form Management",
-  "Team Communication Tools",
-  "Training & Development Support"
-],
-        tools: ["Canva","CapCut","Google Calendar","Google Docs","Google Sheets","Google Slides","Microsoft Excel","Microsoft Outlook","Microsoft Powerpoint","Microsoft Word"],
-        otherNeedsReview:["Brand Marketing & Community Management","Cost Reduction & Process Optimization","Facebook & Instagram Management","Infographic & Poster Creation","Manufacturing Process Improvement & Automation","Problem-Solving & Workflow Organization"],  
+          "Artificial Intelligence",
+          "Business Operations",
+          "Content & Copywriting",
+          "CRM Tools",
+          "Data Entry & Management",
+          "Digital Marketing",
+          "Executive and Administrative Support",
+          "Google Workspace",
+          "Graphic Design",
+          "Microsoft Office",
+          "Podcast Production",
+          "Presentation & Slide Design",
+          "Process Improvement & Workflow Optimization",
+          "Research & Data Analysis",
+          "Survey & Form Management",
+          "Team Communication Tools",
+          "Training & Development Support"
+        ],
+        tools: ["Canva", "CapCut", "Google Calendar", "Google Docs", "Google Sheets", "Google Slides", "Microsoft Excel", "Microsoft Outlook", "Microsoft Powerpoint", "Microsoft Word"],
+        otherNeedsReview: ["Brand Marketing & Community Management", "Cost Reduction & Process Optimization", "Facebook & Instagram Management", "Infographic & Poster Creation", "Manufacturing Process Improvement & Automation", "Problem-Solving & Workflow Organization"],
         remarks: "",
         link: "https://executivehelpnow.org/team-members#946c4980-bd8b-42f5-9798-ab31e81c81f9"
       },
-//       {
-//         name: "Arietta",
-//         profileImage:"https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/image%20(2).png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:480,h:480,cg:true",
-//         experience: "5+ years",
-//         hours: "31-40 hours",
-//         certificate: "None",
-//         certificationInfo: "",
-//         educationLevel:"Yes",
-//         educationInfo:"Master of Arts - MA, International Relations and Politics",
-//         originalSkills: ["Audience Research & Market Analysis", "Blog & eBook Writing", "Brand Marketing & Community Management", "Calendar Scheduling & Task Management","Communication", "Coordination & Customer Support", "Compliance & Quality Control", "Content Research & Copywriting", "Cost Reduction & Process Optimization","Creative Storytelling & Topic Outlining", "Data Analysis & Research Documentation", "Data Entry & File Organization", "Email Management & Technical Assistance","Facebook & Instagram Management", "Graphic, Layout & Cover Design", "Infographic & Poster Creation", "Manufacturing Process Improvement & Automation", "Podcast Graphics Creation & Design", "Podcast Setup", "Problem-Solving & Workflow Organization", "Process Analysis & Yield Improvement", "Social Media Content Creation & Engagement", "Social Media Strategy & Brand Development"],
-//         standardizedSkills: [
-// "Artificial Intelligence",
-// "Business Operations",
-// "Business Strategy & Planning",
-// "Calendar Management",
-// "Content & Copywriting",
-// "Customer Service",
-// "Data Entry & Management",
-// "Digital Marketing",
-// "Email Management",
-// "Event Planning",
-// "Executive and Administrative Support",
-// "Google Workspace",
-// "Graphic Design",
-// "Marketing Communications",
-// "Microsoft Office",
-// "Performance & Metrics Tracking",
-// "Presentation & Slide Design",
-// "Process Improvement & Workflow Optimization",
-// "Project Management",
-// "Stakeholder Engagement",
-// "Travel Coordination"
-// ],
-//         tools: ["Blogging Platforms",
-// "Canva",
-// "Content Management Systems",
-// "Email Platforms",
-// "Google Docs",
-// "Google Sheets", 
-// "Google Slides", 
-// "Microsoft Excel", 
-// "Microsoft Outlook", 
-// "Microsoft PowerPoint", 
-// "Microsoft Word", 
-// "Slack",
-// "Social Media Platforms",
-// "Trello",
-// "Zoom"],
-//         otherNeedsReview:["Brand Marketing & Community Management","Cost Reduction & Process Optimization","Facebook & Instagram Management","Infographic & Poster Creation","Manufacturing Process Improvement & Automation","Problem-Solving & Workflow Organization"],  
-//         remarks: "",
-//         link: "https://executivehelpnow.org/team-members-2#41fb6477-4b6f-4247-935a-303ab0c4cff6"
-//       },
-      
-{
+      //       {
+      //         name: "Arietta",
+      //         profileImage:"https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/image%20(2).png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:480,h:480,cg:true",
+      //         experience: "5+ years",
+      //         hours: "31-40 hours",
+      //         certificate: "None",
+      //         certificationInfo: "",
+      //         educationLevel:"Yes",
+      //         educationInfo:"Master of Arts - MA, International Relations and Politics",
+      //         originalSkills: ["Audience Research & Market Analysis", "Blog & eBook Writing", "Brand Marketing & Community Management", "Calendar Scheduling & Task Management","Communication", "Coordination & Customer Support", "Compliance & Quality Control", "Content Research & Copywriting", "Cost Reduction & Process Optimization","Creative Storytelling & Topic Outlining", "Data Analysis & Research Documentation", "Data Entry & File Organization", "Email Management & Technical Assistance","Facebook & Instagram Management", "Graphic, Layout & Cover Design", "Infographic & Poster Creation", "Manufacturing Process Improvement & Automation", "Podcast Graphics Creation & Design", "Podcast Setup", "Problem-Solving & Workflow Organization", "Process Analysis & Yield Improvement", "Social Media Content Creation & Engagement", "Social Media Strategy & Brand Development"],
+      //         standardizedSkills: [
+      // "Artificial Intelligence",
+      // "Business Operations",
+      // "Business Strategy & Planning",
+      // "Calendar Management",
+      // "Content & Copywriting",
+      // "Customer Service",
+      // "Data Entry & Management",
+      // "Digital Marketing",
+      // "Email Management",
+      // "Event Planning",
+      // "Executive and Administrative Support",
+      // "Google Workspace",
+      // "Graphic Design",
+      // "Marketing Communications",
+      // "Microsoft Office",
+      // "Performance & Metrics Tracking",
+      // "Presentation & Slide Design",
+      // "Process Improvement & Workflow Optimization",
+      // "Project Management",
+      // "Stakeholder Engagement",
+      // "Travel Coordination"
+      // ],
+      //         tools: ["Blogging Platforms",
+      // "Canva",
+      // "Content Management Systems",
+      // "Email Platforms",
+      // "Google Docs",
+      // "Google Sheets", 
+      // "Google Slides", 
+      // "Microsoft Excel", 
+      // "Microsoft Outlook", 
+      // "Microsoft PowerPoint", 
+      // "Microsoft Word", 
+      // "Slack",
+      // "Social Media Platforms",
+      // "Trello",
+      // "Zoom"],
+      //         otherNeedsReview:["Brand Marketing & Community Management","Cost Reduction & Process Optimization","Facebook & Instagram Management","Infographic & Poster Creation","Manufacturing Process Improvement & Automation","Problem-Solving & Workflow Organization"],  
+      //         remarks: "",
+      //         link: "https://executivehelpnow.org/team-members-2#41fb6477-4b6f-4247-935a-303ab0c4cff6"
+      //       },
+
+      {
         name: "Ashley",
-        profileImage:"https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Ashley.png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:730,h:730,cg:true",
+        profileImage: "https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Ashley.png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:730,h:730,cg:true",
         experience: "5+ years",
         hours: "0-10 hours",
         certificate: "Yes",
         certificationInfo: `Certificate for ClickUp Novice Certificate Exam ${getBadge("Growth Starter")}`,
-        educationLevel:"None",
-        educationInfo:"",
-        originalSkills: ["Accounts payable and financial management","Appointment and calendar management","Business process improvement","Client relationship management","CRM and scheduling software proficiency","Data entry and records management","Drafting and preparing correspondence","Event planning and coordination","Expense tracking and reimbursement processing","Financial auditing and compliance","IT troubleshooting and technical support","Merchandising and inventory management","Microsoft Office Suite (Excel, Word, Outlook, PowerPoint)","Multitasking and time management","Office organization and task prioritization","Problem-solving and conflict resolution","Sales consulting, support, and upselling","Strong verbal and written communication","Supporting executive-level leadership","Training and coaching employees"],       
+        educationLevel: "None",
+        educationInfo: "",
+        originalSkills: ["Accounts payable and financial management", "Appointment and calendar management", "Business process improvement", "Client relationship management", "CRM and scheduling software proficiency", "Data entry and records management", "Drafting and preparing correspondence", "Event planning and coordination", "Expense tracking and reimbursement processing", "Financial auditing and compliance", "IT troubleshooting and technical support", "Merchandising and inventory management", "Microsoft Office Suite (Excel, Word, Outlook, PowerPoint)", "Multitasking and time management", "Office organization and task prioritization", "Problem-solving and conflict resolution", "Sales consulting, support, and upselling", "Strong verbal and written communication", "Supporting executive-level leadership", "Training and coaching employees"],
         standardizedSkills: [
-  "Artificial Intelligence",
-  "Bookkeeping",
-  "Business Operations",
-  "Calendar Management",
-  "Content & Copywriting",
-  "CRM Tools",
-  "Customer Service",
-  "Data Entry & Management",
-  "Digital Marketing",
-  "Email Management",
-  "Event Planning",  
-  "Executive and Administrative Support",
-  "Google Workspace",
-  "Graphic Design",
-  "HR & Payroll Support",
-  "Marketing Communications",
-  "Microsoft Office",
-  "Presentation & Slide Design",
-  "Process Improvement & Workflow Optimization",
-  "Survey & Form Management",
-  "Team Communication Tools",
-  "Travel Coordination"
-],
+          "Artificial Intelligence",
+          "Bookkeeping",
+          "Business Operations",
+          "Calendar Management",
+          "Content & Copywriting",
+          "CRM Tools",
+          "Customer Service",
+          "Data Entry & Management",
+          "Digital Marketing",
+          "Email Management",
+          "Event Planning",
+          "Executive and Administrative Support",
+          "Google Workspace",
+          "Graphic Design",
+          "HR & Payroll Support",
+          "Marketing Communications",
+          "Microsoft Office",
+          "Presentation & Slide Design",
+          "Process Improvement & Workflow Optimization",
+          "Survey & Form Management",
+          "Team Communication Tools",
+          "Travel Coordination"
+        ],
 
-        tools: ["ADP Payroll","Asana","Canva","Google Calendar","Google Docs","Google Sheets","Google Slides","HubSpot","MailChimp","MailerLite","Microsoft Excel","Microsoft Outlook","Microsoft Powerpoint","Microsoft Word","QuickBooks","Slack","WiseStamp"],
-         otherNeedsReview:["Accounts payable and financial management", "Business process improvement", "Client relationship management", "Expense tracking and reimbursement processing", "IT troubleshooting and technical support", "Multitasking and time management", "Problem-solving and conflict resolution", "Sales consulting, support, and upselling", "Supporting executive-level leadership"],  
-         remarks: "modified technical skills; query for years of exp and core competencies",
+        tools: ["ADP Payroll", "Asana", "Canva", "Google Calendar", "Google Docs", "Google Sheets", "Google Slides", "HubSpot", "MailChimp", "MailerLite", "Microsoft Excel", "Microsoft Outlook", "Microsoft Powerpoint", "Microsoft Word", "QuickBooks", "Slack", "WiseStamp"],
+        otherNeedsReview: ["Accounts payable and financial management", "Business process improvement", "Client relationship management", "Expense tracking and reimbursement processing", "IT troubleshooting and technical support", "Multitasking and time management", "Problem-solving and conflict resolution", "Sales consulting, support, and upselling", "Supporting executive-level leadership"],
+        remarks: "modified technical skills; query for years of exp and core competencies",
         link: "https://executivehelpnow.org/team-members#31b2adef-7df5-4fcd-9f90-30a216ff4948"
- },
+      },
 
 
-//  {
-//         name: "Astrid",
-//         experience: "5+ years",
-//         hours: "0-10 hours",
-//         certificate: "None",
-//         certificationInfo: "",
-//         originalSkills: ["Applicant Tracking Systems (ATS)", "Asana & Trello", "Calendar (Multiple) & Schedule Management", "Communication & Collaboration", "Complex Problem Solving", "Cross-Functional Collaboration", "Database Management", "Google Suite & Microsoft Office Suite", "HR Operations (ADP, Paylocity, Zenefits, Workday)", "Organization & Prioritization", "Policies & Procedures Development", "Process Improvement", "Project & Special Task Management", "Reporting & Data Analysis", "ServiceNow & Workday", "Slack & Team Communication Tools", "Technical Skills & Software Proficiency", "Vendor & Resource Management (Harvest, ServiceNow)"], 
-//         standardizedSkills: ["Calendar Management", "Google Workspace", "HR & Payroll Support", "Microsoft Office", "Project Management", "Research & Data Analysis", "Team Communication Tools", "Training & Development Support"],
-//         tools: ["ADP", "Asana", "ATS", "Google Calendar", "Google Docs", "Google Sheets", "Google Slides", "Harvest", "Microsoft Excel", "Microsoft Outlook", "Microsoft Powerpoint", "Microsoft Word", "Paylocity", "Service Now", "Slack", "Trello", "Workday", "Zenefits"],
-//         otherNeedsReview:["Applicant Tracking Systems (ATS)", "Complex Problem Solving", "Database Management", "Organization & Prioritization", "Process Improvement", "Technical Skills & Software Proficiency", "Vendor & Resource Management (Harvest, ServiceNow)"],  
-//         remarks: "",
-//         link: "https://executivehelpnow.org/team-members#423d4fb6-9d88-4cda-b89b-ea331c9ce766"
-//  },
- {
+      //  {
+      //         name: "Astrid",
+      //         experience: "5+ years",
+      //         hours: "0-10 hours",
+      //         certificate: "None",
+      //         certificationInfo: "",
+      //         originalSkills: ["Applicant Tracking Systems (ATS)", "Asana & Trello", "Calendar (Multiple) & Schedule Management", "Communication & Collaboration", "Complex Problem Solving", "Cross-Functional Collaboration", "Database Management", "Google Suite & Microsoft Office Suite", "HR Operations (ADP, Paylocity, Zenefits, Workday)", "Organization & Prioritization", "Policies & Procedures Development", "Process Improvement", "Project & Special Task Management", "Reporting & Data Analysis", "ServiceNow & Workday", "Slack & Team Communication Tools", "Technical Skills & Software Proficiency", "Vendor & Resource Management (Harvest, ServiceNow)"], 
+      //         standardizedSkills: ["Calendar Management", "Google Workspace", "HR & Payroll Support", "Microsoft Office", "Project Management", "Research & Data Analysis", "Team Communication Tools", "Training & Development Support"],
+      //         tools: ["ADP", "Asana", "ATS", "Google Calendar", "Google Docs", "Google Sheets", "Google Slides", "Harvest", "Microsoft Excel", "Microsoft Outlook", "Microsoft Powerpoint", "Microsoft Word", "Paylocity", "Service Now", "Slack", "Trello", "Workday", "Zenefits"],
+      //         otherNeedsReview:["Applicant Tracking Systems (ATS)", "Complex Problem Solving", "Database Management", "Organization & Prioritization", "Process Improvement", "Technical Skills & Software Proficiency", "Vendor & Resource Management (Harvest, ServiceNow)"],  
+      //         remarks: "",
+      //         link: "https://executivehelpnow.org/team-members#423d4fb6-9d88-4cda-b89b-ea331c9ce766"
+      //  },
+      {
         name: "Casey",
-        profileImage:"https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Casey.png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:730,h:730,cg:true",
+        profileImage: "https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Casey.png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:730,h:730,cg:true",
         experience: "5+ years",
         hours: "0-10 hours",
-        certificate: "Yes",  
+        certificate: "Yes",
         certificationInfo: `Certificate for ClickUp Novice Certificate Exam ${getBadge("Growth Starter")}`,
-        educationLevel:"Yes",
-        educationInfo:"Doctorate: Juris Doctor (Law)",     
-        originalSkills: ["Administrative Support", "Advocacy & Client Support", "Antitrust & Competition Law", "Asylum & Immigration Applications", "Case Management", "Child Welfare & Adoption Advocacy", "Court Support & Representation", "Ethics & Policy Evaluation", "Fee Waiver & Financial Relief Requests", "Immigration & Legal Research", "Judicial & Legal Document Drafting", "Legal Interpretation & Translation", "Legal Writing & Report Preparation", "Mentorship & Training", "Office & Case Management Software", "Policy & Legislative Research", "Regulatory Compliance & Reporting", "Social Service Coordination", "Technology & Productivity Tools", "Trial & Hearing Preparation"],          
+        educationLevel: "Yes",
+        educationInfo: "Doctorate: Juris Doctor (Law)",
+        originalSkills: ["Administrative Support", "Advocacy & Client Support", "Antitrust & Competition Law", "Asylum & Immigration Applications", "Case Management", "Child Welfare & Adoption Advocacy", "Court Support & Representation", "Ethics & Policy Evaluation", "Fee Waiver & Financial Relief Requests", "Immigration & Legal Research", "Judicial & Legal Document Drafting", "Legal Interpretation & Translation", "Legal Writing & Report Preparation", "Mentorship & Training", "Office & Case Management Software", "Policy & Legislative Research", "Regulatory Compliance & Reporting", "Social Service Coordination", "Technology & Productivity Tools", "Trial & Hearing Preparation"],
         standardizedSkills: [
-  "Advocacy & Social Services",
-  "Artificial Intelligence",
-  "Business Operations",
-  "Customer Service",
-  "Executive and Administrative Support",
-  "Google Workspace",
-  "Microsoft Office",
-  "Presentation & Slide Design",
-  "Research & Data Analysis",
-  "Training & Development Support"
-],
-     
+          "Advocacy & Social Services",
+          "Artificial Intelligence",
+          "Business Operations",
+          "Customer Service",
+          "Executive and Administrative Support",
+          "Google Workspace",
+          "Microsoft Office",
+          "Presentation & Slide Design",
+          "Research & Data Analysis",
+          "Training & Development Support"
+        ],
+
         tools: ["Google Calendar", "Google Docs", "Google Sheets", "Google Slides", "Microsoft Excel", "Microsoft Outlook", "Microsoft Powerpoint", "Microsoft Word"],
-        otherNeedsReview:["Administrative Support", "Antitrust & Competition Law", "Fee Waiver & Financial Relief Requests", "Social Service Coordination", "Technology & Productivity Tools", "Trial & Hearing Preparation"],  
+        otherNeedsReview: ["Administrative Support", "Antitrust & Competition Law", "Fee Waiver & Financial Relief Requests", "Social Service Coordination", "Technology & Productivity Tools", "Trial & Hearing Preparation"],
         remarks: "",
         link: "https://executivehelpnow.org/team-members#4dc7d429-6711-46cc-9e8e-95e343f4f8fc"
- },
+      },
 
- {
+      {
         name: "Chrystelle",
-        profileImage:"https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Chrystelle.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:500,h:500,cg:true",
+        profileImage: "https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Chrystelle.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:500,h:500,cg:true",
         experience: "5+ years",
         hours: "31-40 hours",
         certificate: "Yes",
-        educationLevel:"Yes",
-        educationInfo:"Bachelor’s Degree: Food Technology",
+        educationLevel: "Yes",
+        educationInfo: "Bachelor’s Degree: Food Technology",
         certificationInfo: `Online Learning Course in Canva, Online Learning Course in Data Entry, Online Learning Course in Graphics Design, Online Learning Course in Lead Generation, Online Learning Course in Facebook Advertising, Online Learning Course in Social Media Management, 5-Hour QuickBooks Online Advance Training, Administrative Assistant Course, Freelance Artist Course, General Virtual Assistant Course, Real Estate Virtual Assistant Course, Social Media Management Course, Share Data Through the Art of Visualization, Analyze Data to Answer Questions, Process Data from Dirty to Clean, Prepare Data for Exploration, Ask Questions to Make Data-Driven Decisions, Foundations: Data, Data, Everywhere, Webinar on Data Analytics with Excel for Beginners, 15-hour e-Commerce Course, Webinar on Data Analytics with Excel for Beginners, Certificate for ClickUp Novice Certificate Exam ${getBadge("Elite Growth")}`,
-        originalSkills: ["Administrative Support", "Basic Graphic Design (Canva, Adobe Photoshop)", "Cash Handling & Security Procedures", "Customer Service", "Data Encoding & Management", "Document & File Management", "Event Coordination & Planning", "Financial & Sales Analysis", "Google Spreadsheet Proficiency", "Inventory & Stock Management", "Leadership & Team Supervision", "Marketing & Sales Knowledge", "Microsoft Office (Word, Excel, PowerPoint)", "Operations & Process Improvement", "Report Preparation & Documentation", "Store Setup & Maintenance", "Task Delegation & Workforce Scheduling", "Team Training & Coaching"], 
+        originalSkills: ["Administrative Support", "Basic Graphic Design (Canva, Adobe Photoshop)", "Cash Handling & Security Procedures", "Customer Service", "Data Encoding & Management", "Document & File Management", "Event Coordination & Planning", "Financial & Sales Analysis", "Google Spreadsheet Proficiency", "Inventory & Stock Management", "Leadership & Team Supervision", "Marketing & Sales Knowledge", "Microsoft Office (Word, Excel, PowerPoint)", "Operations & Process Improvement", "Report Preparation & Documentation", "Store Setup & Maintenance", "Task Delegation & Workforce Scheduling", "Team Training & Coaching"],
         standardizedSkills: [
-  "Artificial Intelligence",
-  "Business Operations",
-  "Data Entry & Management",
-  "Digital Marketing",
-  "Education & Academic Support",
-  "Email Management",
-  "Executive and Administrative Support",
-  "Google Workspace",
-  "Graphic Design",
-  "Marketing Communications",
-  "Microsoft Office",
-  "Presentation & Slide Design",
-  "Process Improvement & Workflow Optimization",
-  "Research & Data Analysis",
-  "Training & Development Support"
-],
+          "Artificial Intelligence",
+          "Business Operations",
+          "Data Entry & Management",
+          "Digital Marketing",
+          "Education & Academic Support",
+          "Email Management",
+          "Executive and Administrative Support",
+          "Google Workspace",
+          "Graphic Design",
+          "Marketing Communications",
+          "Microsoft Office",
+          "Presentation & Slide Design",
+          "Process Improvement & Workflow Optimization",
+          "Research & Data Analysis",
+          "Training & Development Support"
+        ],
 
         tools: ["Adobe Photoshop", "Canva", "Google Calendar", "Google Docs", "Google Sheets", "Google Slides", "Microsoft Excel", "Microsoft Outlook", "Microsoft Powerpoint", "Microsoft Word"],
-        otherNeedsReview:["Administrative Support", "Graphic Design", "Cash Handling & Security Procedures", "Document & File Management", "Leadership & Team Supervision", "Marketing & Sales Knowledge", "Operations & Process Improvement"],  
+        otherNeedsReview: ["Administrative Support", "Graphic Design", "Cash Handling & Security Procedures", "Document & File Management", "Leadership & Team Supervision", "Marketing & Sales Knowledge", "Operations & Process Improvement"],
         remarks: "all good",
         link: "https://executivehelpnow.org/team-members-2#8a7dcf1c-e581-4578-96e6-ff3cd917a209"
- },
- {
+      },
+      {
         name: "Fritzie",
-        profileImage:"https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Fritzie.jpg/:/cr=t:12.25%25,l:17.71%25,w:73.53%25,h:33.07%25/rs=w:730,h:730,cg:true,m",
+        profileImage: "https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Fritzie.jpg/:/cr=t:12.25%25,l:17.71%25,w:73.53%25,h:33.07%25/rs=w:730,h:730,cg:true,m",
         experience: "5+ years",
         hours: "21-30 hours",
         certificate: "Yes",
         certificationInfo: `Certificate for ClickUp Novice Certificate Exam ${getBadge("Growth Starter")}`,
-        educationLevel:"Yes",
-        educationInfo:"Bachelor’s Degree: Hotel and Restaurant Management",
-        originalSkills: ["Basic Graphic Design", "Bookkeeping", "Calendar and Schedule Management", "Canva Design Skills", "Caption Writing with Hashtags", "Client and Team Communication", "Competitor Analysis & Market Research", "Conflict Resolution", "Content Creation & Social Media Management", "CRM Tools Experience", "Customer Inquiry Handling", "Data Entry & Organization", "Document Creation & Formatting", "Email Inbox & Newsletter Management", "File Management", "Google Workspace & Microsoft Office Proficiency", "Managing Multiple Projects & Meeting deadlines", "Media Production", "Meeting Coordination & Follow-up", "Prioritizing Tasks & Professional Email Writing"],  
-  standardizedSkills: [
-"Artificial Intelligence",
-"Bookkeeping",
-"Business Operations",
-"Calendar Management",
-"Content & Copywriting",
-"Customer Service",
-"Data Entry & Management",
-"Email Management",
-"Event Planning",
-"Executive and Administrative Support",
-"Google Workspace",
-"Graphic Design",
-"Microsoft Office",
-"Podcast Production",
-"Presentation & Slide Design",
-"Research & Data Analysis",
-"Travel Coordination",
-"Web & Content Management"
-],
-        tools: ["Adobe Premiere Pro", "Canva",  "CapCut",  "ClickUp", "Descript", "Figma", "Final Cut Pro",  "Freshdesk","Google Calendar", "Google Docs", "Google Sheets", "Google Slides", "HubSpot CRM", "InShot", "Microsoft Excel", "Microsoft Outlook", "Microsoft Powerpoint", "Microsoft Word", "Notion", "Pixlr", "StreamYard", "Trello", "Zapier", "Zendesk " ],
-        otherNeedsReview:["Conflict Resolution", "Document Creation & Formatting", "File Management", "Meeting Coordination & Follow-up"], 
+        educationLevel: "Yes",
+        educationInfo: "Bachelor’s Degree: Hotel and Restaurant Management",
+        originalSkills: ["Basic Graphic Design", "Bookkeeping", "Calendar and Schedule Management", "Canva Design Skills", "Caption Writing with Hashtags", "Client and Team Communication", "Competitor Analysis & Market Research", "Conflict Resolution", "Content Creation & Social Media Management", "CRM Tools Experience", "Customer Inquiry Handling", "Data Entry & Organization", "Document Creation & Formatting", "Email Inbox & Newsletter Management", "File Management", "Google Workspace & Microsoft Office Proficiency", "Managing Multiple Projects & Meeting deadlines", "Media Production", "Meeting Coordination & Follow-up", "Prioritizing Tasks & Professional Email Writing"],
+        standardizedSkills: [
+          "Artificial Intelligence",
+          "Bookkeeping",
+          "Business Operations",
+          "Calendar Management",
+          "Content & Copywriting",
+          "Customer Service",
+          "Data Entry & Management",
+          "Email Management",
+          "Event Planning",
+          "Executive and Administrative Support",
+          "Google Workspace",
+          "Graphic Design",
+          "Microsoft Office",
+          "Podcast Production",
+          "Presentation & Slide Design",
+          "Research & Data Analysis",
+          "Travel Coordination",
+          "Web & Content Management"
+        ],
+        tools: ["Adobe Premiere Pro", "Canva", "CapCut", "ClickUp", "Descript", "Figma", "Final Cut Pro", "Freshdesk", "Google Calendar", "Google Docs", "Google Sheets", "Google Slides", "HubSpot CRM", "InShot", "Microsoft Excel", "Microsoft Outlook", "Microsoft Powerpoint", "Microsoft Word", "Notion", "Pixlr", "StreamYard", "Trello", "Zapier", "Zendesk "],
+        otherNeedsReview: ["Conflict Resolution", "Document Creation & Formatting", "File Management", "Meeting Coordination & Follow-up"],
         remarks: "changes in Technical Proficiencies: Adobe Premiere Pro, Canva, CapCut, ClickUp, Descript, Figma, Final Cut Pro, Freshdesk, HubSpot CRM, InShot , Notion ; Pixlr , StreamYard,  Trello , Zapier ,Zendesk - ALL GOOD",
         link: "https://executivehelpnow.org/team-members#b5a55c7b-c1e4-4f31-8fe5-81cc0b4040f0"
- },
- {
+      },
+      {
         name: "Immanuel",
-        profileImage:"https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Immanuel.png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:730,h:730,cg:true",
+        profileImage: "https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Immanuel.png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:730,h:730,cg:true",
         experience: "5+ years",
         hours: "11-20 hours",
         certificate: "Yes",
         certificationInfo: `Certificate for ClickUp Novice Certificate Exam ${getBadge("Growth Starter")}`,
-        educationLevel:"Yes",
-        educationInfo:"Bachelor’s Degree: Information Technology (IT)",
-        originalSkills: ["Adobe After Effects", "Adobe Photoshop", "Adobe Premiere", "Airtable", "Appointment Setting & Calendar Management", "Canva", "Commitment & Independence", "Communication & Organization", "Concentration & Attention to Detail", "Google Calendar", "Google Docs", "Google Gmail", "Google Sheets", "Google Slides", "Macro Excel & Microsoft Excel", "Microsoft OneDrive", "Microsoft Outlook", "Microsoft PowerPoint", "Microsoft SharePoint", "MS Dynamics & Zendesk"],  
+        educationLevel: "Yes",
+        educationInfo: "Bachelor’s Degree: Information Technology (IT)",
+        originalSkills: ["Adobe After Effects", "Adobe Photoshop", "Adobe Premiere", "Airtable", "Appointment Setting & Calendar Management", "Canva", "Commitment & Independence", "Communication & Organization", "Concentration & Attention to Detail", "Google Calendar", "Google Docs", "Google Gmail", "Google Sheets", "Google Slides", "Macro Excel & Microsoft Excel", "Microsoft OneDrive", "Microsoft Outlook", "Microsoft PowerPoint", "Microsoft SharePoint", "MS Dynamics & Zendesk"],
         standardizedSkills: [
-  "Artificial Intelligence",
-  "Business Operations",
-  "Calendar Management",
-  "CRM Tools",
-  "Customer Service",
-  "Data Entry & Management",
-  "Email Management",
-  "Executive and Administrative Support",
-  "Google Workspace",
-  "Graphic Design",
-  "Microsoft Office",
-  "Performance & Metrics Tracking",
-  "Podcast Production",
-  "Presentation & Slide Design",
-  "Project Management",
-  "Research & Data Analysis",
-  "Team Communication Tools",
-  "Web & Content Management"
-],
+          "Artificial Intelligence",
+          "Business Operations",
+          "Calendar Management",
+          "CRM Tools",
+          "Customer Service",
+          "Data Entry & Management",
+          "Email Management",
+          "Executive and Administrative Support",
+          "Google Workspace",
+          "Graphic Design",
+          "Microsoft Office",
+          "Performance & Metrics Tracking",
+          "Podcast Production",
+          "Presentation & Slide Design",
+          "Project Management",
+          "Research & Data Analysis",
+          "Team Communication Tools",
+          "Web & Content Management"
+        ],
         tools: ["Adobe After Effects", "Adobe Photoshop", "Adobe Premiere", "Airtable", "Canva", "Google Calendar", "Google Docs", "Google Sheets", "Google Slides", "Microsoft Excel", "Microsoft Outlook", "Microsoft Powerpoint", "Microsoft Word", "MS Dynamics", "Power BI", "SQL", "Zendesk"],
-        otherNeedsReview:["Airtable", "Commitment & Independence", "Concentration & Attention to Detail", "MS Dynamics & Zendesk"],  
+        otherNeedsReview: ["Airtable", "Commitment & Independence", "Concentration & Attention to Detail", "MS Dynamics & Zendesk"],
         remarks: "",
         link: "https://executivehelpnow.org/team-members-2#db85c7d4-b3f9-4f52-8dd4-f3007890107e"
- },
- {
+      },
+      {
         name: "Jessica",
-        profileImage:"https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Jessica.png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:730,h:730,cg:true",
+        profileImage: "https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Jessica.png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:730,h:730,cg:true",
         experience: "5+ years",
         hours: "0-10 hours",
         certificate: "Yes",
         certificationInfo: `Certificate for ClickUp Novice Certificate Exam ${getBadge("Growth Starter")}`,
-        educationLevel:"Yes",
-        educationInfo:"Bachelor’s Degree: Biology and Psychology",
-        originalSkills: ["Administrative Support & Office Organization", "Appointment, Calendar & Task Management", "Budget Reconciliation & Invoice Processing", "Client Communication & Customer Service", "Data Collection, Analysis & Reporting", "Database & Records Management", "Document Preparation & Filing", "Event Coordination & Scheduling", "Human Resources Assistance", "Interview Facilitation & Hiring Support", "Job Posting, Applicant Tracking & Onboarding", "Process Improvement & Workflow Optimization", "Project Coordination & Management", "Reception, Phone & Email Handling", "Team Collaboration & Time Management"],  
+        educationLevel: "Yes",
+        educationInfo: "Bachelor’s Degree: Biology and Psychology",
+        originalSkills: ["Administrative Support & Office Organization", "Appointment, Calendar & Task Management", "Budget Reconciliation & Invoice Processing", "Client Communication & Customer Service", "Data Collection, Analysis & Reporting", "Database & Records Management", "Document Preparation & Filing", "Event Coordination & Scheduling", "Human Resources Assistance", "Interview Facilitation & Hiring Support", "Job Posting, Applicant Tracking & Onboarding", "Process Improvement & Workflow Optimization", "Project Coordination & Management", "Reception, Phone & Email Handling", "Team Collaboration & Time Management"],
         standardizedSkills: [
-  "Artificial Intelligence",
-  "Bookkeeping",
-  "Business Operations",
-  "Business Strategy & Planning",
-  "Calendar Management",
-  "Customer Service",
-  "Data Entry & Management",
-  "Email Management",
-  "Event Planning",
-  "Executive and Administrative Support",
-  "Google Workspace",
-  "HR & Payroll Support",
-  "Microsoft Office",
-  "Project Management",
-  "Survey & Form Management",
-  "Travel Coordination",
-  "Vendor Management",
-  "Web & Content Management"
-],
+          "Artificial Intelligence",
+          "Bookkeeping",
+          "Business Operations",
+          "Business Strategy & Planning",
+          "Calendar Management",
+          "Customer Service",
+          "Data Entry & Management",
+          "Email Management",
+          "Event Planning",
+          "Executive and Administrative Support",
+          "Google Workspace",
+          "HR & Payroll Support",
+          "Microsoft Office",
+          "Project Management",
+          "Survey & Form Management",
+          "Travel Coordination",
+          "Vendor Management",
+          "Web & Content Management"
+        ],
         tools: ["Asana", "Canva", "ClickUp ", "Google Calendar", "Google Docs", "Google Sheets", "Google Slides", "Microsoft Excel", "Microsoft Outlook", "Microsoft Powerpoint", "Microsoft Word", "QuickBooks", "Wordpress", "Zoho"],
-        otherNeedsReview:["Data Collection, Analysis & Reporting", "Document Preparation & Filing", "Human Resources Assistance", "Interview Facilitation & Hiring Support", "Job Posting, Applicant Tracking & Onboarding", "Process Improvement & Workflow Optimization", "Reception, Phone & Email Handling"], 
+        otherNeedsReview: ["Data Collection, Analysis & Reporting", "Document Preparation & Filing", "Human Resources Assistance", "Interview Facilitation & Hiring Support", "Job Posting, Applicant Tracking & Onboarding", "Process Improvement & Workflow Optimization", "Reception, Phone & Email Handling"],
         remarks: "all good",
         link: "https://executivehelpnow.org/team-members#ac0786b8-e262-4889-b87d-d214d8a758a9"
- },
- {
+      },
+      {
         name: "Julie",
-        profileImage:"https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Julie.png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:730,h:730,cg:true",
+        profileImage: "https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Julie.png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:730,h:730,cg:true",
         experience: "5+ years",
         hours: "0-10 hours",
         certificate: "Yes",
         certificationInfo: `Certificate for ClickUp Novice Certificate Exam ${getBadge("Growth Starter")}`,
-        educationLevel:"Yes",
-        educationInfo:"Bachelor’s Degree: Healthcare Management and Policy",
-        originalSkills: ["Academic Advising & Student Support", "Administrative Organization & Workflow Management", "Classroom Management & Curriculum Development", "Client Relations & Customer Outreach", "Compliance, Auditing & Data Management", "Content Creation & Copywriting", "Digital Marketing & Sales Campaigns", "Email Marketing & Newsletter Creation", "Employee Recruitment & Onboarding", "English Language Instruction & Exam Preparation", "Event Coordination & Public Speaking", "Market Research & Survey Analysis", "Social Media Management & Strategy", "Training & Professional Development", "Resume Screening & Interview Scheduling"],   
+        educationLevel: "Yes",
+        educationInfo: "Bachelor’s Degree: Healthcare Management and Policy",
+        originalSkills: ["Academic Advising & Student Support", "Administrative Organization & Workflow Management", "Classroom Management & Curriculum Development", "Client Relations & Customer Outreach", "Compliance, Auditing & Data Management", "Content Creation & Copywriting", "Digital Marketing & Sales Campaigns", "Email Marketing & Newsletter Creation", "Employee Recruitment & Onboarding", "English Language Instruction & Exam Preparation", "Event Coordination & Public Speaking", "Market Research & Survey Analysis", "Social Media Management & Strategy", "Training & Professional Development", "Resume Screening & Interview Scheduling"],
         standardizedSkills: [
-"Artificial Intelligence",
-"Business Operations",
-"Calendar Management",
-"Content & Copywriting",
-"Customer Service",
-"Data Entry & Management",
-"Education & Academic Support",
-"Email Management",
-"Event Planning",
-"Executive and Administrative Support",
-"Google Workspace",
-"Marketing Communications",
-"Microsoft Office",
-"Process Improvement & Workflow Optimization",
-"Stakeholder Engagement",
-"Team Communication Tools",
-"Travel Coordination",
-"Web & Content Management"
-],
+          "Artificial Intelligence",
+          "Business Operations",
+          "Calendar Management",
+          "Content & Copywriting",
+          "Customer Service",
+          "Data Entry & Management",
+          "Education & Academic Support",
+          "Email Management",
+          "Event Planning",
+          "Executive and Administrative Support",
+          "Google Workspace",
+          "Marketing Communications",
+          "Microsoft Office",
+          "Process Improvement & Workflow Optimization",
+          "Stakeholder Engagement",
+          "Team Communication Tools",
+          "Travel Coordination",
+          "Web & Content Management"
+        ],
         tools: ["Adobe Lightroom", "Canva", "Constant Contact", "Google Calendar", "Google Docs", "Google Sheets", "Google Slides", "Microsoft Excel", "Microsoft Outlook", "Microsoft Powerpoint", "Microsoft Word", "WordPress"],
-        otherNeedsReview:["Administrative Organization & Workflow Management"],  
+        otherNeedsReview: ["Administrative Organization & Workflow Management"],
         remarks: "HR & Payroll Support - removed Payroll retained HR Support Research & Data Analysis - removed the Payroll and Data Analysis; I just want research and data analysis removed, as well as payroll support. - ALL GOOD",
         link: "https://executivehelpnow.org/team-members#af3b5bfb-674a-4a7d-a3df-86ecbb253286"
- },
-//  {
-//         name: "Karen",
-//         experience: "5+ years",
-//         hours: "11-20 hours",
-//         certificate: "None",
-//         certificationInfo: "",
-//         originalSkills: ["Accounting & Budgeting", "Audits & Compliance", "Conference Calls & Meeting Planning", "Core Competencies & Business Acumen", "Data Analysis & Reporting", "Documentation & SOP Development", "Event & Logistics Planning", "Forecasting & Metrics Analysis", "Payroll Processing (ADP, E-time, Nexonia)", "Research & Analytics", "Travel Arrangements & Calendaring", "Technical Proficiencies & Software Knowledge", "Microsoft Office Suite (Word, Excel, PowerPoint, Outlook, Publisher)", "Adobe Suite (Photoshop, Adobe Professional)", "QuickBooks (Pro & Professional)", "ERP & Financial Systems (Tyler Munis, Deltek CostPoint, IBS, Abila)", "CRM & HR Systems (Simpleview CRM, Beacon, Neogov, People Admin)"  ],
-//         standardizedSkills: ["Bookkeeping", "Calendar Management", "Data Entry & Management", "Event Planning",  "Google Workspace", "HR & Payroll Support", "Microsoft Office", "Research & Data Analysis", "Travel Coordination"],
-//         tools: ["Abila", "Adobe Photoshop", "Adobe Professional", "Beacon", "Deltek CostPoint", "IBS", "Microsoft Excel", "Microsoft Outlook", "Microsoft Powerpoint", "Microsoft Publisher", "Microsoft Word", "Payroll – ADP, E-time", "QuickBooks Pro / Professional", "Simpleview CRM", "Tyler Munis"],
-//         otherNeedsReview:["Conference Calls & Meeting Planning", "Core Competencies & Business Acumen", "Technical Proficiencies & Software Knowledge"],  
-//         remarks: "",
-//         link: "https://executivehelpnow.org/team-members#423d4fb6-9d88-4cda-b89b-ea331c9ce766"
-//  },
-//  {
-//         name: "Klarisa",
-//         experience: "5+ years",
-//         hours: "21-30 hours",
-//         certificate: "Yes",
-//         certificationInfo: "LINKEDIN LEARNING CERTIFICATES, Project Management Foundations, Operations Management Foundations, Email and Newsletter Marketing, Foundations",
-//         originalSkills: ["Administrative & Executive Support", "Budget & Expense Management", "Calendar & Meeting Management", "Communication & Correspondence", "Customer & Call Center Support", "Data Analysis & Reporting", "Design & Branding", "Document & Contract Management", "Event & Travel Coordination", "HR & Recruitment Assistance", "Insurance & Payment Processing", "Inventory & Facility Operations", "LinkedIn Learning Certifications", "Project Coordination", "Proofreading & Editing", "Remote Work Adaptability", "Software Proficiency (Figma, Google Workspace, Microsoft Suite, Slack, Zoom, Concur, Google Analytics, AMEX Global, DocuSign, Yardi)", "Supply & Logistics Management", "Timekeeping & Approvals", "Website Content Management" ],
-//         standardizedSkills: ["Bookkeeping", "Calendar Management", "Customer Service", "Email Management", "Event Planning", "Google Workspace", "Grand Writing", "Graphic Design", "HR & Payroll Support", "Inventory & Procurement", "Microsoft Office", "Project Management", "Research & Data Analysis", "Travel Coordination", "Web & Content Management"],
-//         tools: ["AMEX Global", "Concur", "DocuSign", "Figma", "Google Calendar", "Google Docs", "Google Sheets", "Google Slides", "Microsoft Excel", "Microsoft Outlook", "Microsoft Powerpoint", "Microsoft Word", "Slack", "Smartsheet", "Zoom"],
-//         otherNeedsReview:["Administrative & Executive Support", "Document & Contract Management", "Insurance & Payment Processing", "Proofreading & Editing", "Remote Work Adaptability", "Software Proficiency", "Timekeeping & Approvals"],  
-//         remarks: "",
-//         link: "https://executivehelpnow.org/team-members#423d4fb6-9d88-4cda-b89b-ea331c9ce766"
-//  },
-//  {
-//         name: "Krisha",
-//         experience: "5+ years",
-//         hours: "0-10 hours",
-//         certificate: "None",
-//         certificationInfo: "",
-//         educationLevel:"Yes",
-//         educationInfo:"Associate’s Degree: Human Resource Management",
-//         originalSkills: ["Active Listening", "Call Handling", "Coaching and Mentoring", "Communication Skills", "Conflict Resolution", "Customer Service", "Data Entry and Documentation", "Email Correspondence", "Interpersonal Skills", "Multitasking", "Performance Evaluation", "Problem-Solving", "Process Improvement", "Quality Assurance", "Team Leadership", "Technical Support", "Time Management", "Training and Development", "Workplace Adaptability", "Workflow Optimization"   ],  
-//         standardizedSkills: [
-//   "Artificial Intelligence",
-//   "Business Operations",
-//   "Customer Service",
-//   "Data Entry & Management",
-//   "Email Management",
-//   "Executive and Administrative Support",
-//   "Performance & Metrics Tracking",
-//   "Team Communication Tools",
-//   "Training & Development Support"
-// ],
-//         tools: ["Canva", "Descript", "Google Calendar", "Google Docs", "Google Sheets", "Google Slides", "Microsoft Excel", "Microsoft Outlook", "Microsoft Powerpoint", "Microsoft Word", "Streamyard"],
-//         otherNeedsReview:["Active Listening", "Call Handling", "Conflict Resolution", "Multitasking", "Problem-Solving", "Process Improvement", "Quality Assurance", "Team Leadership", "Technical Support", "Workplace Adaptability", "Workflow Optimization"],  
-//         remarks: "all good - change picture",
-//         link: "https://executivehelpnow.org/team-members#7516a486-fa7f-4a94-bbd7-d150a697ec39"
-//  },
- {
+      },
+      //  {
+      //         name: "Karen",
+      //         experience: "5+ years",
+      //         hours: "11-20 hours",
+      //         certificate: "None",
+      //         certificationInfo: "",
+      //         originalSkills: ["Accounting & Budgeting", "Audits & Compliance", "Conference Calls & Meeting Planning", "Core Competencies & Business Acumen", "Data Analysis & Reporting", "Documentation & SOP Development", "Event & Logistics Planning", "Forecasting & Metrics Analysis", "Payroll Processing (ADP, E-time, Nexonia)", "Research & Analytics", "Travel Arrangements & Calendaring", "Technical Proficiencies & Software Knowledge", "Microsoft Office Suite (Word, Excel, PowerPoint, Outlook, Publisher)", "Adobe Suite (Photoshop, Adobe Professional)", "QuickBooks (Pro & Professional)", "ERP & Financial Systems (Tyler Munis, Deltek CostPoint, IBS, Abila)", "CRM & HR Systems (Simpleview CRM, Beacon, Neogov, People Admin)"  ],
+      //         standardizedSkills: ["Bookkeeping", "Calendar Management", "Data Entry & Management", "Event Planning",  "Google Workspace", "HR & Payroll Support", "Microsoft Office", "Research & Data Analysis", "Travel Coordination"],
+      //         tools: ["Abila", "Adobe Photoshop", "Adobe Professional", "Beacon", "Deltek CostPoint", "IBS", "Microsoft Excel", "Microsoft Outlook", "Microsoft Powerpoint", "Microsoft Publisher", "Microsoft Word", "Payroll – ADP, E-time", "QuickBooks Pro / Professional", "Simpleview CRM", "Tyler Munis"],
+      //         otherNeedsReview:["Conference Calls & Meeting Planning", "Core Competencies & Business Acumen", "Technical Proficiencies & Software Knowledge"],  
+      //         remarks: "",
+      //         link: "https://executivehelpnow.org/team-members#423d4fb6-9d88-4cda-b89b-ea331c9ce766"
+      //  },
+      //  {
+      //         name: "Klarisa",
+      //         experience: "5+ years",
+      //         hours: "21-30 hours",
+      //         certificate: "Yes",
+      //         certificationInfo: "LINKEDIN LEARNING CERTIFICATES, Project Management Foundations, Operations Management Foundations, Email and Newsletter Marketing, Foundations",
+      //         originalSkills: ["Administrative & Executive Support", "Budget & Expense Management", "Calendar & Meeting Management", "Communication & Correspondence", "Customer & Call Center Support", "Data Analysis & Reporting", "Design & Branding", "Document & Contract Management", "Event & Travel Coordination", "HR & Recruitment Assistance", "Insurance & Payment Processing", "Inventory & Facility Operations", "LinkedIn Learning Certifications", "Project Coordination", "Proofreading & Editing", "Remote Work Adaptability", "Software Proficiency (Figma, Google Workspace, Microsoft Suite, Slack, Zoom, Concur, Google Analytics, AMEX Global, DocuSign, Yardi)", "Supply & Logistics Management", "Timekeeping & Approvals", "Website Content Management" ],
+      //         standardizedSkills: ["Bookkeeping", "Calendar Management", "Customer Service", "Email Management", "Event Planning", "Google Workspace", "Grand Writing", "Graphic Design", "HR & Payroll Support", "Inventory & Procurement", "Microsoft Office", "Project Management", "Research & Data Analysis", "Travel Coordination", "Web & Content Management"],
+      //         tools: ["AMEX Global", "Concur", "DocuSign", "Figma", "Google Calendar", "Google Docs", "Google Sheets", "Google Slides", "Microsoft Excel", "Microsoft Outlook", "Microsoft Powerpoint", "Microsoft Word", "Slack", "Smartsheet", "Zoom"],
+      //         otherNeedsReview:["Administrative & Executive Support", "Document & Contract Management", "Insurance & Payment Processing", "Proofreading & Editing", "Remote Work Adaptability", "Software Proficiency", "Timekeeping & Approvals"],  
+      //         remarks: "",
+      //         link: "https://executivehelpnow.org/team-members#423d4fb6-9d88-4cda-b89b-ea331c9ce766"
+      //  },
+      //  {
+      //         name: "Krisha",
+      //         experience: "5+ years",
+      //         hours: "0-10 hours",
+      //         certificate: "None",
+      //         certificationInfo: "",
+      //         educationLevel:"Yes",
+      //         educationInfo:"Associate’s Degree: Human Resource Management",
+      //         originalSkills: ["Active Listening", "Call Handling", "Coaching and Mentoring", "Communication Skills", "Conflict Resolution", "Customer Service", "Data Entry and Documentation", "Email Correspondence", "Interpersonal Skills", "Multitasking", "Performance Evaluation", "Problem-Solving", "Process Improvement", "Quality Assurance", "Team Leadership", "Technical Support", "Time Management", "Training and Development", "Workplace Adaptability", "Workflow Optimization"   ],  
+      //         standardizedSkills: [
+      //   "Artificial Intelligence",
+      //   "Business Operations",
+      //   "Customer Service",
+      //   "Data Entry & Management",
+      //   "Email Management",
+      //   "Executive and Administrative Support",
+      //   "Performance & Metrics Tracking",
+      //   "Team Communication Tools",
+      //   "Training & Development Support"
+      // ],
+      //         tools: ["Canva", "Descript", "Google Calendar", "Google Docs", "Google Sheets", "Google Slides", "Microsoft Excel", "Microsoft Outlook", "Microsoft Powerpoint", "Microsoft Word", "Streamyard"],
+      //         otherNeedsReview:["Active Listening", "Call Handling", "Conflict Resolution", "Multitasking", "Problem-Solving", "Process Improvement", "Quality Assurance", "Team Leadership", "Technical Support", "Workplace Adaptability", "Workflow Optimization"],  
+      //         remarks: "all good - change picture",
+      //         link: "https://executivehelpnow.org/team-members#7516a486-fa7f-4a94-bbd7-d150a697ec39"
+      //  },
+      {
         name: "Lavonne",
-        profileImage:"https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Lavonne.png/:/cr=t:5.39%25,l:16.69%25,w:64.94%25,h:64.94%25/rs=w:730,h:730,cg:true,m",
+        profileImage: "https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Lavonne.png/:/cr=t:5.39%25,l:16.69%25,w:64.94%25,h:64.94%25/rs=w:730,h:730,cg:true,m",
         experience: "5+ years",
         hours: "0-10 hours",
         certificate: "Yes",
         certificationInfo: `Certificate for ClickUp Novice Certificate Exam ${getBadge("Growth Starter")}`,
-        educationLevel:"Yes",
-        educationInfo:"Bachelor’s Degree: Finance, Master’s Degree: Business Administration, Certification: Certified Management Accountant",
-        originalSkills: ["Audit & Compliance", "Budgeting & Forecasting", "Business Continuity & Risk Management", "Business Strategy & Development", "Cash Flow & Treasury Management", "Change & Process Management", "Conflict Resolution & Problem-Solving", "Contract & Procurement Management", "Cross-Functional Collaboration", "Data Analysis & Performance Metrics", "Decision-Making & Leadership", "Employee Development & Training", "Financial Modeling & Reporting", "Operational Budgeting & Cost Efficiency", "Organizational Development", "Policy Development & Implementation", "Project Management & Execution", "Quality Assurance & Control"  ],  
+        educationLevel: "Yes",
+        educationInfo: "Bachelor’s Degree: Finance, Master’s Degree: Business Administration, Certification: Certified Management Accountant",
+        originalSkills: ["Audit & Compliance", "Budgeting & Forecasting", "Business Continuity & Risk Management", "Business Strategy & Development", "Cash Flow & Treasury Management", "Change & Process Management", "Conflict Resolution & Problem-Solving", "Contract & Procurement Management", "Cross-Functional Collaboration", "Data Analysis & Performance Metrics", "Decision-Making & Leadership", "Employee Development & Training", "Financial Modeling & Reporting", "Operational Budgeting & Cost Efficiency", "Organizational Development", "Policy Development & Implementation", "Project Management & Execution", "Quality Assurance & Control"],
         standardizedSkills: [
-  "Artificial Intelligence",
-  "Bookkeeping",
-  "Business Operations",
-  "Executive and Administrative Support",
-  "Inventory & Procurement",
-  "Project Management",
-  "Research & Data Analysis",
-  "Team Communication Tools",
-  "Training & Development Support"
-],
+          "Artificial Intelligence",
+          "Bookkeeping",
+          "Business Operations",
+          "Executive and Administrative Support",
+          "Inventory & Procurement",
+          "Project Management",
+          "Research & Data Analysis",
+          "Team Communication Tools",
+          "Training & Development Support"
+        ],
         tools: ["Google Calendar", "Google Docs", "Google Sheets", "Google Slides", "Microsoft Excel", "Microsoft Outlook", "Microsoft Powerpoint", "Microsoft Word", "Peoplesoft", "QuickBooks", "Tableau"],
-        otherNeedsReview:["Business Continuity & Risk Management", "Cash Flow & Treasury Management", "Change & Process Management", "Conflict Resolution & Problem-Solving", "Decision-Making & Leadership", "Financial Modeling & Reporting", "Quality Assurance & Control"],  
+        otherNeedsReview: ["Business Continuity & Risk Management", "Cash Flow & Treasury Management", "Change & Process Management", "Conflict Resolution & Problem-Solving", "Decision-Making & Leadership", "Financial Modeling & Reporting", "Quality Assurance & Control"],
         remarks: "",
         link: "https://executivehelpnow.org/team-members#e011e82c-74ef-4c24-82ef-176c80210a77"
- },
- {
+      },
+      {
         name: "Louie",
-        profileImage:"https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/72983964_10217753901712835_5062486069283389440.jpg/:/cr=t:16.56%25,l:11.2%25,w:76.92%25,h:51.27%25/rs=w:730,h:730,cg:true,m",
+        profileImage: "https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/72983964_10217753901712835_5062486069283389440.jpg/:/cr=t:16.56%25,l:11.2%25,w:76.92%25,h:51.27%25/rs=w:730,h:730,cg:true,m",
         experience: "5+ years",
         hours: "11-20 hours",
-        certificate: "Yes",       
+        certificate: "Yes",
         certificationInfo: `Scrum Fundamentals Certified (SFC), Six Sigma Yellow Belt, Shopify E-Commerce Websites for Beginners & Freelancers, Certificate for ClickUp Novice Certificate Exam ${getBadge("Growth Starter")}`,
-        educationLevel:"Yes",
-        educationInfo:"Bachelor’s Degree: Information Technology (IT), Associate’s Degree: Computer Electronics Technology",
-        originalSkills: ["Code Review & Release Management", "Communication & Stakeholder Management", "Documentation & Issue Tracking", "Front-End & Back-End Integration", "IT Consulting & Technology Optimization", "Leading Development Teams", "Managing Project Life Cycle", "Merging Code & Version Control", "Process Improvement in SDLC", "Project Planning & Timeline Management", "Project Scope & Deliverables Definition", "Quality Assurance & Testing Oversight", "Software Development Lifecycle (SDLC) Management", "System Setup & Maintenance", "Team Collaboration & Leadership", "UI/UX Design & Prototyping", "Website Design & Development", "Workstream Monitoring & Escalation"], 
+        educationLevel: "Yes",
+        educationInfo: "Bachelor’s Degree: Information Technology (IT), Associate’s Degree: Computer Electronics Technology",
+        originalSkills: ["Code Review & Release Management", "Communication & Stakeholder Management", "Documentation & Issue Tracking", "Front-End & Back-End Integration", "IT Consulting & Technology Optimization", "Leading Development Teams", "Managing Project Life Cycle", "Merging Code & Version Control", "Process Improvement in SDLC", "Project Planning & Timeline Management", "Project Scope & Deliverables Definition", "Quality Assurance & Testing Oversight", "Software Development Lifecycle (SDLC) Management", "System Setup & Maintenance", "Team Collaboration & Leadership", "UI/UX Design & Prototyping", "Website Design & Development", "Workstream Monitoring & Escalation"],
         standardizedSkills: [
-  "Artificial Intelligence",
-  "Business Operations",
-  "Data Entry & Management",
-  "Executive and Administrative Support",
-  "Graphic Design",
-  "Project Management",
-  "Research & Data Analysis",
-  "Team Communication Tools",
-  "Training & Development Support",
-  "Web & Content Management"
-],
+          "Artificial Intelligence",
+          "Business Operations",
+          "Data Entry & Management",
+          "Executive and Administrative Support",
+          "Graphic Design",
+          "Project Management",
+          "Research & Data Analysis",
+          "Team Communication Tools",
+          "Training & Development Support",
+          "Web & Content Management"
+        ],
         tools: ["Adobe Photoshop", "CSS3", "DaVinci Resolve", "Elementor", "Google Calendar", "Google Docs", "Google Sheets", "Google Slides", "HTML5", "JavaScript", "Microsoft Excel", "Microsoft Outlook", "Microsoft Powerpoint", "Microsoft Word", "PHP", "ReactJS", "Sony Vegas Pro", "WordPress"],
-        otherNeedsReview:["Code Review & Release Management", "Front-End & Back-End Integration", "IT Consulting & Technology Optimization", "Merging Code & Version Control", "Process Improvement in SDLC", "Quality Assurance & Testing Oversight", "Workstream Monitoring & Escalation"],  
+        otherNeedsReview: ["Code Review & Release Management", "Front-End & Back-End Integration", "IT Consulting & Technology Optimization", "Merging Code & Version Control", "Process Improvement in SDLC", "Quality Assurance & Testing Oversight", "Workstream Monitoring & Escalation"],
         remarks: "all good",
         link: "https://executivehelpnow.org/team-members#7e622d1b-7d6c-4d65-9603-f0efc039aa5a"
- },
+      },
 
-  {
+      {
         name: "Mae",
-        profileImage:"https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Screenshot%202025-04-02%20172416.png/:/cr=t:1.52%25,l:0%25,w:100%25,h:74.83%25/rs=w:446,h:446,cg:true",
+        profileImage: "https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Screenshot%202025-04-02%20172416.png/:/cr=t:1.52%25,l:0%25,w:100%25,h:74.83%25/rs=w:446,h:446,cg:true",
         experience: "5+ years",
         hours: "21-30 hours",
-        certificate: "Yes",   
+        certificate: "Yes",
         certificationInfo: `LinkedIn Certification, Delegating from a Distance, Project Management Skills for Leaders, Certificate for ClickUp Novice Certificate Exam ${getBadge("Growth Starter")}`,
-        educationLevel:"Yes",
-        educationInfo:"Bachelor’s Degree: Computer Science",
-        originalSkills: ["Claims Processing & Dispute Resolution", "Coaching, Mentoring & Leadership", "Content Creation, Copywriting & Podcast Production", "Curriculum Design & Training Facilitation", "Customer Service & Support", "Data Entry & Management", "Facebook Ads & Social Media Marketing", "General Technical Support & Troubleshooting", "Media Production", "Onboarding & Training Facilitation", "Process Documentation & Record Keeping", "Sales, Upselling & Customer Retention", "Social Media Engagement & Community Management", "Social Media Management & Strategy", "Teaching & Development Programs", "Workflow Optimization & Efficiency"], 
+        educationLevel: "Yes",
+        educationInfo: "Bachelor’s Degree: Computer Science",
+        originalSkills: ["Claims Processing & Dispute Resolution", "Coaching, Mentoring & Leadership", "Content Creation, Copywriting & Podcast Production", "Curriculum Design & Training Facilitation", "Customer Service & Support", "Data Entry & Management", "Facebook Ads & Social Media Marketing", "General Technical Support & Troubleshooting", "Media Production", "Onboarding & Training Facilitation", "Process Documentation & Record Keeping", "Sales, Upselling & Customer Retention", "Social Media Engagement & Community Management", "Social Media Management & Strategy", "Teaching & Development Programs", "Workflow Optimization & Efficiency"],
         standardizedSkills: [
-"Artificial Intelligence",
-"Bilingual",
-"Business Operations",
-"Calendar Management",
-"Content & Copywriting",
-"Customer Service",
-"Data Entry & Management",
-"Digital Marketing",
-"Education and Academic Support",
-"Email Management",
-"Executive & Administrative Support",
-"Google Workspace",
-"Graphic Design",
-"Marketing Communications",
-"Microsoft Office",
-"Performance & Metrics Tracking",
-"Podcast Production",
-"Presentation & Slide Design",
-"Process Improvement & Workflow Optimization",
-"Project Management",
-"Stakeholder Engagement",
-"Survey & Form Management",
-"Team Communication Tools",
-"Training & Development Support",
-"Web & Content Management"
-],
+          "Artificial Intelligence",
+          "Bilingual",
+          "Business Operations",
+          "Calendar Management",
+          "Content & Copywriting",
+          "Customer Service",
+          "Data Entry & Management",
+          "Digital Marketing",
+          "Education and Academic Support",
+          "Email Management",
+          "Executive & Administrative Support",
+          "Google Workspace",
+          "Graphic Design",
+          "Marketing Communications",
+          "Microsoft Office",
+          "Performance & Metrics Tracking",
+          "Podcast Production",
+          "Presentation & Slide Design",
+          "Process Improvement & Workflow Optimization",
+          "Project Management",
+          "Stakeholder Engagement",
+          "Survey & Form Management",
+          "Team Communication Tools",
+          "Training & Development Support",
+          "Web & Content Management"
+        ],
         tools: ["Canva", "CapCut", "Descript", "GoDaddy", "Google Calendar", "Google Docs", "Google Sheets", "Google Slides", "Mailchimp", "Microsoft Excel", "Microsoft Outlook", "Microsoft Powerpoint", "Microsoft Word", "Squarespace", "Streamyard", "VideoBolt", "Vyond", "Zoom"],
-        otherNeedsReview:["Claims Processing & Dispute Resolution", "General Technical Support & Troubleshooting", "Workflow Optimization & Efficiency"],  
+        otherNeedsReview: ["Claims Processing & Dispute Resolution", "General Technical Support & Troubleshooting", "Workflow Optimization & Efficiency"],
         remarks: "all good",
         link: "https://executivehelpnow.org/team-members#a9050cfd-cd6a-42d5-8c8d-50ed5de89112"
- },
-  {
+      },
+      {
         name: "Megan",
-        profileImage:"https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Screenshot%202025-03-26%20114931.png/:/cr=t:1.05%25,l:0%25,w:100%25,h:97.9%25/rs=w:419,h:419,cg:true",
+        profileImage: "https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Screenshot%202025-03-26%20114931.png/:/cr=t:1.05%25,l:0%25,w:100%25,h:97.9%25/rs=w:419,h:419,cg:true",
         experience: "5+ years",
         hours: "31-40 hours",
         certificate: "Yes",
         certificationInfo: `Certificate for ClickUp Novice Certificate Exam ${getBadge("Growth Starter")}`,
-        educationLevel:"Yes",
-        educationInfo:"Bachelor’s Degree: Arts, Master’s Degree: Organizational Leadership",
-        originalSkills: ["Calendar, Scheduling & Travel Coordination", "CEO & Executive Support", "Communication, Correspondence & Presentation Preparation", "Confidential Information Handling & Data Security", "Conflict Resolution, Mediation & Team Leadership", "Corporate & Event Planning", "Customer Support & Satisfaction Enhancement", "Data Entry, Documentation Accuracy & Record Maintenance", "Decision-Making, Strategy Execution & Goal Alignment", "Employee Training, Development & Motivation", "Financial Tracking, Expense Reporting & Invoice Processing", "HR Policy Enforcement, Talent Acquisition & Recruitment"], 
+        educationLevel: "Yes",
+        educationInfo: "Bachelor’s Degree: Arts, Master’s Degree: Organizational Leadership",
+        originalSkills: ["Calendar, Scheduling & Travel Coordination", "CEO & Executive Support", "Communication, Correspondence & Presentation Preparation", "Confidential Information Handling & Data Security", "Conflict Resolution, Mediation & Team Leadership", "Corporate & Event Planning", "Customer Support & Satisfaction Enhancement", "Data Entry, Documentation Accuracy & Record Maintenance", "Decision-Making, Strategy Execution & Goal Alignment", "Employee Training, Development & Motivation", "Financial Tracking, Expense Reporting & Invoice Processing", "HR Policy Enforcement, Talent Acquisition & Recruitment"],
         standardizedSkills: [
-"Artificial Intelligence",
-"Business Operations",
-"Calendar Management",
-"Data Entry & Management",
-"Education & Academic Support",
-"Email Management",
-"Event Planning",
-"Executive and Administrative Support",
-"Google Workspace",
-"Microsoft Office",
-"Operations & Facility Support",
-"Presentation & Slide Design",
-"Process Improvement & Workflow Optimization",
-"Research & Data Analysis",
-"Team Communication Tools",
-"Training & Development Support",
-"Travel Coordination"
-],
+          "Artificial Intelligence",
+          "Business Operations",
+          "Calendar Management",
+          "Data Entry & Management",
+          "Education & Academic Support",
+          "Email Management",
+          "Event Planning",
+          "Executive and Administrative Support",
+          "Google Workspace",
+          "Microsoft Office",
+          "Operations & Facility Support",
+          "Presentation & Slide Design",
+          "Process Improvement & Workflow Optimization",
+          "Research & Data Analysis",
+          "Team Communication Tools",
+          "Training & Development Support",
+          "Travel Coordination"
+        ],
         tools: ["1Password", "Asana", "ChatGPT", "Concur", "Cortana", "Evernote", "Expensify", "Fathom", "Google Calendar", "Google Docs", "Google Sheets", "Google Slides", "GroupMe", "LastPass", "Microsoft Excel", "Microsoft Outlook", "Microsoft Powerpoint", "Microsoft Teams", "Microsoft Word", "Monday.com", "Otter AI", "QuickBooks", "Siri", "Slack", "Trello", "TripIt"],
-        otherNeedsReview:["CEO & Executive Support", "Confidential Information Handling & Data Security", "Conflict Resolution, Mediation & Team Leadership" ], 
+        otherNeedsReview: ["CEO & Executive Support", "Confidential Information Handling & Data Security", "Conflict Resolution, Mediation & Team Leadership"],
         remarks: "all good",
         link: "https://executivehelpnow.org/team-members-2#ea9369b7-4692-4352-8843-821af75b9e20"
- },
-  {
+      },
+      {
         name: "Kimberly",
-        profileImage:"https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Kimberly_Headshot.jpg/:/rs=w:767,m",
+        profileImage: "https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Kimberly_Headshot.jpg/:/rs=w:767,m",
         experience: "5+ years",
         hours: "31-40 hours",
         certificate: "Yes",
         certificationInfo: `Certificate for ClickUp Novice Certificate Exam ${getBadge("Growth Starter")}`,
-        educationLevel:"Yes",
-        educationInfo:"Bachelor of Science in Organizational Leadership Indiana Institute of Technology  Summa Cum Laude | Cumulative GPA: 3.98/4.0  Associate’s Degree: Arts",
-        originalSkills: ["Calendar, Scheduling & Travel Coordination", "CEO & Executive Support", "Communication, Correspondence & Presentation Preparation", "Confidential Information Handling & Data Security", "Conflict Resolution, Mediation & Team Leadership", "Corporate & Event Planning", "Customer Support & Satisfaction Enhancement", "Data Entry, Documentation Accuracy & Record Maintenance", "Decision-Making, Strategy Execution & Goal Alignment", "Employee Training, Development & Motivation", "Financial Tracking, Expense Reporting & Invoice Processing", "HR Policy Enforcement, Talent Acquisition & Recruitment"], 
+        educationLevel: "Yes",
+        educationInfo: "Bachelor of Science in Organizational Leadership Indiana Institute of Technology  Summa Cum Laude | Cumulative GPA: 3.98/4.0  Associate’s Degree: Arts",
+        originalSkills: ["Calendar, Scheduling & Travel Coordination", "CEO & Executive Support", "Communication, Correspondence & Presentation Preparation", "Confidential Information Handling & Data Security", "Conflict Resolution, Mediation & Team Leadership", "Corporate & Event Planning", "Customer Support & Satisfaction Enhancement", "Data Entry, Documentation Accuracy & Record Maintenance", "Decision-Making, Strategy Execution & Goal Alignment", "Employee Training, Development & Motivation", "Financial Tracking, Expense Reporting & Invoice Processing", "HR Policy Enforcement, Talent Acquisition & Recruitment"],
         standardizedSkills: [
-"Artificial Intelligence",
-"Business Operations", 
-"Business Strategy & Planning",
-"Calendar Management",
-"Content & Copywriting",
-"CRM Tools",
-"Customer Service",
-"Digital Marketing",
-"Executive & Administrative Support",
-"Google Workspace",
-"HR & Payroll Support",
-"Microsoft Office",
-"Operations & Facility Support",
-"Project Management",
-"Research & Data Analysis",
-"Team Communication Tools",
-"Training & Development Support",
-"Vendor Management",
-"Web & Content Management "
-],
+          "Artificial Intelligence",
+          "Business Operations",
+          "Business Strategy & Planning",
+          "Calendar Management",
+          "Content & Copywriting",
+          "CRM Tools",
+          "Customer Service",
+          "Digital Marketing",
+          "Executive & Administrative Support",
+          "Google Workspace",
+          "HR & Payroll Support",
+          "Microsoft Office",
+          "Operations & Facility Support",
+          "Project Management",
+          "Research & Data Analysis",
+          "Team Communication Tools",
+          "Training & Development Support",
+          "Vendor Management",
+          "Web & Content Management "
+        ],
         tools: [
-          "17 Hats", 
-          "Adobe Photoshop & Lightroom", 
-          "Beautiful AI", 
-          "ChatGPT", 
-          "ClickUp", 
-          "Dialpad", 
-          "Figma", 
+          "17 Hats",
+          "Adobe Photoshop & Lightroom",
+          "Beautiful AI",
+          "ChatGPT",
+          "ClickUp",
+          "Dialpad",
+          "Figma",
           "Gmail",
           "Google Calendar",
           "Google Docs",
           "Google Sheets",
           "Google Slides",
-          "HubSpot", 
+          "HubSpot",
           "Microsoft Excel",
           "Microsoft Outlook",
           "Microsoft Powerpoint",
           "Microsoft Word",
-          "PandaDoc", 
-          "Pipedrive", 
-          "Pixieset", 
-          "Slack", 
-          "Wix", 
-          "Zendesk", 
+          "PandaDoc",
+          "Pipedrive",
+          "Pixieset",
+          "Slack",
+          "Wix",
+          "Zendesk",
           "Zoom "
         ],
-        otherNeedsReview:["CEO & Executive Support", "Confidential Information Handling & Data Security", "Conflict Resolution, Mediation & Team Leadership" ], 
+        otherNeedsReview: ["CEO & Executive Support", "Confidential Information Handling & Data Security", "Conflict Resolution, Mediation & Team Leadership"],
         remarks: "all good",
         link: "https://executivehelpnow.org/team-members-2#ea9369b7-4692-4352-8843-821af75b9e20"
- },
-  {
+      },
+      {
         name: "Milagros",
-        profileImage:"https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Revised%20EHN%20%20Team%20-%20Profiles%20(1).png/:/cr=t:9.07%25,l:0%25,w:100%25,h:77.25%25/rs=w:730,h:730,cg:true",
+        profileImage: "https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Revised%20EHN%20%20Team%20-%20Profiles%20(1).png/:/cr=t:9.07%25,l:0%25,w:100%25,h:77.25%25/rs=w:730,h:730,cg:true",
         experience: "5+ years",
         hours: "0-10 hours",
         certificate: "Yes",
         certificationInfo: `Certificate for ClickUp Novice Certificate Exam ${getBadge("Growth Starter")}`,
-        educationLevel:"Yes",
-        educationInfo:"Bachelor’s Degree: Forensic Sciences and Criminology",
-        originalSkills: ["Administrative Task Execution", "Advanced Calendar & Schedule Management", "Advanced MS Office Suite Proficiency", "Audit-Readiness & Compliance", "Billing, Invoicing & Payment Follow-Ups", "Bookkeeping & Financial Transaction Management", "Confidential Information & Financial Data Security", "Customer Inquiry Resolution & Guest Satisfaction", "Daily Sales Report Reconciliation & Financial Accuracy", "Front Desk & Guest Check-In/Out Management", "Meeting Coordination & Reservation Management", "Reservation System & Booking Process Optimization (Ericsoft Suite 5)", "Room Allocation & Travel Itinerary Coordination", "Travel & Accommodation Coordination", "Financial Documentation & Report Preparation"], 
+        educationLevel: "Yes",
+        educationInfo: "Bachelor’s Degree: Forensic Sciences and Criminology",
+        originalSkills: ["Administrative Task Execution", "Advanced Calendar & Schedule Management", "Advanced MS Office Suite Proficiency", "Audit-Readiness & Compliance", "Billing, Invoicing & Payment Follow-Ups", "Bookkeeping & Financial Transaction Management", "Confidential Information & Financial Data Security", "Customer Inquiry Resolution & Guest Satisfaction", "Daily Sales Report Reconciliation & Financial Accuracy", "Front Desk & Guest Check-In/Out Management", "Meeting Coordination & Reservation Management", "Reservation System & Booking Process Optimization (Ericsoft Suite 5)", "Room Allocation & Travel Itinerary Coordination", "Travel & Accommodation Coordination", "Financial Documentation & Report Preparation"],
         standardizedSkills: [
           "Artificial Intelligence",
           "Bilingual",
@@ -1161,29 +1237,29 @@ h1, h2 {
           "Google Workspace",
           "Microsoft Office"],
         tools: ["Ericsoft Suite 5",
-"Google Calendar",
-"Google Docs",
-"Google Sheets",
-"Google Slides",
-"Microsoft Excel",
-"Microsoft Outlook",
-"Microsoft PowerPoint",
-"Microsoft Word",
-"Xero"],
-        otherNeedsReview:["Administrative Task Execution", "Billing, Invoicing & Payment Follow-Ups", "Confidential Information & Financial Data Security", "Daily Sales Report Reconciliation & Financial Accuracy"],  
+          "Google Calendar",
+          "Google Docs",
+          "Google Sheets",
+          "Google Slides",
+          "Microsoft Excel",
+          "Microsoft Outlook",
+          "Microsoft PowerPoint",
+          "Microsoft Word",
+          "Xero"],
+        otherNeedsReview: ["Administrative Task Execution", "Billing, Invoicing & Payment Follow-Ups", "Confidential Information & Financial Data Security", "Daily Sales Report Reconciliation & Financial Accuracy"],
         remarks: "all good",
         link: "https://executivehelpnow.org/team-members#c4f2c90b-4587-474f-8a98-d7e8e2b538b6"
- },
-  {
+      },
+      {
         name: "Racheed",
-        profileImage:"https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Racheed.png/:/cr=t:0%25,l:5.96%25,w:88.07%25,h:100%25/rs=w:730,h:730,cg:true",
+        profileImage: "https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Racheed.png/:/cr=t:0%25,l:5.96%25,w:88.07%25,h:100%25/rs=w:730,h:730,cg:true",
         experience: "3-4 years",
         hours: "31-40 hours",
-        certificate: "Yes",       
+        certificate: "Yes",
         certificationInfo: `City & Guilds (2023) Level 3 Award in Customer Service (First Class Pass), Certificate for ClickUp Novice Certificate Exam ${getBadge("Growth Starter")}`,
-        educationLevel:"Yes",
-        educationInfo:"Bachelor’s Degree: Human Resource Management, Minor: Management Studies",
-        originalSkills: ["Business Development", "Client Relationship Management", "Communication & Interpersonal Skills", "CRM & Database Management", "Customer Service", "Data Analysis & Reporting", "Exam Registration & Processing", "Invoicing & Financial Coordination", "Market Research & Analysis", "Marketing & Public Relations", "Microsoft Office Suite", "Negotiation & Persuasion", "Onboarding & Client Training", "Operations Management", "Performance Tracking", "Presentation & Public Speaking", "Project & Task Management", "Sales Strategy & Execution", "Stakeholder Engagement", "Training Material Development"], 
+        educationLevel: "Yes",
+        educationInfo: "Bachelor’s Degree: Human Resource Management, Minor: Management Studies",
+        originalSkills: ["Business Development", "Client Relationship Management", "Communication & Interpersonal Skills", "CRM & Database Management", "Customer Service", "Data Analysis & Reporting", "Exam Registration & Processing", "Invoicing & Financial Coordination", "Market Research & Analysis", "Marketing & Public Relations", "Microsoft Office Suite", "Negotiation & Persuasion", "Onboarding & Client Training", "Operations Management", "Performance Tracking", "Presentation & Public Speaking", "Project & Task Management", "Sales Strategy & Execution", "Stakeholder Engagement", "Training Material Development"],
         standardizedSkills: ["Artificial Intelligence",
           "Business Operations",
           "Business Strategy & Planning",
@@ -1199,235 +1275,235 @@ h1, h2 {
           "Project Management",
           "Team Communication Tools",
           "Training & Development Support"],
-        tools: ["Microsoft Excel", "Microsoft Outlook", "Microsoft Powerpoint", "Microsoft SharePoint",  "Microsoft Teams", "Microsoft Word", "SAP", "Zoom"],
-        otherNeedsReview:["Exam Registration & Processing", "Invoicing & Financial Coordination", "Marketing & Public Relations", "Negotiation & Persuasion", "Operations Management", "Stakeholder Engagement"],  
+        tools: ["Microsoft Excel", "Microsoft Outlook", "Microsoft Powerpoint", "Microsoft SharePoint", "Microsoft Teams", "Microsoft Word", "SAP", "Zoom"],
+        otherNeedsReview: ["Exam Registration & Processing", "Invoicing & Financial Coordination", "Marketing & Public Relations", "Negotiation & Persuasion", "Operations Management", "Stakeholder Engagement"],
         remarks: "",
         link: "https://executivehelpnow.org/team-members-2#d64f0a13-3c40-488f-85fa-03e82a2d9a96"
- },
- 
-  {
-        name: "Renatta",
-        profileImage:"https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/T023E51QS0H-U07U58H81QD-c5d04eaa2ef0-512.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:512,h:512,cg:true",
-        experience: "5+ years",
-        hours: "0-10 hours",
-        certificate: "Yes",
-        certificationInfo: `Certificate for ClickUp Novice Certificate Exam ${getBadge("Growth Starter")}`,
-        educationLevel:"Yes",
-        educationInfo:"Bachelor’s Degree: Business Administration, Associate’s Degree: Business Management",
-        originalSkills: ["Call Center Management", "Client Relationship Management", "Coaching & Team Leadership", "Compliance & Risk Management", "Construction Management & Oversight", "Continuous Improvement & Process Optimization", "Cross-Functional Collaboration", "Customer Experience Enhancement", "Employee Training & Development", "Executive Engagement & Stakeholder Management", "Forecasting & Strategic Planning", "Growth Strategy & Market Expansion", "High-Performance Team Development", "Operational Efficiency & Scalability", "Performance Metrics & KPI Management", "Project Management & Scheduling", "Quality Control & Assurance", "Sales & Revenue Growth", "Strategic Leadership & Thought Leadership", "Workforce Optimization & Productivity"], 
-        standardizedSkills: [
-"Artificial Intelligence",
-"Bookkeeping",
-"Business Operations",
-"Business Strategy & Planning",
-"Calendar Management",
-"Content & Copywriting",
-"CRM Tools",
-"Customer Service",
-"Data Entry & Management",
-"Email Management",
-"Event Planning",
-"Executive and Administrative Support",
-"Google Workspace",
-"Grant Writing",
-"Graphic Design",
-"HR & Payroll Support",
-"Inventory & Procurement",
-"Marketing Communications",
-"Microsoft Office",
-"Operations & Facility Support",
-"Performance & Metrics Tracking",
-"Presentation & Slide Design",
-"Process Improvement & Workflow Optimization",
-"Project Management",
-"Research & Data Analysis",
-"Specialized Software",
-"Stakeholder Engagement",
-"Survey & Form Management",
-"Team Communication Tools",
-"Training & Development Support",
-"Travel Coordination",
-"Vendor Management",
-"Web & Content Management"
-],
-        tools: ["Acuity Scheduling", "Asana", "Buffer", "Calendly", "Canva", "Clockify", "FunnelStreams", "Google Calendar", "Google Docs", "Google Sheets", "Google Slides", "HubSpot CRM", "iCalendar", "iOS platform", "Jitsi", "Jotform", "LastPass", "Loom", "Mailchimp", "MailerLite", "Meta Business Suite", "Microsoft Excel", "Microsoft Outlook", "Microsoft Powerpoint", "Microsoft Word", "Shopify", "Slack", "Square", "Stripe", "Trello", "Typeform", "Weebly", "Wix", "Zoom"],
-        otherNeedsReview:["Continuous Improvement & Process Optimization", "Executive Engagement & Stakeholder Management", "Operational Efficiency & Scalability", "Quality Control & Assurance", "Sales & Revenue Growth", "Strategic Leadership & Thought Leadership", "Workforce Optimization & Productivity"], 
-        remarks: "I have corrected my bio/profile below.  My birthday is 10/06 and my anniversary is about 10/25 started in 2024. Administrative 30+ years Client Services & Operations Management 30+ years Technical Support & Sales Coaching 20+ years Customer Service & Customer Experience 30+ years Construction Supervision (General Contractor) 7+ years",
-        link: "https://executivehelpnow.org/team-members#ee12959c-84cd-4d8b-8c84-6ce103050b5c"
- },
+      },
 
-//   {
-//         name: "Shaniann",
-//         profileImage:"https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Screenshot%202025-03-26%20114759.png/:/cr=t:0.36%25,l:0%25,w:100%25,h:99.29%25/rs=w:418,h:418,cg:true",
-//         experience: "1-2 years",
-//         hours: "0-10 hours",
-//         certificate: "None",
-//         certificationInfo: "",
-//         educationLevel:"Yes",
-//         educationInfo:"Bachelor’s Degree: Business Communications, Associate’s Degree: Business Administration",
-//         originalSkills: ["Asana & Slack", "Calendar & Travel Management", "Cross-Functional Collaboration", "Event Planning & Coordination", "Executive Support & Strategic Coordination", "GoDaddy & Etsy Management", "Google Suite (Docs, Sheets, Drive)", "Microsoft Office (Excel, PowerPoint, Word)", "Project Management", "Stakeholder Engagement", "Task & Workflow Organization", "Team & Communication Tools (Zoom, Skype)"], 
-//         standardizedSkills: ["Artificial Intelligence",
-//             "Business Operations",
-//             "Calendar Management",
-//             "Event Planning",
-//             "Executive and Administrative Support",
-//             "Google Workspace",
-//             "Microsoft Office",
-//             "Project Management",
-//             "Specialized Software",
-//             "Team Communication Tools",
-//             "Travel Coordination"],
-//         tools: ["Asana", "Google Calendar", "Google Docs", "Google Sheets", "Google Slides", "Microsoft Excel", "Microsoft Outlook", "Microsoft Powerpoint", "Microsoft Word", "Slack", "Zoom"],
-//         otherNeedsReview:["Executive Support & Strategic Coordination", "Stakeholder Engagement", "Task & Workflow Organization" ], 
-//         remarks: "all good",
-//         link: "https://executivehelpnow.org/team-members-2#36ed98ea-5630-4353-9acc-fc5cb3a693ea"
-//  },
-  {
+      // {
+      //   name: "Renatta",
+      //   profileImage: "https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/T023E51QS0H-U07U58H81QD-c5d04eaa2ef0-512.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:512,h:512,cg:true",
+      //   experience: "5+ years",
+      //   hours: "0-10 hours",
+      //   certificate: "Yes",
+      //   certificationInfo: `Certificate for ClickUp Novice Certificate Exam ${getBadge("Growth Starter")}`,
+      //   educationLevel: "Yes",
+      //   educationInfo: "Bachelor’s Degree: Business Administration, Associate’s Degree: Business Management",
+      //   originalSkills: ["Call Center Management", "Client Relationship Management", "Coaching & Team Leadership", "Compliance & Risk Management", "Construction Management & Oversight", "Continuous Improvement & Process Optimization", "Cross-Functional Collaboration", "Customer Experience Enhancement", "Employee Training & Development", "Executive Engagement & Stakeholder Management", "Forecasting & Strategic Planning", "Growth Strategy & Market Expansion", "High-Performance Team Development", "Operational Efficiency & Scalability", "Performance Metrics & KPI Management", "Project Management & Scheduling", "Quality Control & Assurance", "Sales & Revenue Growth", "Strategic Leadership & Thought Leadership", "Workforce Optimization & Productivity"],
+      //   standardizedSkills: [
+      //     "Artificial Intelligence",
+      //     "Bookkeeping",
+      //     "Business Operations",
+      //     "Business Strategy & Planning",
+      //     "Calendar Management",
+      //     "Content & Copywriting",
+      //     "CRM Tools",
+      //     "Customer Service",
+      //     "Data Entry & Management",
+      //     "Email Management",
+      //     "Event Planning",
+      //     "Executive and Administrative Support",
+      //     "Google Workspace",
+      //     "Grant Writing",
+      //     "Graphic Design",
+      //     "HR & Payroll Support",
+      //     "Inventory & Procurement",
+      //     "Marketing Communications",
+      //     "Microsoft Office",
+      //     "Operations & Facility Support",
+      //     "Performance & Metrics Tracking",
+      //     "Presentation & Slide Design",
+      //     "Process Improvement & Workflow Optimization",
+      //     "Project Management",
+      //     "Research & Data Analysis",
+      //     "Specialized Software",
+      //     "Stakeholder Engagement",
+      //     "Survey & Form Management",
+      //     "Team Communication Tools",
+      //     "Training & Development Support",
+      //     "Travel Coordination",
+      //     "Vendor Management",
+      //     "Web & Content Management"
+      //   ],
+      //   tools: ["Acuity Scheduling", "Asana", "Buffer", "Calendly", "Canva", "Clockify", "FunnelStreams", "Google Calendar", "Google Docs", "Google Sheets", "Google Slides", "HubSpot CRM", "iCalendar", "iOS platform", "Jitsi", "Jotform", "LastPass", "Loom", "Mailchimp", "MailerLite", "Meta Business Suite", "Microsoft Excel", "Microsoft Outlook", "Microsoft Powerpoint", "Microsoft Word", "Shopify", "Slack", "Square", "Stripe", "Trello", "Typeform", "Weebly", "Wix", "Zoom"],
+      //   otherNeedsReview: ["Continuous Improvement & Process Optimization", "Executive Engagement & Stakeholder Management", "Operational Efficiency & Scalability", "Quality Control & Assurance", "Sales & Revenue Growth", "Strategic Leadership & Thought Leadership", "Workforce Optimization & Productivity"],
+      //   remarks: "I have corrected my bio/profile below.  My birthday is 10/06 and my anniversary is about 10/25 started in 2024. Administrative 30+ years Client Services & Operations Management 30+ years Technical Support & Sales Coaching 20+ years Customer Service & Customer Experience 30+ years Construction Supervision (General Contractor) 7+ years",
+      //   link: "https://executivehelpnow.org/team-members#ee12959c-84cd-4d8b-8c84-6ce103050b5c"
+      // },
+
+      //   {
+      //         name: "Shaniann",
+      //         profileImage:"https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Screenshot%202025-03-26%20114759.png/:/cr=t:0.36%25,l:0%25,w:100%25,h:99.29%25/rs=w:418,h:418,cg:true",
+      //         experience: "1-2 years",
+      //         hours: "0-10 hours",
+      //         certificate: "None",
+      //         certificationInfo: "",
+      //         educationLevel:"Yes",
+      //         educationInfo:"Bachelor’s Degree: Business Communications, Associate’s Degree: Business Administration",
+      //         originalSkills: ["Asana & Slack", "Calendar & Travel Management", "Cross-Functional Collaboration", "Event Planning & Coordination", "Executive Support & Strategic Coordination", "GoDaddy & Etsy Management", "Google Suite (Docs, Sheets, Drive)", "Microsoft Office (Excel, PowerPoint, Word)", "Project Management", "Stakeholder Engagement", "Task & Workflow Organization", "Team & Communication Tools (Zoom, Skype)"], 
+      //         standardizedSkills: ["Artificial Intelligence",
+      //             "Business Operations",
+      //             "Calendar Management",
+      //             "Event Planning",
+      //             "Executive and Administrative Support",
+      //             "Google Workspace",
+      //             "Microsoft Office",
+      //             "Project Management",
+      //             "Specialized Software",
+      //             "Team Communication Tools",
+      //             "Travel Coordination"],
+      //         tools: ["Asana", "Google Calendar", "Google Docs", "Google Sheets", "Google Slides", "Microsoft Excel", "Microsoft Outlook", "Microsoft Powerpoint", "Microsoft Word", "Slack", "Zoom"],
+      //         otherNeedsReview:["Executive Support & Strategic Coordination", "Stakeholder Engagement", "Task & Workflow Organization" ], 
+      //         remarks: "all good",
+      //         link: "https://executivehelpnow.org/team-members-2#36ed98ea-5630-4353-9acc-fc5cb3a693ea"
+      //  },
+      {
         name: "Shannon",
-        profileImage:"https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Shannon.png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:730,h:730,cg:true",
+        profileImage: "https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Shannon.png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:730,h:730,cg:true",
         experience: "5+ years",
         hours: "0-10 hours",
         certificate: "Yes",
         certificationInfo: `Certificate for ClickUp Novice Certificate Exam ${getBadge("Growth Starter")}`,
-        educationLevel:"Yes",
-        educationInfo:"Associate’s Degree: Visual Communications",
-        originalSkills: ["Administrative Support", "Business Communication", "Compliance & Confidentiality", "Customer Service & Conflict Resolution", "Contract & Legal Documentation", "Data & Database Management", "Event & Employee Engagement", "Expense & Budget Management", "Financial Transactions & Processing", "IT & Software Proficiency", "Marketing & Sales Support", "Process Improvement & Efficiency", "Real Estate & Referral Coordination", "Report Generation & Data Analysis", "Travel & Logistics Coordination" ],
+        educationLevel: "Yes",
+        educationInfo: "Associate’s Degree: Visual Communications",
+        originalSkills: ["Administrative Support", "Business Communication", "Compliance & Confidentiality", "Customer Service & Conflict Resolution", "Contract & Legal Documentation", "Data & Database Management", "Event & Employee Engagement", "Expense & Budget Management", "Financial Transactions & Processing", "IT & Software Proficiency", "Marketing & Sales Support", "Process Improvement & Efficiency", "Real Estate & Referral Coordination", "Report Generation & Data Analysis", "Travel & Logistics Coordination"],
         standardizedSkills: ["Artificial Intelligence",
-            "Bookkeeping",
-            "Business Operations",
-            "Customer Service",
-            "Data Entry & Management",
-            "Event Planning",
-            "Executive and Administrative Support",
-            "Real Estate Agent Support",
-            "Real Estate Investor Support",
-            "Research & Data Analysis",
-            "Team Communication Tools",
-            "Travel Coordination"],
-        tools: ["Google Calendar","Google Docs", "Google Sheets", "Google Slides", "Microsoft Excel", "Microsoft Outlook", "Microsoft Powerpoint", "Microsoft Word", "Slack", "Zoom"],
-        otherNeedsReview:["Administrative Support", "Data & Database Management", "Financial Transactions & Processing", "IT & Software Proficiency", "Marketing & Sales Support", "Process Improvement & Efficiency"], 
+          "Bookkeeping",
+          "Business Operations",
+          "Customer Service",
+          "Data Entry & Management",
+          "Event Planning",
+          "Executive and Administrative Support",
+          "Real Estate Agent Support",
+          "Real Estate Investor Support",
+          "Research & Data Analysis",
+          "Team Communication Tools",
+          "Travel Coordination"],
+        tools: ["Google Calendar", "Google Docs", "Google Sheets", "Google Slides", "Microsoft Excel", "Microsoft Outlook", "Microsoft Powerpoint", "Microsoft Word", "Slack", "Zoom"],
+        otherNeedsReview: ["Administrative Support", "Data & Database Management", "Financial Transactions & Processing", "IT & Software Proficiency", "Marketing & Sales Support", "Process Improvement & Efficiency"],
         remarks: "",
         link: "https://executivehelpnow.org/team-members#ef94d31d-d72e-46c2-a85a-463207144381"
- },
-  {
+      },
+      {
         name: "Sujata",
-        profileImage:"https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Sujata.png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:730,h:730,cg:true",
+        profileImage: "https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Sujata.png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:730,h:730,cg:true",
         experience: "5+ years",
         hours: "0-10 hours",
         certificate: "Yes",
         certificationInfo: `Certificate for ClickUp Novice Certificate Exam ${getBadge("Growth Starter")}`,
-        educationLevel:"Yes",
-        educationInfo:"Bachelor’s Degree: Engineering",
-        originalSkills: ["A/B Testing", "Brand Engagement", "Business Consulting", "Campaign Management", "Client Management", "Content Creation", "Copywriting", "Data Interpretation", "Email Marketing", "Graphic Design", "Market Research", "Process Improvement", "Project Management", "SEO Optimization", "Social Media Advertising", "Social Media Analytics", "Social Media Management", "Social Media Strategy", "Stakeholder Communication", "Workflow Optimization"], 
+        educationLevel: "Yes",
+        educationInfo: "Bachelor’s Degree: Engineering",
+        originalSkills: ["A/B Testing", "Brand Engagement", "Business Consulting", "Campaign Management", "Client Management", "Content Creation", "Copywriting", "Data Interpretation", "Email Marketing", "Graphic Design", "Market Research", "Process Improvement", "Project Management", "SEO Optimization", "Social Media Advertising", "Social Media Analytics", "Social Media Management", "Social Media Strategy", "Stakeholder Communication", "Workflow Optimization"],
         standardizedSkills: ["Artificial Intelligence",
-            "Business Operations",
-            "Business Strategy & Planning",
-            "Content & Copywriting",
-            "Digital Marketing",
-            "Email Management",
-            "Executive and Administrative Support"
-            ],
+          "Business Operations",
+          "Business Strategy & Planning",
+          "Content & Copywriting",
+          "Digital Marketing",
+          "Email Management",
+          "Executive and Administrative Support"
+        ],
         tools: ["Google Calendar", "Google Docs", "Google Sheets", "Google Slides", "Microsoft Excel", "Microsoft Outlook", "Microsoft Powerpoint", "Microsoft Word", "Slack", "Zoom"],
-        otherNeedsReview:["A/B Testing", "Brand Engagement", "Business Consulting", "Campaign Management", "Client Management", "Data Interpretation", "Process Improvement", "Workflow Optimization"],  
+        otherNeedsReview: ["A/B Testing", "Brand Engagement", "Business Consulting", "Campaign Management", "Client Management", "Data Interpretation", "Process Improvement", "Workflow Optimization"],
         remarks: "all good",
         link: "https://executivehelpnow.org/team-members#fa08ab0c-6f46-41f4-a93c-8728d21f5213"
- },
-  {
+      },
+      {
         name: "Tori",
-        profileImage:"https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Tori.png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:730,h:730,cg:true",
+        profileImage: "https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Tori.png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:730,h:730,cg:true",
         experience: "5+ years",
         hours: "0-10 hours",
         certificate: "Yes",
         certificationInfo: `Certificate for ClickUp Novice Certificate Exam ${getBadge("Growth Starter")}`,
-        educationLevel:"Yes",
-        educationInfo:"Bachelor’s Degree: Sociology, Minor: Gender and Women's Studies",
-        originalSkills: ["Artistic Design & Product Development", "Auditing, Financial Management & Bookkeeping", "Business Operations & Self-Employment", "Cash Handling, Transaction Processing & Sales", "Cleaning, Facility Maintenance & Organization", "Creative Problem-Solving & Critical Thinking", "Customer Service & Relationship Building", "Data Entry, Record-Keeping & Scheduling", "Leadership, Team Management & Mentoring", "Marketing, Branding & Social Media Strategy", "Microsoft Office & Digital Tools Proficiency", "Multitasking, Time Management & Efficiency"], 
+        educationLevel: "Yes",
+        educationInfo: "Bachelor’s Degree: Sociology, Minor: Gender and Women's Studies",
+        originalSkills: ["Artistic Design & Product Development", "Auditing, Financial Management & Bookkeeping", "Business Operations & Self-Employment", "Cash Handling, Transaction Processing & Sales", "Cleaning, Facility Maintenance & Organization", "Creative Problem-Solving & Critical Thinking", "Customer Service & Relationship Building", "Data Entry, Record-Keeping & Scheduling", "Leadership, Team Management & Mentoring", "Marketing, Branding & Social Media Strategy", "Microsoft Office & Digital Tools Proficiency", "Multitasking, Time Management & Efficiency"],
         standardizedSkills: [
-"Advocacy & Social Services",
-"Artificial Intelligence",
-"Business Operations",
-"Calendar Management",
-"CRM Tools",
-"Customer Service",
-"Data Entry & Management",
-"Education & Academic Support",
-"Email Management",
-"Event Planning",
-"Executive and Administrative Support",
-"Google Workspace",
-"Microsoft Office",
-"Team Communication Tools",
-"Travel Coordination"
-],
+          "Advocacy & Social Services",
+          "Artificial Intelligence",
+          "Business Operations",
+          "Calendar Management",
+          "CRM Tools",
+          "Customer Service",
+          "Data Entry & Management",
+          "Education & Academic Support",
+          "Email Management",
+          "Event Planning",
+          "Executive and Administrative Support",
+          "Google Workspace",
+          "Microsoft Office",
+          "Team Communication Tools",
+          "Travel Coordination"
+        ],
         tools: ["ChatGPT", "ClickUp", "Google Calendar", "Google Docs", "Google Sheets", "Google Slides", "Microsoft Excel", "Microsoft Outlook", "Microsoft Powerpoint", "Microsoft Word", "Ringy", "Slack", "Smartsheets", "Zoom"],
-        otherNeedsReview:["Business Operations & Self-Employment", "Cash Handling, Transaction Processing & Sales", "Creative Problem-Solving & Critical Thinking", "Multitasking, Time Management & Efficiency"],  
+        otherNeedsReview: ["Business Operations & Self-Employment", "Cash Handling, Transaction Processing & Sales", "Creative Problem-Solving & Critical Thinking", "Multitasking, Time Management & Efficiency"],
         remarks: "all good",
         link: "https://executivehelpnow.org/team-members#d2e60e8d-a23f-4e87-b820-06249018ac25"
- },
+      },
 
-//  {
-//         name: "Heather",
-//         profileImage:"https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Screenshot%202025-07-07%20201233.jpg/:/cr=t:2.5%25,l:0%25,w:100%25,h:97.5%25/rs=w:365,h:365,cg:true",
-//         experience: "5+ years",
-//         hours: "31-40 hours",
-//         certificate: "Yes",
-//         certificationInfo: `Certificate for ClickUp Novice Certificate Exam, Licensed Attorney in Massachusetts , Licensed Realtor in Florida ${getBadge("Growth Starter")}`,
-//         educationLevel:"Yes",
-//         educationInfo:"Bachelor’s Degree: Arts, Journalism and Mass Communication-Advertising Doctorate: Juris Doctor (Law)",
-//         originalSkills: ["Administrative Support", "Appointment and Calendar Management", "Confidential File and Records Management", "Customer Service", "Data Entry and Report Management", "Document Editing, Formatting, and Proofreading", "Event Planning and Coordination", "Expense Reporting and Budget Management", "Interview and Travel Coordination", "Inventory and Office Supply Management", "Meeting Scheduling, Facilitation, and Minutes Preparation", "Physician Scheduling and On-Call Management", "Presentation and Report Creation (Excel, PowerPoint, Word, Tableau)", "Process Improvement and Workflow Optimization", "Stakeholder and Vendor Relations"], 
-//         standardizedSkills: [
-//           "Artificial Intelligence",
-//           "Bookkeeping",
-//           "Business Operations",
-//           "Calendar Management",
-//           "CRM Tools",
-//           "Customer Service",
-//           "Data Entry & Management",
-//           "Email Management",
-//           "Event Planning",
-//           "Executive & Administrative Support",
-//           "Google Workspace",
-//           "HR & Payroll Support",
-//           "Inventory & Procurement",
-//           "Microsoft Office",
-//           "Operations & Facility Support",
-//           "Presentation & Slide Design",
-//           "Project Management",
-//           "Real Estate Agent Support",
-//           "Real Estate Investor Support",
-//           "Research & Data Analysis",
-//           "Survey & Form Management",
-//           "Team Communication Tools",
-//           "Training & Development Support",
-//           "Travel Coordination",
-//           "Vendor Management"
-//         ],
-//         tools: [
-//           "Asana",
-//           "BaseCamp",
-//           "Concur",
-//           "Google Calendar",
-//           "Google Docs",
-//           "Google Sheets",
-//           "Google Slides",
-//           "Quickbooks",
-//           "Trello"
-//         ],
-//         otherNeedsReview:[""],  
-//         remarks: "",
-//         link: "https://executivehelpnow.org/team-members-2#7002e2d5-f58d-4d12-8adc-059c4b9d2d23"
-//  },
- {
+      //  {
+      //         name: "Heather",
+      //         profileImage:"https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Screenshot%202025-07-07%20201233.jpg/:/cr=t:2.5%25,l:0%25,w:100%25,h:97.5%25/rs=w:365,h:365,cg:true",
+      //         experience: "5+ years",
+      //         hours: "31-40 hours",
+      //         certificate: "Yes",
+      //         certificationInfo: `Certificate for ClickUp Novice Certificate Exam, Licensed Attorney in Massachusetts , Licensed Realtor in Florida ${getBadge("Growth Starter")}`,
+      //         educationLevel:"Yes",
+      //         educationInfo:"Bachelor’s Degree: Arts, Journalism and Mass Communication-Advertising Doctorate: Juris Doctor (Law)",
+      //         originalSkills: ["Administrative Support", "Appointment and Calendar Management", "Confidential File and Records Management", "Customer Service", "Data Entry and Report Management", "Document Editing, Formatting, and Proofreading", "Event Planning and Coordination", "Expense Reporting and Budget Management", "Interview and Travel Coordination", "Inventory and Office Supply Management", "Meeting Scheduling, Facilitation, and Minutes Preparation", "Physician Scheduling and On-Call Management", "Presentation and Report Creation (Excel, PowerPoint, Word, Tableau)", "Process Improvement and Workflow Optimization", "Stakeholder and Vendor Relations"], 
+      //         standardizedSkills: [
+      //           "Artificial Intelligence",
+      //           "Bookkeeping",
+      //           "Business Operations",
+      //           "Calendar Management",
+      //           "CRM Tools",
+      //           "Customer Service",
+      //           "Data Entry & Management",
+      //           "Email Management",
+      //           "Event Planning",
+      //           "Executive & Administrative Support",
+      //           "Google Workspace",
+      //           "HR & Payroll Support",
+      //           "Inventory & Procurement",
+      //           "Microsoft Office",
+      //           "Operations & Facility Support",
+      //           "Presentation & Slide Design",
+      //           "Project Management",
+      //           "Real Estate Agent Support",
+      //           "Real Estate Investor Support",
+      //           "Research & Data Analysis",
+      //           "Survey & Form Management",
+      //           "Team Communication Tools",
+      //           "Training & Development Support",
+      //           "Travel Coordination",
+      //           "Vendor Management"
+      //         ],
+      //         tools: [
+      //           "Asana",
+      //           "BaseCamp",
+      //           "Concur",
+      //           "Google Calendar",
+      //           "Google Docs",
+      //           "Google Sheets",
+      //           "Google Slides",
+      //           "Quickbooks",
+      //           "Trello"
+      //         ],
+      //         otherNeedsReview:[""],  
+      //         remarks: "",
+      //         link: "https://executivehelpnow.org/team-members-2#7002e2d5-f58d-4d12-8adc-059c4b9d2d23"
+      //  },
+      {
         name: "Sauma",
-        profileImage:"https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Sauma%20Doka%20-%20Headshot.jpg/:/rs=w:100%25",
+        profileImage: "https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Sauma%20Doka%20-%20Headshot.jpg/:/rs=w:100%25",
         experience: "5+ years",
         hours: "0-10 hours",
         certificate: "Yes",
         certificationInfo: `Certificate for ClickUp Novice Certificate Exam ${getBadge("Growth Starter")}`,
-        educationLevel:"Yes",
-        educationInfo:"Bachelor’s Degree: Public Health Science, Master’s Degree: Public Health (MPH)",
-        originalSkills: ["Administrative Support", "Appointment and Calendar Management", "Confidential File and Records Management", "Customer Service", "Data Entry and Report Management", "Document Editing, Formatting, and Proofreading", "Event Planning and Coordination", "Expense Reporting and Budget Management", "Interview and Travel Coordination", "Inventory and Office Supply Management", "Meeting Scheduling, Facilitation, and Minutes Preparation", "Physician Scheduling and On-Call Management", "Presentation and Report Creation (Excel, PowerPoint, Word, Tableau)", "Process Improvement and Workflow Optimization", "Stakeholder and Vendor Relations"], 
-         standardizedSkills: [
+        educationLevel: "Yes",
+        educationInfo: "Bachelor’s Degree: Public Health Science, Master’s Degree: Public Health (MPH)",
+        originalSkills: ["Administrative Support", "Appointment and Calendar Management", "Confidential File and Records Management", "Customer Service", "Data Entry and Report Management", "Document Editing, Formatting, and Proofreading", "Event Planning and Coordination", "Expense Reporting and Budget Management", "Interview and Travel Coordination", "Inventory and Office Supply Management", "Meeting Scheduling, Facilitation, and Minutes Preparation", "Physician Scheduling and On-Call Management", "Presentation and Report Creation (Excel, PowerPoint, Word, Tableau)", "Process Improvement and Workflow Optimization", "Stakeholder and Vendor Relations"],
+        standardizedSkills: [
           "Advocacy & Social Services",
           "Artificial Intelligence",
           "Business Operations",
@@ -1475,86 +1551,86 @@ h1, h2 {
           "Twitter",
           "Zoom"
         ],
-        otherNeedsReview:[""],  
+        otherNeedsReview: [""],
         remarks: "",
         link: "https://executivehelpnow.org/team-members-2#9b2fc5c2-71bf-4259-8c45-6c7d2697ec2b"
- },
-//  {
-//         name: "Sasha",
-//         profileImage:"https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/IMG_2282-2.jpg/:/rs=w:100%25",
-//         experience: "5+ years",
-//         hours: "31-40 hours",
-//         certificate: "Yes",
-//         certificationInfo: `Certificate for ClickUp Novice Certificate Exam ${getBadge("Growth Starter")}`,
-//         educationLevel:"Yes",
-//         educationInfo:"Bachelor’s Degree: Criminal Justice",
-//         originalSkills: ["Administrative Support", "Appointment and Calendar Management", "Confidential File and Records Management", "Customer Service", "Data Entry and Report Management", "Document Editing, Formatting, and Proofreading", "Event Planning and Coordination", "Expense Reporting and Budget Management", "Interview and Travel Coordination", "Inventory and Office Supply Management", "Meeting Scheduling, Facilitation, and Minutes Preparation", "Physician Scheduling and On-Call Management", "Presentation and Report Creation (Excel, PowerPoint, Word, Tableau)", "Process Improvement and Workflow Optimization", "Stakeholder and Vendor Relations"], 
-//         standardizedSkills: [
-//           "Advocacy & Social Services",
-//           "Artificial Intelligence",
-//           "Bookkeeping",
-//           "Business Operations",
-//           "Calendar Management",
-//           "Content Creation/ CapCut",
-//           "Customer Service",
-//           "Data Entry & Management",
-//           "Digital Marketing",
-//           "Education & Academic Support",
-//           "Email Management",
-//           "Event Planning",
-//           "Executive & Administrative Support",
-//           "Google Workspace",
-//           "Marketing Communications",
-//           "Microsoft Office",
-//           "Operations & Facility Support",
-//           "Performance & Metrics Tracking",
-//           "Presentation & Slide Design",
-//           "Process Improvement & Workflow Optimization",
-//           "Project Management",
-//           "Research & Data Analysis",
-//           "Stakeholder Engagement",
-//           "Survey & Form Management",
-//           "Team Communication Tools",
-//           "Training & Development Support",
-//           "Travel Coordination",
-//           "Web & Content Management"
-//         ],
-//         tools: [
-//           "ChatGPT",
-//           "Claude.ai",
-//           "Gmail",
-//           "Google Calendar",
-//           "Google Docs",
-//           "Google Sheets",
-//           "Google Slides",
-//           "Microsoft Excel",
-//           "Microsoft Outlook",
-//           "Microsoft Powerpoint",
-//           "Microsoft Teams",
-//           "Microsoft Word",
-//           "Zoom"
-//         ],
-//         otherNeedsReview:[""],  
-//         remarks: "",
-//         link: "https://executivehelpnow.org/team-members-2#41fb6477-4b6f-4247-935a-303ab0c4cff6"
-//  },
- {
+      },
+      //  {
+      //         name: "Sasha",
+      //         profileImage:"https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/IMG_2282-2.jpg/:/rs=w:100%25",
+      //         experience: "5+ years",
+      //         hours: "31-40 hours",
+      //         certificate: "Yes",
+      //         certificationInfo: `Certificate for ClickUp Novice Certificate Exam ${getBadge("Growth Starter")}`,
+      //         educationLevel:"Yes",
+      //         educationInfo:"Bachelor’s Degree: Criminal Justice",
+      //         originalSkills: ["Administrative Support", "Appointment and Calendar Management", "Confidential File and Records Management", "Customer Service", "Data Entry and Report Management", "Document Editing, Formatting, and Proofreading", "Event Planning and Coordination", "Expense Reporting and Budget Management", "Interview and Travel Coordination", "Inventory and Office Supply Management", "Meeting Scheduling, Facilitation, and Minutes Preparation", "Physician Scheduling and On-Call Management", "Presentation and Report Creation (Excel, PowerPoint, Word, Tableau)", "Process Improvement and Workflow Optimization", "Stakeholder and Vendor Relations"], 
+      //         standardizedSkills: [
+      //           "Advocacy & Social Services",
+      //           "Artificial Intelligence",
+      //           "Bookkeeping",
+      //           "Business Operations",
+      //           "Calendar Management",
+      //           "Content Creation/ CapCut",
+      //           "Customer Service",
+      //           "Data Entry & Management",
+      //           "Digital Marketing",
+      //           "Education & Academic Support",
+      //           "Email Management",
+      //           "Event Planning",
+      //           "Executive & Administrative Support",
+      //           "Google Workspace",
+      //           "Marketing Communications",
+      //           "Microsoft Office",
+      //           "Operations & Facility Support",
+      //           "Performance & Metrics Tracking",
+      //           "Presentation & Slide Design",
+      //           "Process Improvement & Workflow Optimization",
+      //           "Project Management",
+      //           "Research & Data Analysis",
+      //           "Stakeholder Engagement",
+      //           "Survey & Form Management",
+      //           "Team Communication Tools",
+      //           "Training & Development Support",
+      //           "Travel Coordination",
+      //           "Web & Content Management"
+      //         ],
+      //         tools: [
+      //           "ChatGPT",
+      //           "Claude.ai",
+      //           "Gmail",
+      //           "Google Calendar",
+      //           "Google Docs",
+      //           "Google Sheets",
+      //           "Google Slides",
+      //           "Microsoft Excel",
+      //           "Microsoft Outlook",
+      //           "Microsoft Powerpoint",
+      //           "Microsoft Teams",
+      //           "Microsoft Word",
+      //           "Zoom"
+      //         ],
+      //         otherNeedsReview:[""],  
+      //         remarks: "",
+      //         link: "https://executivehelpnow.org/team-members-2#41fb6477-4b6f-4247-935a-303ab0c4cff6"
+      //  },
+      {
         name: "Angela Marie",
-        profileImage:"https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/1714764457809.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:767,m",
+        profileImage: "https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/1714764457809.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:767,m",
         experience: "5+ years",
         hours: "31-40 hours",
         certificate: "Yes",
         certificationInfo: `Psychological Safety: Clear Blocks to Innovation, Collaboration, and  Risk-Taking , Strategies to Improve Self Awareness, Developing Self-Awareness, Improving Your Leadership Communications, Mindful Leadership ${getBadge("Growth Starter")}`,
-        educationLevel:"Yes",
-        educationInfo:"Bachelor’s Degree: Science in Theology , Business Administration Degree: Entrepreneurship Project Management Studies",
-        originalSkills: ["Administrative Support", "Appointment and Calendar Management", "Confidential File and Records Management", "Customer Service", "Data Entry and Report Management", "Document Editing, Formatting, and Proofreading", "Event Planning and Coordination", "Expense Reporting and Budget Management", "Interview and Travel Coordination", "Inventory and Office Supply Management", "Meeting Scheduling, Facilitation, and Minutes Preparation", "Physician Scheduling and On-Call Management", "Presentation and Report Creation (Excel, PowerPoint, Word, Tableau)", "Process Improvement and Workflow Optimization", "Stakeholder and Vendor Relations"], 
+        educationLevel: "Yes",
+        educationInfo: "Bachelor’s Degree: Science in Theology , Business Administration Degree: Entrepreneurship Project Management Studies",
+        originalSkills: ["Administrative Support", "Appointment and Calendar Management", "Confidential File and Records Management", "Customer Service", "Data Entry and Report Management", "Document Editing, Formatting, and Proofreading", "Event Planning and Coordination", "Expense Reporting and Budget Management", "Interview and Travel Coordination", "Inventory and Office Supply Management", "Meeting Scheduling, Facilitation, and Minutes Preparation", "Physician Scheduling and On-Call Management", "Presentation and Report Creation (Excel, PowerPoint, Word, Tableau)", "Process Improvement and Workflow Optimization", "Stakeholder and Vendor Relations"],
         standardizedSkills: [
           "Artificial Intelligence",
           "Business Operations",
           "Business Strategy & Planning",
           "CRM Tools",
           "Customer Service",
-          "Digital Marketing", 
+          "Digital Marketing",
           "Executive & Administrative Support",
           "Google Workspace",
           "Marketing Communications",
@@ -1597,20 +1673,20 @@ h1, h2 {
           "WFM Systems",
           "Workforce Analytics Platforms"
         ],
-        otherNeedsReview:[""],  
+        otherNeedsReview: [""],
         remarks: "",
         link: "https://executivehelpnow.org/team-members-2#41fb6477-4b6f-4247-935a-303ab0c4cff6"
- },
- {
+      },
+      {
         name: "Renee",
-        profileImage:"https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Renee.png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:730,h:730,cg:true",
+        profileImage: "https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Renee.png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:730,h:730,cg:true",
         experience: "5+ years",
         hours: "21-30 hours",
         certificate: "Yes",
         certificationInfo: `Certificate for ClickUp Novice Certificate Exam, City & Guilds (2023), Level 3 Award in Customer Service (First Class Pass) ${getBadge("Growth Starter")}`,
-        educationLevel:"Yes",
-        educationInfo:"Bachelor’s Degree: Business Management",
-        originalSkills: [], 
+        educationLevel: "Yes",
+        educationInfo: "Bachelor’s Degree: Business Management",
+        originalSkills: [],
         standardizedSkills: [
           "Artificial Intelligence",
           "Business Operations",
@@ -1633,51 +1709,51 @@ h1, h2 {
           "Microsoft Powerpoint",
           "Microsoft Word"
         ],
-        otherNeedsReview:[],  
+        otherNeedsReview: [],
         remarks: "",
         link: "https://executivehelpnow.org/team-members#7fc239c0-64c7-41ba-9424-20eb2aaf391c"
- },
- {
+      },
+      {
         name: "Raquel",
-        profileImage:"https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Revised%20EHN%20%20Team%20-%20Profiles.png/:/cr=t:11.38%25,l:0%25,w:100%25,h:77.25%25/rs=w:730,h:730,cg:true",
+        profileImage: "https://img1.wsimg.com/isteam/ip/a5853050-3aab-49ff-a0b1-8b052e68ffa3/Revised%20EHN%20%20Team%20-%20Profiles.png/:/cr=t:11.38%25,l:0%25,w:100%25,h:77.25%25/rs=w:730,h:730,cg:true",
         experience: "5+ years",
         hours: "21-30 hours",
-        certificate: "Yes",        
+        certificate: "Yes",
         certificationInfo: `Certification in Brand Management, Certificate for ClickUp Novice Certificate Exam ${getBadge("Growth Starter")}`,
-        educationLevel:"Yes",
-        educationInfo:"Bachelor’s Degree: Arts, Spanish, and Psychology",
-        originalSkills: ["Marketing Communications", "Calendar Management", "Content Strategy & Copywriting", "Content Management Systems (WordPress, SharePoint, AEM)", "Email Marketing & Campaign Management", "Video Editing & Graphic Design", "Microsoft 365 Suiteicor", "Project Management", "Executive and Administrative Support", "Event Planning & Coordination", "Stakeholder Engagement", "Digital Analytics & Reporting", "Bilingual"], 
+        educationLevel: "Yes",
+        educationInfo: "Bachelor’s Degree: Arts, Spanish, and Psychology",
+        originalSkills: ["Marketing Communications", "Calendar Management", "Content Strategy & Copywriting", "Content Management Systems (WordPress, SharePoint, AEM)", "Email Marketing & Campaign Management", "Video Editing & Graphic Design", "Microsoft 365 Suiteicor", "Project Management", "Executive and Administrative Support", "Event Planning & Coordination", "Stakeholder Engagement", "Digital Analytics & Reporting", "Bilingual"],
         standardizedSkills: [
-"Artificial Intelligence",
-"Bilingual",
-"Business Operations",
-"Calendar Management",
-"Content & Copywriting",
-"CRM Tools",
-"Customer Service",
-"Data Entry & Management",
-"Digital Marketing",
-"Email Management",
-"Executive and Administrative Support",
-"Google Workspace",
-"Marketing Communications",
-"Microsoft Office",
-"Operations & Facility Support",
-"Performance & Metrics Tracking",
-"Presentation & Slide Design",
-"Process Improvement & Workflow Optimization",
-"Project Management",
-"Research & Data Analysis",
-"Stakeholder Engagement",
-"Survey & Form Management",
-"Team Communication Tools",
-"Web & Content Management"
-],
+          "Artificial Intelligence",
+          "Bilingual",
+          "Business Operations",
+          "Calendar Management",
+          "Content & Copywriting",
+          "CRM Tools",
+          "Customer Service",
+          "Data Entry & Management",
+          "Digital Marketing",
+          "Email Management",
+          "Executive and Administrative Support",
+          "Google Workspace",
+          "Marketing Communications",
+          "Microsoft Office",
+          "Operations & Facility Support",
+          "Performance & Metrics Tracking",
+          "Presentation & Slide Design",
+          "Process Improvement & Workflow Optimization",
+          "Project Management",
+          "Research & Data Analysis",
+          "Stakeholder Engagement",
+          "Survey & Form Management",
+          "Team Communication Tools",
+          "Web & Content Management"
+        ],
         tools: ["Adobe Creative Suite", "Adobe Experience Manager", "Campaign Monitor", "Camtasia", "Canva", "MailChimp", "Microsoft Excel", "Microsoft Outlook", "Microsoft Planner", "Microsoft Powerpoint", "Microsoft Word", "Monday.com", "Poppulo", "Slack", "Teams", "WordPress"],
-        otherNeedsReview:[],  
+        otherNeedsReview: [],
         remarks: "",
         link: "https://executivehelpnow.org/team-members-2#19206ec3-689a-4505-8a97-93b2aa63a3d5"
- }
+      }
     ];
 
     const categoryCheckboxes = document.getElementById('categoryCheckboxes');
@@ -1782,10 +1858,10 @@ h1, h2 {
         const matchCertificate = !certificate || va.certificate === certificate;
         const matchEducationLevel = !educationLevel || va.educationLevel === educationLevel;
         const matchSkills = selectedCategories.length === 0 || selectedCategories.some(cat => va.standardizedSkills.includes(cat));
-        const matchTools = selectedTools.length === 0 || selectedTools.every(selectedTool => 
+        const matchTools = selectedTools.length === 0 || selectedTools.every(selectedTool =>
           va.tools.some(t => t.toLowerCase().includes(selectedTool.toLowerCase()))
         );
-        
+
         // Hours availability filtering logic
         let matchAvailability = true;
         if (availability) {
@@ -1796,12 +1872,12 @@ h1, h2 {
             if (hourStr.includes('31-40')) return 40;
             return 0;
           };
-          
+
           const selectedHourValue = getHourValue(availability);
           const vaHourValue = getHourValue(va.hours);
           matchAvailability = vaHourValue >= selectedHourValue;
         }
-        
+
         return matchExperience && matchCertificate && matchEducationLevel && matchSkills && matchTools && matchAvailability;
       });
 
@@ -1818,25 +1894,25 @@ h1, h2 {
       filtered.forEach((va, index) => {
         const card = document.createElement('div');
 
-  // ✅ Conditional layout based on number of results
-  if (filtered.length === 1) {
-    card.className = 'va-card col-12';
-  } else {
-    card.className = 'va-card col-md-5';
-    card.style.width = '34rem';
-    card.style.marginLeft = '10px';
-  }
+        // ✅ Conditional layout based on number of results
+        if (filtered.length === 1) {
+          card.className = 'va-card col-12';
+        } else {
+          card.className = 'va-card col-md-5';
+          card.style.width = '34rem';
+          card.style.marginLeft = '10px';
+        }
 
-  card.id = `va-card-${index}`;
+        card.id = `va-card-${index}`;
 
-  const certificationHTML = va.certificate !== "None" && va.certificationInfo
-    ? `<p><strong>List of Certificates:</strong> ${va.certificationInfo}</p>`
-    : '';
+        const certificationHTML = va.certificate !== "None" && va.certificationInfo
+          ? `<p><strong>List of Certificates:</strong> ${va.certificationInfo}</p>`
+          : '';
 
-  const educationHTML = va.educationLevel !== "None" && va.educationInfo
-    ? `<p><strong>List of Education:</strong> ${va.educationInfo}</p>`
-    : '';
-        
+        const educationHTML = va.educationLevel !== "None" && va.educationInfo
+          ? `<p><strong>List of Education:</strong> ${va.educationInfo}</p>`
+          : '';
+
         let selectionControls = '';
         if (filtered.length > 2) {
           selectionControls = `
@@ -1851,9 +1927,9 @@ h1, h2 {
               <label><input type="radio" name="priority" value="${index}-primary" onchange="handleTwoSelection(${index}, 'primary')"> Primary</label>
               <label><input type="radio" name="priority" value="${index}-secondary" onchange="handleTwoSelection(${index}, 'secondary')"> Secondary</label>
             </div>
-          `;          
+          `;
         }
-        
+
         card.innerHTML = `
           ${selectionControls}
           
@@ -1891,7 +1967,7 @@ h1, h2 {
       if (type === 'primary' || type === 'secondary') {
         card.classList.add('highlighted');
       }
-      
+
       // Remove highlights from other cards of the same type
       filteredResults.forEach((_, i) => {
         if (i !== index) {
@@ -1910,7 +1986,7 @@ h1, h2 {
     function handleTwoSelection(index, type) {
       const card = document.getElementById(`va-card-${index}`);
       card.classList.add('highlighted');
-      
+
       // Remove highlight from the other card
       filteredResults.forEach((_, i) => {
         if (i !== index) {
@@ -1921,98 +1997,98 @@ h1, h2 {
     }
 
     // Email form submission - FIXED VERSION
-    document.getElementById('userForm').addEventListener('submit', function(e) {
-  e.preventDefault();
+    document.getElementById('userForm').addEventListener('submit', function (e) {
+      e.preventDefault();
 
-  const submitBtn = document.getElementById('submitBtn');
-  const originalText = submitBtn.textContent;
-  const userEmail = document.getElementById('userEmail').value.trim();
-  const userRemarks = document.getElementById('userRemarks').value.trim();
+      const submitBtn = document.getElementById('submitBtn');
+      const originalText = submitBtn.textContent;
+      const userEmail = document.getElementById('userEmail').value.trim();
+      const userRemarks = document.getElementById('userRemarks').value.trim();
 
-  if (!userEmail) {
-    alertify.error("Please enter your email address.");
-    return;
-  }
-
-  if (filteredResults.length === 0) {
-    alertify.error("No VA results to send.");
-    return;
-  }
-
-  submitBtn.disabled = true;
-  submitBtn.textContent = 'Sending...';
-
-  let selectedVAs = [];
-
-  try {
-    if (filteredResults.length === 1) {
-      selectedVAs.push({
-        va: filteredResults[0],
-        priority: 'Primary'
-      });
-    } else if (filteredResults.length === 2) {
-      const primaryRadio = document.querySelector('input[name="priority"]:checked');
-      if (!primaryRadio) {
-        alertify.error("Please select Primary and Secondary preferences.");
-        submitBtn.disabled = false;
-        submitBtn.textContent = originalText;
+      if (!userEmail) {
+        alertify.error("Please enter your email address.");
         return;
       }
 
-      const [selectedIndex, priority] = primaryRadio.value.split('-');
-      const otherIndex = selectedIndex === '0' ? 1 : 0;
-      const otherPriority = priority === 'primary' ? 'Secondary' : 'Primary';
-
-      selectedVAs.push({
-        va: filteredResults[parseInt(selectedIndex)],
-        priority: priority.charAt(0).toUpperCase() + priority.slice(1)
-      });
-      selectedVAs.push({
-        va: filteredResults[otherIndex],
-        priority: otherPriority
-      });
-    } else {
-      const primaryRadio = document.querySelector('input[value="primary"]:checked');
-      const secondaryRadio = document.querySelector('input[value="secondary"]:checked');
-
-      if (!primaryRadio && !secondaryRadio) {
-        alertify.error("Please select at least one VA as Primary or Secondary.");
-        submitBtn.disabled = false;
-        submitBtn.textContent = originalText;
+      if (filteredResults.length === 0) {
+        alertify.error("No VA results to send.");
         return;
       }
 
-      if (primaryRadio) {
-        const primaryIndex = parseInt(primaryRadio.name.split('-')[1]);
-        selectedVAs.push({
-          va: filteredResults[primaryIndex],
-          priority: 'Primary'
-        });
-      }
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
 
-      if (secondaryRadio) {
-        const secondaryIndex = parseInt(secondaryRadio.name.split('-')[1]);
-        selectedVAs.push({
-          va: filteredResults[secondaryIndex],
-          priority: 'Secondary'
-        });
-      }
-    }
+      let selectedVAs = [];
 
-    // Build a temporary container with selected VA cards' HTML to extract summary text
-    const tempDiv = document.createElement('div');
-    selectedVAs.forEach(({ va, priority }) => {
-      const certInfo = `
+      try {
+        if (filteredResults.length === 1) {
+          selectedVAs.push({
+            va: filteredResults[0],
+            priority: 'Primary'
+          });
+        } else if (filteredResults.length === 2) {
+          const primaryRadio = document.querySelector('input[name="priority"]:checked');
+          if (!primaryRadio) {
+            alertify.error("Please select Primary and Secondary preferences.");
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+            return;
+          }
+
+          const [selectedIndex, priority] = primaryRadio.value.split('-');
+          const otherIndex = selectedIndex === '0' ? 1 : 0;
+          const otherPriority = priority === 'primary' ? 'Secondary' : 'Primary';
+
+          selectedVAs.push({
+            va: filteredResults[parseInt(selectedIndex)],
+            priority: priority.charAt(0).toUpperCase() + priority.slice(1)
+          });
+          selectedVAs.push({
+            va: filteredResults[otherIndex],
+            priority: otherPriority
+          });
+        } else {
+          const primaryRadio = document.querySelector('input[value="primary"]:checked');
+          const secondaryRadio = document.querySelector('input[value="secondary"]:checked');
+
+          if (!primaryRadio && !secondaryRadio) {
+            alertify.error("Please select at least one VA as Primary or Secondary.");
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+            return;
+          }
+
+          if (primaryRadio) {
+            const primaryIndex = parseInt(primaryRadio.name.split('-')[1]);
+            selectedVAs.push({
+              va: filteredResults[primaryIndex],
+              priority: 'Primary'
+            });
+          }
+
+          if (secondaryRadio) {
+            const secondaryIndex = parseInt(secondaryRadio.name.split('-')[1]);
+            selectedVAs.push({
+              va: filteredResults[secondaryIndex],
+              priority: 'Secondary'
+            });
+          }
+        }
+
+        // Build a temporary container with selected VA cards' HTML to extract summary text
+        const tempDiv = document.createElement('div');
+        selectedVAs.forEach(({ va, priority }) => {
+          const certInfo = `
   <p class="${va.certificate === "None" ? 'hidden' : ''}">
     <strong>Certification:</strong> ${va.certificationInfo || ''}
   </p>
 `;
-const educationInfo = `
+          const educationInfo = `
     <p class="${va.educationLevel === "None" ? 'hidden' : ''}">
       <strong>Education:</strong> ${va.educationInfo || ''}
     </p>
   `;
-      tempDiv.innerHTML += `
+          tempDiv.innerHTML += `
         <div class="va-card">
           <h3>${va.name} (${priority})</h3>
           <p><strong>Experience:</strong> ${va.experience}</p>
@@ -2026,48 +2102,49 @@ const educationInfo = `
           <a href="${va.link}" target="_blank">View Profile</a>
         </div>
       `;
+        });
+
+        // Convert HTML to plain text summary
+        const resultsHtml = tempDiv.innerHTML;
+        const vaSummaryText = resultsHtml
+          .replace(/<\/div>/g, '\n')
+          .replace(/<h3>(.*?)<\/h3>/g, '$1\n')
+          .replace(/<p><strong>(.*?):<\/strong>\s*(.*?)<\/p>/g, '$1: $2\n')
+          .replace(/<a href="(.*?)".*?>(.*?)<\/a>/g, 'Profile Link: $1\n')
+          .replace(/<[^>]+>/g, '')
+          .trim();
+
+        // Send email via EmailJS
+        emailjs.send('service_jyovi0n', 'template_4tbqns1', {
+          user_email: userEmail,
+          user_remarks: userRemarks || 'No additional remarks',
+          va_summary: vaSummaryText,
+          subject: 'TalentFinder Inquiry'
+        })
+          .then(() => {
+            alertify.success('VA Results sent successfully!');
+            this.reset();
+          })
+          .catch(err => {
+            console.error(err);
+            alertify.error('Error sending email: ' + (err.text || err));
+          })
+          .finally(() => {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+          });
+
+      } catch (error) {
+        console.error('Error processing email:', error);
+        alertify.error("An error occurred. Please try again.");
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+      }
     });
-
-    // Convert HTML to plain text summary
-    const resultsHtml = tempDiv.innerHTML;
-    const vaSummaryText = resultsHtml
-      .replace(/<\/div>/g, '\n')
-      .replace(/<h3>(.*?)<\/h3>/g, '$1\n')
-      .replace(/<p><strong>(.*?):<\/strong>\s*(.*?)<\/p>/g, '$1: $2\n')
-      .replace(/<a href="(.*?)".*?>(.*?)<\/a>/g, 'Profile Link: $1\n')
-      .replace(/<[^>]+>/g, '')
-      .trim();
-
-    // Send email via EmailJS
-    emailjs.send('service_jyovi0n', 'template_4tbqns1', {
-      user_email: userEmail,
-      user_remarks: userRemarks || 'No additional remarks',
-      va_summary: vaSummaryText,
-      subject: 'TalentFinder Inquiry'
-    })
-    .then(() => {
-      alertify.success('VA Results sent successfully!');
-      this.reset();
-    })
-    .catch(err => {
-      console.error(err);
-      alertify.error('Error sending email: ' + (err.text || err));
-    })
-    .finally(() => {
-      submitBtn.disabled = false;
-      submitBtn.textContent = originalText;
-    });
-
-  } catch (error) {
-    console.error('Error processing email:', error);
-    alertify.error("An error occurred. Please try again.");
-    submitBtn.disabled = false;
-    submitBtn.textContent = originalText;
-  }
-});
 
     // Initial load
     filterResults();
   </script>
 </body>
+
 </html>
