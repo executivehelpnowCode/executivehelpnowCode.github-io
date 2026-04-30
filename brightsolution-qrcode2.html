@@ -1,0 +1,462 @@
+<section class="bs-webinar-landing">
+  <style>
+    .bs-webinar-landing {
+      --bs-red: #e81810;
+      --bs-dark: #222;
+      --bs-gray: #666;
+      --bs-light: #f3f3f3;
+      --bs-border: #ddd;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--bs-dark);
+      line-height: 1.5;
+    }
+
+    .bs-webinar-landing * {
+      box-sizing: border-box;
+    }
+
+    .bs-webinar-landing .bs-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 50px 22px;
+    }
+
+    .bs-webinar-landing h1,
+    .bs-webinar-landing h2,
+    .bs-webinar-landing h3 {
+      margin: 0 0 14px;
+      line-height: 1.2;
+      font-weight: 600;
+    }
+
+    .bs-webinar-landing h1 {
+      font-size: clamp(32px, 5vw, 58px);
+      max-width: 680px;
+    }
+
+    .bs-webinar-landing h2 {
+      font-size: clamp(26px, 4vw, 42px);
+      text-align: center;
+    }
+
+    .bs-webinar-landing h3 {
+      font-size: 22px;
+    }
+
+    .bs-webinar-landing p {
+      margin: 0 0 14px;
+      color: var(--bs-gray);
+      font-size: 16px;
+    }
+
+    .bs-webinar-landing .bs-hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .bs-webinar-landing .bs-hero-image {
+      width: 100%;
+      aspect-ratio: 1 / 0.75;
+      border-radius: 50%;
+      overflow: hidden;
+      background: #eee;
+    }
+
+    .bs-webinar-landing .bs-hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .bs-webinar-landing .bs-benefits {
+      margin-top: 24px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .bs-webinar-landing .bs-benefit {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .bs-webinar-landing .bs-icon-circle {
+      width: 28px;
+      height: 28px;
+      border: 1px solid var(--bs-dark);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .bs-webinar-landing .bs-process {
+      padding-top: 20px;
+    }
+
+    .bs-webinar-landing .bs-process-grid {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 48px;
+      align-items: center;
+      margin-top: 38px;
+    }
+
+    .bs-webinar-landing .bs-process-circle {
+      width: 310px;
+      height: 310px;
+      margin: 0 auto;
+      border-radius: 50%;
+      position: relative;
+      background:
+        radial-gradient(circle at center, #fff 0 31%, transparent 32%),
+        conic-gradient(
+          var(--bs-red) 0deg 95deg,
+          #555 95deg 185deg,
+          #777 185deg 265deg,
+          var(--bs-red) 265deg 360deg
+        );
+    }
+
+    .bs-webinar-landing .bs-process-circle span {
+      position: absolute;
+      color: #fff;
+      font-size: 32px;
+      font-weight: 700;
+    }
+
+    .bs-webinar-landing .bs-process-circle .p1 { left: 52px; top: 132px; }
+    .bs-webinar-landing .bs-process-circle .p2 { left: 129px; top: 45px; }
+    .bs-webinar-landing .bs-process-circle .p3 { right: 54px; top: 142px; }
+    .bs-webinar-landing .bs-process-circle .p4 { left: 128px; bottom: 42px; }
+
+    .bs-webinar-landing .bs-step {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .bs-webinar-landing .bs-step-number {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--bs-red);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .bs-webinar-landing .bs-step strong {
+      color: var(--bs-dark);
+    }
+
+    .bs-webinar-landing .bs-divider {
+      border-top: 1px solid var(--bs-border);
+    }
+
+    .bs-webinar-landing .bs-offers {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 36px;
+    }
+
+    .bs-webinar-landing .bs-card {
+      border: 1px solid var(--bs-border);
+      padding: 28px;
+      text-align: center;
+      background: #fff;
+    }
+
+    .bs-webinar-landing .bs-price {
+      font-size: 28px;
+      color: var(--bs-red);
+      font-weight: 700;
+      margin: 12px 0 20px;
+    }
+
+    .bs-webinar-landing .bs-btn {
+      display: inline-block;
+      width: auto;
+      min-width: 230px;
+      text-align: center;
+      padding: 13px 22px;
+      border: 1px solid var(--bs-red);
+      background: var(--bs-red);
+      color: #fff !important;
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .bs-webinar-landing .bs-btn:hover {
+      opacity: 0.88;
+    }
+
+    .bs-webinar-landing .bs-btn-outline {
+      background: transparent;
+      color: var(--bs-dark) !important;
+      border-color: var(--bs-dark);
+    }
+
+    .bs-webinar-landing .bs-checklist {
+      background: var(--bs-light);
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 36px;
+      align-items: center;
+      padding: 38px;
+      margin-top: 35px;
+    }
+
+    .bs-webinar-landing .bs-checklist-img {
+      min-height: 180px;
+      background: #ddd;
+      overflow: hidden;
+    }
+
+    .bs-webinar-landing .bs-checklist-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      opacity: 0.75;
+    }
+
+    .bs-webinar-landing .bs-why {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .bs-webinar-landing .bs-connect {
+      text-align: center;
+    }
+
+    .bs-webinar-landing .bs-socials {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .bs-webinar-landing .bs-socials a {
+      color: var(--bs-dark);
+      text-decoration: none;
+      border-bottom: 1px solid var(--bs-dark);
+    }
+
+    .bs-webinar-landing .bs-note {
+      margin-top: 18px;
+      font-size: 14px;
+      color: var(--bs-gray);
+    }
+
+    @media (max-width: 850px) {
+      .bs-webinar-landing .bs-hero,
+      .bs-webinar-landing .bs-process-grid,
+      .bs-webinar-landing .bs-offers,
+      .bs-webinar-landing .bs-checklist {
+        grid-template-columns: 1fr;
+      }
+
+      .bs-webinar-landing .bs-hero-image {
+        max-width: 420px;
+        margin: 0 auto;
+      }
+
+      .bs-webinar-landing .bs-process-circle {
+        width: 250px;
+        height: 250px;
+      }
+
+      .bs-webinar-landing .bs-process-circle span {
+        font-size: 24px;
+      }
+
+      .bs-webinar-landing .bs-process-circle .p1 { left: 42px; top: 108px; }
+      .bs-webinar-landing .bs-process-circle .p2 { left: 104px; top: 38px; }
+      .bs-webinar-landing .bs-process-circle .p3 { right: 46px; top: 112px; }
+      .bs-webinar-landing .bs-process-circle .p4 { left: 104px; bottom: 35px; }
+    }
+  </style>
+
+  <!-- HERO -->
+  <div class="bs-container">
+    <div class="bs-hero">
+      <div>
+        <h1>The Allow-Guard-Grow Launchpad</h1>
+        <p><strong>Your Turnkey AI Implementation for Senior Living Teams</strong></p>
+        <p>
+          You’ve seen the framework. Now, let’s make it your reality. The Allow-Guard-Grow Launchpad helps bring AI out of the shadows and into a secure, practical path your team can use confidently.
+        </p>
+
+        <div class="bs-benefits">
+          <div class="bs-benefit">
+            <div class="bs-icon-circle">✓</div>
+            <p><strong>Align Leadership:</strong> Move from curiosity to clarity with a practical AI strategy.</p>
+          </div>
+          <div class="bs-benefit">
+            <div class="bs-icon-circle">✓</div>
+            <p><strong>Set Guardrails:</strong> Establish secure policies, usage rules, and Microsoft Copilot readiness.</p>
+          </div>
+          <div class="bs-benefit">
+            <div class="bs-icon-circle">✓</div>
+            <p><strong>Build Adoption:</strong> Train your team with real senior living use cases and practical next steps.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bs-hero-image">
+        <img src="PASTE-HERO-IMAGE-URL-HERE" alt="Senior living team planning together">
+      </div>
+    </div>
+  </div>
+
+  <!-- PROCESS -->
+  <div class="bs-container bs-process">
+    <h2>The Allow-Guard-Grow Process</h2>
+
+    <div class="bs-process-grid">
+      <div class="bs-process-circle" aria-hidden="true">
+        <span class="p1">01</span>
+        <span class="p2">02</span>
+        <span class="p3">03</span>
+        <span class="p4">04</span>
+      </div>
+
+      <div>
+        <div class="bs-step">
+          <div class="bs-step-number">01</div>
+          <p><strong>Allow:</strong> Align your leadership team on the AI vision, strategy, and secure starting point.</p>
+        </div>
+
+        <div class="bs-step">
+          <div class="bs-step-number">02</div>
+          <p><strong>Guard:</strong> Partner with IT or M365 administrators to create security, governance, and usage guardrails.</p>
+        </div>
+
+        <div class="bs-step">
+          <div class="bs-step-number">03</div>
+          <p><strong>Grow:</strong> Train your staff with practical Copilot use cases and build confidence through adoption.</p>
+        </div>
+
+        <div class="bs-step">
+          <div class="bs-step-number">04</div>
+          <p><strong>Sustain:</strong> Keep momentum alive with follow-up tips, reminders, and practice activities.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OFFERS -->
+  <div class="bs-divider"></div>
+
+  <div class="bs-container">
+    <h2>Choose Your Launchpad</h2>
+
+    <div class="bs-offers">
+      <div class="bs-card">
+        <h3>The Standard Launchpad</h3>
+        <p><strong>Focus:</strong> Secure, enterprise-ready AI Chat using Microsoft Copilot Chat included in most M365 licenses.</p>
+        <p><strong>Audience:</strong> Up to 30 users.</p>
+        <p><strong>Includes:</strong> Strategy session, technical onboarding plan, user training, and senior living use case guide.</p>
+        <div class="bs-price">$8,775</div>
+        <a class="bs-btn js-bs-track" data-action="standard-priority" href="PASTE-STANDARD-PRIORITY-LIST-LINK-HERE">
+          Join Standard Priority List
+        </a>
+      </div>
+
+      <div class="bs-card">
+        <h3>The Premium Launchpad</h3>
+        <p><strong>Focus:</strong> Enhanced productivity for high-output roles using Microsoft Copilot Premium.</p>
+        <p><strong>Audience:</strong> Up to 12 users.</p>
+        <p><strong>Includes:</strong> Everything in Standard, plus additional Premium user training and use case guidance.</p>
+        <div class="bs-price">$13,775</div>
+        <a class="bs-btn js-bs-track" data-action="premium-priority" href="PASTE-PREMIUM-PRIORITY-LIST-LINK-HERE">
+          Join Premium Priority List
+        </a>
+      </div>
+    </div>
+
+    <div class="bs-checklist">
+      <div class="bs-checklist-img">
+        <img src="PASTE-CHECKLIST-IMAGE-URL-HERE" alt="Checklist planning image">
+      </div>
+
+      <div>
+        <h3>Not ready to launch?</h3>
+        <p>
+          Take the first step toward safer AI adoption today. Download the Allow-Guard-Grow Checklist and start bringing Shadow AI into the sunlight.
+        </p>
+        <a class="bs-btn bs-btn-outline js-bs-track" data-action="download-checklist" href="PASTE-CHECKLIST-PDF-LINK-HERE" target="_blank" rel="noopener">
+          Download Free Checklist
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHY -->
+  <div class="bs-container">
+    <div class="bs-why">
+      <h2>Why Bright Solutions?</h2>
+      <p>
+        Bright Solutions works exclusively with senior living organizations, so we understand the balance between resident privacy, staff capacity, security, operational complexity, and innovation.
+      </p>
+      <p>
+        We help create a practical path forward that gives your team permission to use AI safely, puts the right guardrails in place, and builds the confidence needed to turn AI into real organizational value.
+      </p>
+      <p><strong>Questions?</strong> Reach out at <a href="mailto:katie@brightsolutions.co">katie@brightsolutions.co</a>.</p>
+    </div>
+  </div>
+
+  <!-- STAY CONNECTED -->
+  <div class="bs-container bs-connect">
+    <h2>Stay Connected</h2>
+    <p>
+      Want to keep learning about AI, innovation, and technology strategy in senior living?
+    </p>
+    <a class="bs-btn js-bs-track" data-action="subscribe-bright-brief" href="PASTE-BRIGHT-BRIEF-SUBSCRIBE-LINK-HERE">
+      Subscribe to The Bright Brief
+    </a>
+
+    <div class="bs-socials">
+      <a href="PASTE-LINKEDIN-LINK-HERE" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://brightsolutions.co" target="_blank" rel="noopener">Website</a>
+      <a href="PASTE-FACEBOOK-LINK-HERE" target="_blank" rel="noopener">Facebook</a>
+      <a href="PASTE-YOUTUBE-LINK-HERE" target="_blank" rel="noopener">YouTube</a>
+    </div>
+
+    <p class="bs-note">
+      Replace the placeholder links before publishing.
+    </p>
+  </div>
+
+  <script>
+    (function () {
+      var root = document.querySelector('.bs-webinar-landing');
+      if (!root) return;
+
+      var buttons = root.querySelectorAll('.js-bs-track');
+
+      buttons.forEach(function (button) {
+        button.addEventListener('click', function () {
+          var action = button.getAttribute('data-action') || 'button-click';
+          console.log('[Bright Solutions Webinar Landing Page]', action);
+        });
+      });
+    })();
+  </script>
+</section>
