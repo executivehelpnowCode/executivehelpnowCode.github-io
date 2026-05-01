@@ -2,13 +2,14 @@
   <style>
     .bs-webinar-landing {
       --bs-red: #e81810;
-      --bs-dark: #222;
-      --bs-gray: #666;
-      --bs-light: #f3f3f3;
-      --bs-border: #ddd;
+      --bs-dark: #111;
+      --bs-gray: #4f4f4f;
+      --bs-light: #f6f6f6;
+      --bs-soft-red: #fff1f0;
+      --bs-border: #e2e2e2;
       font-family: Arial, Helvetica, sans-serif;
       color: var(--bs-dark);
-      line-height: 1.5;
+      line-height: 1.6;
     }
 
     .bs-webinar-landing * {
@@ -18,177 +19,163 @@
     .bs-webinar-landing .bs-container {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 50px 22px;
+      padding: 70px 22px;
+    }
+
+    .bs-webinar-landing .bs-narrow {
+      max-width: 880px;
+      margin: 0 auto;
     }
 
     .bs-webinar-landing h1,
     .bs-webinar-landing h2,
-    .bs-webinar-landing h3 {
-      margin: 0 0 14px;
+    .bs-webinar-landing h3,
+    .bs-webinar-landing h4 {
+      margin: 0 0 16px;
       line-height: 1.2;
-      font-weight: 600;
+      color: var(--bs-dark);
     }
 
     .bs-webinar-landing h1 {
-      font-size: clamp(32px, 5vw, 58px);
-      max-width: 680px;
+      font-size: clamp(36px, 5vw, 58px);
+      max-width: 820px;
     }
 
     .bs-webinar-landing h2 {
-      font-size: clamp(26px, 4vw, 42px);
+      font-size: clamp(30px, 4vw, 44px);
       text-align: center;
     }
 
     .bs-webinar-landing h3 {
-      font-size: 22px;
+      font-size: 24px;
+    }
+
+    .bs-webinar-landing h4 {
+      font-size: 18px;
+      color: var(--bs-red);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
     .bs-webinar-landing p {
-      margin: 0 0 14px;
+      margin: 0 0 16px;
       color: var(--bs-gray);
       font-size: 16px;
     }
 
+    .bs-webinar-landing ul {
+      margin: 14px 0 0;
+      padding-left: 20px;
+      color: var(--bs-gray);
+    }
+
+    .bs-webinar-landing li {
+      margin-bottom: 10px;
+    }
+
     .bs-webinar-landing .bs-hero {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 40px;
-      align-items: center;
-    }
-
-    .bs-webinar-landing .bs-hero-image {
-      width: 100%;
-      aspect-ratio: 1 / 0.75;
-      border-radius: 50%;
-      overflow: hidden;
-      background: #eee;
-    }
-
-    .bs-webinar-landing .bs-hero-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .bs-webinar-landing .bs-benefits {
-      margin-top: 24px;
-      display: grid;
-      gap: 14px;
-    }
-
-    .bs-webinar-landing .bs-benefit {
-      display: grid;
-      grid-template-columns: 34px 1fr;
-      gap: 12px;
-      align-items: start;
-    }
-
-    .bs-webinar-landing .bs-icon-circle {
-      width: 28px;
-      height: 28px;
-      border: 1px solid var(--bs-dark);
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      font-size: 14px;
-      flex-shrink: 0;
-    }
-
-    .bs-webinar-landing .bs-process {
-      padding-top: 20px;
-    }
-
-    .bs-webinar-landing .bs-process-grid {
-      display: grid;
-      grid-template-columns: 360px 1fr;
-      gap: 48px;
-      align-items: center;
-      margin-top: 38px;
-    }
-
-    .bs-webinar-landing .bs-process-circle {
-      width: 310px;
-      height: 310px;
-      margin: 0 auto;
-      border-radius: 50%;
+      background: var(--bs-light);
       position: relative;
-      background:
-        radial-gradient(circle at center, #fff 0 31%, transparent 32%),
-        conic-gradient(
-          var(--bs-red) 0deg 95deg,
-          #555 95deg 185deg,
-          #777 185deg 265deg,
-          var(--bs-red) 265deg 360deg
-        );
+      overflow: hidden;
     }
 
-    .bs-webinar-landing .bs-process-circle span {
+    .bs-webinar-landing .bs-hero::before {
+      content: "";
       position: absolute;
-      color: #fff;
-      font-size: 32px;
+      top: 34px;
+      left: 24px;
+      width: 120px;
+      height: 120px;
+      background-image: radial-gradient(var(--bs-red) 2px, transparent 2px);
+      background-size: 18px 18px;
+      opacity: 0.12;
+    }
+
+    .bs-webinar-landing .bs-hero-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .bs-webinar-landing .bs-eyebrow {
+      color: var(--bs-red);
       font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 13px;
+      margin-bottom: 12px;
     }
 
-    .bs-webinar-landing .bs-process-circle .p1 { left: 52px; top: 132px; }
-    .bs-webinar-landing .bs-process-circle .p2 { left: 129px; top: 45px; }
-    .bs-webinar-landing .bs-process-circle .p3 { right: 54px; top: 142px; }
-    .bs-webinar-landing .bs-process-circle .p4 { left: 128px; bottom: 42px; }
+    .bs-webinar-landing .bs-lead {
+      font-size: 19px;
+      max-width: 820px;
+      color: #333;
+    }
 
-    .bs-webinar-landing .bs-step {
+    .bs-webinar-landing .bs-section-light {
+      background: var(--bs-light);
+    }
+
+    .bs-webinar-landing .bs-section-soft-red {
+      background: var(--bs-soft-red);
+    }
+
+    .bs-webinar-landing .bs-center {
+      text-align: center;
+    }
+
+    .bs-webinar-landing .bs-grid-3 {
       display: grid;
-      grid-template-columns: 44px 1fr;
-      gap: 16px;
-      margin-bottom: 20px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      margin-top: 34px;
     }
 
-    .bs-webinar-landing .bs-step-number {
-      width: 36px;
-      height: 36px;
+    .bs-webinar-landing .bs-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 26px;
+      margin-top: 34px;
+    }
+
+    .bs-webinar-landing .bs-box {
+      background: #fff;
+      border: 1px solid var(--bs-border);
+      padding: 28px;
+    }
+
+    .bs-webinar-landing .bs-phase-number {
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
       background: var(--bs-red);
       color: #fff;
       display: grid;
       place-items: center;
       font-weight: 700;
-      font-size: 14px;
+      margin-bottom: 18px;
     }
 
-    .bs-webinar-landing .bs-step strong {
-      color: var(--bs-dark);
-    }
-
-    .bs-webinar-landing .bs-divider {
-      border-top: 1px solid var(--bs-border);
-    }
-
-    .bs-webinar-landing .bs-offers {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
-      margin-top: 36px;
-    }
-
-    .bs-webinar-landing .bs-card {
-      border: 1px solid var(--bs-border);
-      padding: 28px;
-      text-align: center;
+    .bs-webinar-landing .bs-offer-card {
       background: #fff;
+      border: 1px solid var(--bs-border);
+      padding: 34px 30px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     .bs-webinar-landing .bs-price {
-      font-size: 28px;
+      font-size: 32px;
       color: var(--bs-red);
       font-weight: 700;
-      margin: 12px 0 20px;
+      margin: 18px 0 24px;
     }
 
     .bs-webinar-landing .bs-btn {
       display: inline-block;
-      width: auto;
-      min-width: 230px;
       text-align: center;
-      padding: 13px 22px;
+      padding: 14px 24px;
       border: 1px solid var(--bs-red);
       background: var(--bs-red);
       color: #fff !important;
@@ -211,45 +198,33 @@
     }
 
     .bs-webinar-landing .bs-checklist {
-      background: var(--bs-light);
       display: grid;
       grid-template-columns: 0.8fr 1.2fr;
       gap: 36px;
       align-items: center;
+      background: #fff;
+      border: 1px solid var(--bs-border);
       padding: 38px;
-      margin-top: 35px;
+      margin-top: 32px;
     }
 
-    .bs-webinar-landing .bs-checklist-img {
-      min-height: 180px;
-      background: #ddd;
-      overflow: hidden;
-    }
-
-    .bs-webinar-landing .bs-checklist-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      opacity: 0.75;
-    }
-
-    .bs-webinar-landing .bs-why {
-      max-width: 900px;
-      margin: 0 auto;
+    .bs-webinar-landing .bs-image-placeholder {
+      min-height: 220px;
+      background: linear-gradient(135deg, #eeeeee, #fafafa);
+      display: grid;
+      place-items: center;
+      color: #999;
+      font-size: 14px;
       text-align: center;
-    }
-
-    .bs-webinar-landing .bs-connect {
-      text-align: center;
+      padding: 20px;
     }
 
     .bs-webinar-landing .bs-socials {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 20px;
+      gap: 16px;
+      margin-top: 24px;
     }
 
     .bs-webinar-landing .bs-socials a {
@@ -259,189 +234,210 @@
     }
 
     .bs-webinar-landing .bs-note {
-      margin-top: 18px;
       font-size: 14px;
-      color: var(--bs-gray);
+      color: #777;
+      margin-top: 22px;
     }
 
     @media (max-width: 850px) {
-      .bs-webinar-landing .bs-hero,
-      .bs-webinar-landing .bs-process-grid,
-      .bs-webinar-landing .bs-offers,
+      .bs-webinar-landing .bs-grid-3,
+      .bs-webinar-landing .bs-grid-2,
       .bs-webinar-landing .bs-checklist {
         grid-template-columns: 1fr;
       }
 
-      .bs-webinar-landing .bs-hero-image {
-        max-width: 420px;
-        margin: 0 auto;
+      .bs-webinar-landing .bs-container {
+        padding: 52px 20px;
       }
 
-      .bs-webinar-landing .bs-process-circle {
-        width: 250px;
-        height: 250px;
+      .bs-webinar-landing .bs-btn {
+        width: 100%;
       }
-
-      .bs-webinar-landing .bs-process-circle span {
-        font-size: 24px;
-      }
-
-      .bs-webinar-landing .bs-process-circle .p1 { left: 42px; top: 108px; }
-      .bs-webinar-landing .bs-process-circle .p2 { left: 104px; top: 38px; }
-      .bs-webinar-landing .bs-process-circle .p3 { right: 46px; top: 112px; }
-      .bs-webinar-landing .bs-process-circle .p4 { left: 104px; bottom: 35px; }
     }
   </style>
 
   <!-- HERO -->
-  <div class="bs-container">
-    <div class="bs-hero">
-      <div>
-        <h1>The Allow-Guard-Grow Launchpad</h1>
-        <p><strong>Your Turnkey AI Implementation for Senior Living Teams</strong></p>
-        <p>
-          You’ve seen the framework. Now, let’s make it your reality. The Allow-Guard-Grow Launchpad helps bring AI out of the shadows and into a secure, practical path your team can use confidently.
-        </p>
-
-        <div class="bs-benefits">
-          <div class="bs-benefit">
-            <div class="bs-icon-circle">✓</div>
-            <p><strong>Align Leadership:</strong> Move from curiosity to clarity with a practical AI strategy.</p>
-          </div>
-          <div class="bs-benefit">
-            <div class="bs-icon-circle">✓</div>
-            <p><strong>Set Guardrails:</strong> Establish secure policies, usage rules, and Microsoft Copilot readiness.</p>
-          </div>
-          <div class="bs-benefit">
-            <div class="bs-icon-circle">✓</div>
-            <p><strong>Build Adoption:</strong> Train your team with real senior living use cases and practical next steps.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="bs-hero-image">
-        <img src="PASTE-HERO-IMAGE-URL-HERE" alt="Senior living team planning together">
-      </div>
+  <div class="bs-hero">
+    <div class="bs-container bs-hero-inner">
+      <p class="bs-eyebrow">The Allow-Guard-Grow Launchpad</p>
+      <h1>Your Turnkey AI Implementation for Senior Living Teams</h1>
+      <p class="bs-lead">
+        You’ve seen the framework. Now, let’s make it your reality.
+      </p>
+      <p>
+        The Allow-Guard-Grow framework is the easiest way to bring AI out of the shadows and into the light so your employees can use AI confidently and safely. Your team is already experimenting, and the risks of doing nothing grow every day.
+      </p>
+      <p>
+        The only thing standing between your organization and a secure, AI-powered future is a clear path to execution. We built the Allow-Guard-Grow Launchpad to be that path.
+      </p>
+      <p>
+        This is a pragmatic implementation designed specifically for senior living leadership teams who need to move quickly and securely.
+      </p>
     </div>
   </div>
 
-  <!-- PROCESS -->
-  <div class="bs-container bs-process">
-    <h2>The Allow-Guard-Grow Process</h2>
+  <!-- PHASES -->
+  <div class="bs-container">
+    <div class="bs-narrow bs-center">
+      <h2>How the Launchpad Works</h2>
+      <p>
+        The Launchpad moves your organization through three practical phases: Allow, Guard, and Grow.
+      </p>
+    </div>
 
-    <div class="bs-process-grid">
-      <div class="bs-process-circle" aria-hidden="true">
-        <span class="p1">01</span>
-        <span class="p2">02</span>
-        <span class="p3">03</span>
-        <span class="p4">04</span>
+    <div class="bs-grid-3">
+      <div class="bs-box">
+        <div class="bs-phase-number">1</div>
+        <h3>ALLOW</h3>
+        <h4>Vision & Strategy</h4>
+        <p>
+          We begin by aligning your leadership team on the vision. We move your leaders from curious to competent, ensuring they are ready to lead this cultural shift.
+        </p>
+        <ul>
+          <li><strong>Discovery & Strategy Session:</strong> We review your current corporate goals and technical environment to identify how AI can make the most immediate impact.</li>
+          <li><strong>Sanctioned Tool Strategy:</strong> We help you define Microsoft Copilot as your secure Home Base and establish clear rules for how other tools can and cannot be used.</li>
+          <li><strong>Culture Shift:</strong> We provide messaging templates your leaders need to foster a safe environment for employee disclosure and adoption.</li>
+        </ul>
       </div>
 
-      <div>
-        <div class="bs-step">
-          <div class="bs-step-number">01</div>
-          <p><strong>Allow:</strong> Align your leadership team on the AI vision, strategy, and secure starting point.</p>
-        </div>
+      <div class="bs-box">
+        <div class="bs-phase-number">2</div>
+        <h3>GUARD</h3>
+        <h4>Security & Governance</h4>
+        <p>
+          We act as the bridge between your vision and your technical execution. We partner with your IT team or M365 administrators to ensure your data is protected before high-volume usage begins.
+        </p>
+        <ul>
+          <li><strong>Technical Implementation Plan:</strong> We partner with your IT leads to develop a roadmap for security and governance configurations.</li>
+          <li><strong>Licensing & Readiness Advisory:</strong> We help your administrators verify M365 license requirements so you have clarity on costs and tools.</li>
+          <li><strong>Policy & Usage Review:</strong> We help update your current AI usage policies to set clear security and professional guardrails.</li>
+        </ul>
+      </div>
 
-        <div class="bs-step">
-          <div class="bs-step-number">02</div>
-          <p><strong>Guard:</strong> Partner with IT or M365 administrators to create security, governance, and usage guardrails.</p>
-        </div>
-
-        <div class="bs-step">
-          <div class="bs-step-number">03</div>
-          <p><strong>Grow:</strong> Train your staff with practical Copilot use cases and build confidence through adoption.</p>
-        </div>
-
-        <div class="bs-step">
-          <div class="bs-step-number">04</div>
-          <p><strong>Sustain:</strong> Keep momentum alive with follow-up tips, reminders, and practice activities.</p>
-        </div>
+      <div class="bs-box">
+        <div class="bs-phase-number">3</div>
+        <h3>GROW</h3>
+        <h4>Adoption & Results</h4>
+        <p>
+          This phase transforms individual curiosity into organizational results, creating a culture where technology consistently serves your mission.
+        </p>
+        <ul>
+          <li><strong>Interactive User Training:</strong> Live virtual training tailored to your user groups with practical AI skills and high-impact use cases.</li>
+          <li><strong>Standardized License Path:</strong> A clear path for employees to earn a paid Copilot license when your organization is ready to invest.</li>
+          <li><strong>Senior Living Use Case Guide:</strong> A high-level guide featuring 6 to 8 curated use cases for senior living executives or a department of your choice.</li>
+          <li><strong>Momentum Sustainment:</strong> Five curated Microsoft Teams posts or emails with tips, reminders, and practice activities.</li>
+        </ul>
       </div>
     </div>
   </div>
 
   <!-- OFFERS -->
-  <div class="bs-divider"></div>
-
-  <div class="bs-container">
-    <h2>Choose Your Launchpad</h2>
-
-    <div class="bs-offers">
-      <div class="bs-card">
-        <h3>The Standard Launchpad</h3>
-        <p><strong>Focus:</strong> Secure, enterprise-ready AI Chat using Microsoft Copilot Chat included in most M365 licenses.</p>
-        <p><strong>Audience:</strong> Up to 30 users.</p>
-        <p><strong>Includes:</strong> Strategy session, technical onboarding plan, user training, and senior living use case guide.</p>
-        <div class="bs-price">$8,775</div>
-        <a class="bs-btn js-bs-track" data-action="standard-priority" href="PASTE-STANDARD-PRIORITY-LIST-LINK-HERE">
-          Join Standard Priority List
-        </a>
+  <div class="bs-section-light">
+    <div class="bs-container">
+      <div class="bs-narrow bs-center">
+        <h2>Choose Your Launchpad</h2>
+        <p>
+          Select the path that best fits where your organization is today.
+        </p>
       </div>
 
-      <div class="bs-card">
-        <h3>The Premium Launchpad</h3>
-        <p><strong>Focus:</strong> Enhanced productivity for high-output roles using Microsoft Copilot Premium.</p>
-        <p><strong>Audience:</strong> Up to 12 users.</p>
-        <p><strong>Includes:</strong> Everything in Standard, plus additional Premium user training and use case guidance.</p>
-        <div class="bs-price">$13,775</div>
-        <a class="bs-btn js-bs-track" data-action="premium-priority" href="PASTE-PREMIUM-PRIORITY-LIST-LINK-HERE">
-          Join Premium Priority List
-        </a>
+      <div class="bs-grid-2">
+        <div class="bs-offer-card">
+          <div>
+            <h3>The Standard Launchpad</h3>
+            <p><strong>Focus:</strong> Secure, enterprise-ready AI Chat using the version of Microsoft Copilot Chat included in most M365 licenses.</p>
+            <p><strong>Audience:</strong> Up to 30 users.</p>
+            <p><strong>Includes:</strong> Discovery and strategy session, technical and onboarding plan, interactive user training, and Senior Living use case guide.</p>
+            <div class="bs-price">$8,775</div>
+          </div>
+          <a class="bs-btn js-bs-track" data-action="standard-priority" href="PASTE-STANDARD-PRIORITY-LIST-LINK-HERE">
+            Join the Priority List for Upcoming Launchpad Dates
+          </a>
+        </div>
+
+        <div class="bs-offer-card">
+          <div>
+            <h3>The Premium Launchpad</h3>
+            <p><strong>Focus:</strong> Enhanced productivity for your most high-output roles using Microsoft Copilot Premium.</p>
+            <p><strong>Audience:</strong> Up to 12 users.</p>
+            <p><strong>Includes:</strong> Everything in Standard, plus additional interactive user training and use case guide for Premium users.</p>
+            <div class="bs-price">$13,775</div>
+          </div>
+          <a class="bs-btn js-bs-track" data-action="premium-priority" href="PASTE-PREMIUM-PRIORITY-LIST-LINK-HERE">
+            Join the Priority List for Upcoming Launchpad Dates
+          </a>
+        </div>
       </div>
     </div>
+  </div>
 
-    <div class="bs-checklist">
-      <div class="bs-checklist-img">
-        <img src="PASTE-CHECKLIST-IMAGE-URL-HERE" alt="Checklist planning image">
-      </div>
+  <!-- CHECKLIST -->
+  <div class="bs-section-soft-red">
+    <div class="bs-container">
+      <div class="bs-checklist">
+        <div class="bs-image-placeholder">
+          Optional image or checklist mockup here
+        </div>
 
-      <div>
-        <h3>Not ready to launch?</h3>
-        <p>
-          Take the first step toward safer AI adoption today. Download the Allow-Guard-Grow Checklist and start bringing Shadow AI into the sunlight.
-        </p>
-        <a class="bs-btn bs-btn-outline js-bs-track" data-action="download-checklist" href="PASTE-CHECKLIST-PDF-LINK-HERE" target="_blank" rel="noopener">
-          Download Free Checklist
-        </a>
+        <div>
+          <h2 style="text-align:left;">Not ready to launch?</h2>
+          <p>
+            If you aren't ready for the full Launchpad, you can still take the first step toward security today.
+          </p>
+          <p>
+            Download our Allow-Guard-Grow Checklist. It contains the essential steps you need to take to bring Shadow AI into the sunlight.
+          </p>
+          <a class="bs-btn bs-btn-outline js-bs-track" data-action="download-checklist" href="PASTE-CHECKLIST-PDF-LINK-HERE" target="_blank" rel="noopener">
+            Download the Free Checklist
+          </a>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- WHY -->
   <div class="bs-container">
-    <div class="bs-why">
+    <div class="bs-narrow bs-center">
       <h2>Why Bright Solutions?</h2>
       <p>
-        Bright Solutions works exclusively with senior living organizations, so we understand the balance between resident privacy, staff capacity, security, operational complexity, and innovation.
+        Bright Solutions works exclusively with senior living organizations, so we understand the realities you are balancing: resident privacy, staff capacity, security concerns, operational complexity, and the pressure to move up the innovation maturity scale without creating unnecessary risk.
       </p>
       <p>
-        We help create a practical path forward that gives your team permission to use AI safely, puts the right guardrails in place, and builds the confidence needed to turn AI into real organizational value.
+        We are not here to sell you software or push AI for the sake of innovation. We help you create a practical path forward, one that gives your team permission to use AI safely, puts the right guardrails in place, and builds the confidence and habits needed to turn AI into real organizational value.
       </p>
-      <p><strong>Questions?</strong> Reach out at <a href="mailto:katie@brightsolutions.co">katie@brightsolutions.co</a>.</p>
+      <p>
+        Our role is to bridge strategy, operations, technology, and adoption so AI becomes something your teams can use responsibly and effectively, not another initiative that creates confusion or stalls after launch.
+      </p>
+      <p>
+        <strong>Questions?</strong> Reach out at
+        <a href="mailto:katie@brightsolutions.co">katie@brightsolutions.co</a>.
+      </p>
     </div>
   </div>
 
   <!-- STAY CONNECTED -->
-  <div class="bs-container bs-connect">
-    <h2>Stay Connected</h2>
-    <p>
-      Want to keep learning about AI, innovation, and technology strategy in senior living?
-    </p>
-    <a class="bs-btn js-bs-track" data-action="subscribe-bright-brief" href="PASTE-BRIGHT-BRIEF-SUBSCRIBE-LINK-HERE">
-      Subscribe to The Bright Brief
-    </a>
+  <div class="bs-section-light">
+    <div class="bs-container bs-center">
+      <h2>Stay Connected</h2>
+      <p>
+        Want to keep learning about AI, innovation, and technology strategy in senior living?
+      </p>
 
-    <div class="bs-socials">
-      <a href="PASTE-LINKEDIN-LINK-HERE" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="https://brightsolutions.co" target="_blank" rel="noopener">Website</a>
-      <a href="PASTE-FACEBOOK-LINK-HERE" target="_blank" rel="noopener">Facebook</a>
-      <a href="PASTE-YOUTUBE-LINK-HERE" target="_blank" rel="noopener">YouTube</a>
+      <a class="bs-btn js-bs-track" data-action="subscribe-bright-brief" href="PASTE-BRIGHT-BRIEF-SUBSCRIBE-LINK-HERE">
+        Subscribe to The Bright Brief
+      </a>
+
+      <div class="bs-socials">
+        <a href="PASTE-LINKEDIN-LINK-HERE" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://brightsolutions.co" target="_blank" rel="noopener">Website</a>
+        <a href="PASTE-FACEBOOK-LINK-HERE" target="_blank" rel="noopener">Facebook</a>
+        <a href="PASTE-YOUTUBE-LINK-HERE" target="_blank" rel="noopener">YouTube</a>
+      </div>
+
+      <p class="bs-note">
+        Replace the placeholder links before publishing.
+      </p>
     </div>
-
-    <p class="bs-note">
-      Replace the placeholder links before publishing.
-    </p>
   </div>
 
   <script>
