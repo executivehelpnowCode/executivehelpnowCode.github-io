@@ -11,6 +11,9 @@
       color: var(--bs-dark);
       line-height: 1.6;
     }
+    .bs-red {
+  color: var(--bs-red);
+}
 
     .bs-webinar-landing * {
       box-sizing: border-box;
@@ -198,25 +201,17 @@
     }
 
     .bs-webinar-landing .bs-checklist {
-      display: grid;
-      grid-template-columns: 0.8fr 1.2fr;
-      gap: 36px;
-      align-items: center;
       background: #fff;
       border: 1px solid var(--bs-border);
-      padding: 38px;
+      padding: 44px 34px;
       margin-top: 32px;
+      text-align: center;
+      display: flex;
+      justify-content: center;
     }
 
-    .bs-webinar-landing .bs-image-placeholder {
-      min-height: 220px;
-      background: linear-gradient(135deg, #eeeeee, #fafafa);
-      display: grid;
-      place-items: center;
-      color: #999;
-      font-size: 14px;
-      text-align: center;
-      padding: 20px;
+    .bs-webinar-landing .bs-checklist-content {
+      max-width: 680px;
     }
 
     .bs-webinar-landing .bs-socials {
@@ -239,10 +234,84 @@
       margin-top: 22px;
     }
 
+    /* MODAL */
+    .bs-webinar-landing .bs-modal-toggle {
+      display: none;
+    }
+
+    .bs-webinar-landing .bs-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 999999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .bs-webinar-landing .bs-modal-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      cursor: pointer;
+    }
+
+    .bs-webinar-landing .bs-modal-content {
+      position: relative;
+      width: 100%;
+      max-width: 560px;
+      background: #fff;
+      padding: 34px;
+      z-index: 1;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+    }
+
+    .bs-webinar-landing .bs-modal-close {
+      position: absolute;
+      top: 14px;
+      right: 18px;
+      font-size: 30px;
+      cursor: pointer;
+      line-height: 1;
+      color: var(--bs-dark);
+    }
+
+    .bs-webinar-landing .bs-modal-content .bs-field-label {
+      display: block;
+      margin: 14px 0 6px;
+      font-weight: 700;
+      color: var(--bs-dark);
+    }
+
+    .bs-webinar-landing .bs-modal-content input[type="email"],
+    .bs-webinar-landing .bs-modal-content input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--bs-border);
+      font-size: 15px;
+    }
+
+    .bs-webinar-landing .bs-modal-content input[type="submit"] {
+      width: 100%;
+      margin-top: 18px;
+      padding: 14px 24px;
+      border: 1px solid var(--bs-red);
+      background: var(--bs-red);
+      color: #fff;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-size: 13px;
+      letter-spacing: 0.04em;
+    }
+
+    #bs-standard-modal-toggle:checked ~ .bs-standard-modal,
+    #bs-premium-modal-toggle:checked ~ .bs-premium-modal {
+      display: flex;
+    }
+
     @media (max-width: 850px) {
       .bs-webinar-landing .bs-grid-3,
-      .bs-webinar-landing .bs-grid-2,
-      .bs-webinar-landing .bs-checklist {
+      .bs-webinar-landing .bs-grid-2 {
         grid-template-columns: 1fr;
       }
 
@@ -252,6 +321,10 @@
 
       .bs-webinar-landing .bs-btn {
         width: 100%;
+      }
+
+      .bs-webinar-landing .bs-modal-content {
+        padding: 28px 22px;
       }
     }
   </style>
@@ -349,10 +422,12 @@
             <p><strong>Audience:</strong> Up to 30 users.</p>
             <p><strong>Includes:</strong> Discovery and strategy session, technical and onboarding plan, interactive user training, and Senior Living use case guide.</p>
             <div class="bs-price">$8,775</div>
+            <p><spam class="bs-red">Only 19 spots left this summer!</spam> </p>
           </div>
-          <a class="bs-btn js-bs-track" data-action="standard-priority" href="PASTE-STANDARD-PRIORITY-LIST-LINK-HERE">
+
+          <label class="bs-btn" for="bs-standard-modal-toggle">
             Join the Priority List for Upcoming Launchpad Dates
-          </a>
+          </label>
         </div>
 
         <div class="bs-offer-card">
@@ -362,10 +437,12 @@
             <p><strong>Audience:</strong> Up to 12 users.</p>
             <p><strong>Includes:</strong> Everything in Standard, plus additional interactive user training and use case guide for Premium users.</p>
             <div class="bs-price">$13,775</div>
+             <p><spam class="bs-red">Only 19 spots left this summer!</spam> </p>
           </div>
-          <a class="bs-btn js-bs-track" data-action="premium-priority" href="PASTE-PREMIUM-PRIORITY-LIST-LINK-HERE">
+
+          <label class="bs-btn" for="bs-premium-modal-toggle">
             Join the Priority List for Upcoming Launchpad Dates
-          </a>
+          </label>
         </div>
       </div>
     </div>
@@ -375,19 +452,15 @@
   <div class="bs-section-soft-red">
     <div class="bs-container">
       <div class="bs-checklist">
-        <div class="bs-image-placeholder">
-          Optional image or checklist mockup here
-        </div>
-
-        <div>
-          <h2 style="text-align:left;">Not ready to launch?</h2>
+        <div class="bs-checklist-content">
+          <h2>Not ready to launch?</h2>
           <p>
             If you aren't ready for the full Launchpad, you can still take the first step toward security today.
           </p>
           <p>
             Download our Allow-Guard-Grow Checklist. It contains the essential steps you need to take to bring Shadow AI into the sunlight.
           </p>
-          <a class="bs-btn bs-btn-outline js-bs-track" data-action="download-checklist" href="PASTE-CHECKLIST-PDF-LINK-HERE" target="_blank" rel="noopener">
+          <a class="bs-btn bs-btn-outline" href="https://drive.google.com/uc?export=download&id=1F8a147LiM33xWG0vohwxVyfSI2C9gVoz" target="_blank" rel="noopener">
             Download the Free Checklist
           </a>
         </div>
@@ -423,7 +496,7 @@
         Want to keep learning about AI, innovation, and technology strategy in senior living?
       </p>
 
-      <a class="bs-btn js-bs-track" data-action="subscribe-bright-brief" href="PASTE-BRIGHT-BRIEF-SUBSCRIBE-LINK-HERE">
+      <a class="bs-btn" href="PASTE-BRIGHT-BRIEF-SUBSCRIBE-LINK-HERE">
         Subscribe to The Bright Brief
       </a>
 
@@ -440,19 +513,61 @@
     </div>
   </div>
 
-  <script>
-    (function () {
-      var root = document.querySelector('.bs-webinar-landing');
-      if (!root) return;
+  <!-- STANDARD MODAL -->
+  <input type="checkbox" id="bs-standard-modal-toggle" class="bs-modal-toggle">
 
-      var buttons = root.querySelectorAll('.js-bs-track');
+  <div class="bs-modal bs-standard-modal">
+    <label class="bs-modal-overlay" for="bs-standard-modal-toggle"></label>
 
-      buttons.forEach(function (button) {
-        button.addEventListener('click', function () {
-          var action = button.getAttribute('data-action') || 'button-click';
-          console.log('[Bright Solutions Webinar Landing Page]', action);
-        });
-      });
-    })();
-  </script>
+    <div class="bs-modal-content">
+      <label class="bs-modal-close" for="bs-standard-modal-toggle">&times;</label>
+
+      <h3>The Standard Launchpad Priority List</h3>
+      <p>Join the priority list for upcoming Standard Launchpad dates.</p>
+
+      <form action="https://brightsolutions.us18.list-manage.com/subscribe/post?u=e02cc6a18bc549eceabe2e7be&amp;id=bbbe94cc6a&amp;f_id=0032b0e6f0" method="post" target="_blank">
+        <label class="bs-field-label">Email Address *</label>
+        <input type="email" name="EMAIL" required>
+
+        <label class="bs-field-label">Company</label>
+        <input type="text" name="MMERGE5">
+
+        <div aria-hidden="true" style="position:absolute; left:-5000px;">
+          <input type="text" name="b_e02cc6a18bc549eceabe2e7be_bbbe94cc6a" tabindex="-1">
+        </div>
+
+        <input type="submit" value="Subscribe">
+      </form>
+    </div>
+  </div>
+
+  <!-- PREMIUM MODAL -->
+  <input type="checkbox" id="bs-premium-modal-toggle" class="bs-modal-toggle">
+
+  <div class="bs-modal bs-premium-modal">
+    <label class="bs-modal-overlay" for="bs-premium-modal-toggle"></label>
+
+    <div class="bs-modal-content">
+      <label class="bs-modal-close" for="bs-premium-modal-toggle">&times;</label>
+
+      <h3>The Premium Launchpad Priority List</h3>
+      <p>Join the priority list for upcoming Premium Launchpad dates.</p>
+
+      <form action="https://brightsolutions.us18.list-manage.com/subscribe/post?u=e02cc6a18bc549eceabe2e7be&amp;id=bbbe94cc6a&amp;f_id=0031b0e6f0" method="post" target="_blank">
+        <label class="bs-field-label">Email Address *</label>
+        <input type="email" name="EMAIL" required>
+
+        <label class="bs-field-label">Company</label>
+        <input type="text" name="MMERGE5">
+
+        <input type="hidden" name="tags" value="3210102">
+
+        <div aria-hidden="true" style="position:absolute; left:-5000px;">
+          <input type="text" name="b_e02cc6a18bc549eceabe2e7be_bbbe94cc6a" tabindex="-1">
+        </div>
+
+        <input type="submit" value="Subscribe">
+      </form>
+    </div>
+  </div>
 </section>
