@@ -1,0 +1,426 @@
+<section class="bs-webinar-landing">
+  <style>
+    .bs-webinar-landing {
+      --bs-red: #e81810;
+      --bs-dark: #111;
+      --bs-gray: #4f4f4f;
+      --bs-light: #f6f6f6;
+      --bs-soft-red: #fff1f0;
+      --bs-border: #e2e2e2;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--bs-dark);
+      line-height: 1.6;
+    }
+
+    .bs-red {
+      color: var(--bs-red);
+    }
+
+    .bs-webinar-landing * {
+      box-sizing: border-box;
+    }
+
+    .bs-webinar-landing .bs-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 70px 22px;
+    }
+
+    .bs-webinar-landing .bs-narrow {
+      max-width: 880px;
+      margin: 0 auto;
+    }
+
+    .bs-webinar-landing h2,
+    .bs-webinar-landing h3 {
+      margin: 0 0 16px;
+      line-height: 1.2;
+      color: var(--bs-dark);
+    }
+
+    .bs-webinar-landing h2 {
+      font-size: clamp(30px, 4vw, 44px);
+      text-align: center;
+    }
+
+    .bs-webinar-landing h3 {
+      font-size: 24px;
+    }
+
+    .bs-webinar-landing p {
+      margin: 0 0 16px;
+      color: var(--bs-gray);
+      font-size: 16px;
+    }
+
+    .bs-webinar-landing .bs-section-light {
+      background: var(--bs-light);
+    }
+
+    .bs-webinar-landing .bs-section-soft-red {
+      background: var(--bs-soft-red);
+    }
+
+    .bs-webinar-landing .bs-center {
+      text-align: center;
+    }
+
+    .bs-webinar-landing .bs-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 26px;
+      margin-top: 34px;
+    }
+
+    .bs-webinar-landing .bs-offer-card {
+      background: #fff;
+      border: 1px solid var(--bs-border);
+      padding: 34px 30px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .bs-webinar-landing .bs-price {
+      font-size: 32px;
+      color: var(--bs-red);
+      font-weight: 700;
+      margin: 18px 0 24px;
+    }
+
+    .bs-webinar-landing .bs-btn {
+      display: inline-block;
+      text-align: center;
+      padding: 14px 24px;
+      border: 1px solid var(--bs-red);
+      background: var(--bs-red);
+      color: #fff !important;
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .bs-webinar-landing .bs-btn:hover {
+      opacity: 0.88;
+    }
+
+    .bs-webinar-landing .bs-btn-outline {
+      background: transparent;
+      color: var(--bs-dark) !important;
+      border-color: var(--bs-dark);
+    }
+
+    .bs-webinar-landing .bs-checklist {
+      background: #fff;
+      border: 1px solid var(--bs-border);
+      padding: 44px 34px;
+      margin-top: 32px;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+    }
+
+    .bs-webinar-landing .bs-checklist-content {
+      max-width: 680px;
+    }
+
+    .bs-webinar-landing .bs-socials {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .bs-webinar-landing .bs-socials a {
+      color: var(--bs-dark);
+      text-decoration: none;
+      border-bottom: 1px solid var(--bs-dark);
+    }
+
+    .bs-webinar-landing .bs-modal-toggle {
+      display: none;
+    }
+
+    .bs-webinar-landing .bs-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 999999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .bs-webinar-landing .bs-modal-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      cursor: pointer;
+    }
+
+    .bs-webinar-landing .bs-modal-content {
+      position: relative;
+      width: 100%;
+      max-width: 560px;
+      background: #fff;
+      padding: 34px;
+      z-index: 1;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+    }
+
+    .bs-webinar-landing .bs-modal-content-large {
+      max-width: 760px;
+      height: 82vh;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .bs-webinar-landing .bs-modal-close {
+      position: absolute;
+      top: 14px;
+      right: 18px;
+      font-size: 30px;
+      cursor: pointer;
+      line-height: 1;
+      color: var(--bs-dark);
+      z-index: 3;
+      background: #fff;
+      width: 34px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .bs-webinar-landing .bs-field-label {
+      display: block;
+      margin: 14px 0 6px;
+      font-weight: 700;
+      color: var(--bs-dark);
+    }
+
+    .bs-webinar-landing input[type="email"],
+    .bs-webinar-landing input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--bs-border);
+      font-size: 15px;
+    }
+
+    .bs-webinar-landing input[type="submit"] {
+      width: 100%;
+      margin-top: 18px;
+      padding: 14px 24px;
+      border: 1px solid var(--bs-red);
+      background: var(--bs-red);
+      color: #fff;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-size: 13px;
+      letter-spacing: 0.04em;
+    }
+
+    .bs-mailchimp-frame {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: #fff;
+    }
+
+    #bs-standard-modal-toggle:checked ~ .bs-standard-modal,
+    #bs-premium-modal-toggle:checked ~ .bs-premium-modal,
+    #bs-mailchimp-frame-modal-toggle:checked ~ .bs-mailchimp-frame-modal {
+      display: flex;
+    }
+
+    @media (max-width: 850px) {
+      .bs-webinar-landing .bs-grid-2 {
+        grid-template-columns: 1fr;
+      }
+
+      .bs-webinar-landing .bs-container {
+        padding: 52px 20px;
+      }
+
+      .bs-webinar-landing .bs-btn {
+        width: 100%;
+      }
+
+      .bs-webinar-landing .bs-modal-content {
+        padding: 28px 22px;
+      }
+
+      .bs-webinar-landing .bs-modal-content-large {
+        padding: 0;
+        height: 85vh;
+      }
+    }
+  </style>
+
+  <!-- OFFERS -->
+  <div class="bs-section-light">
+    <div class="bs-container">
+      <div class="bs-narrow bs-center">
+        <h2>Choose Your Launchpad</h2>
+        <p>Select the path that best fits where your organization is today.</p>
+      </div>
+
+      <div class="bs-grid-2">
+        <div class="bs-offer-card">
+          <div>
+            <h3>The Standard Launchpad</h3>
+            <p><strong>Focus:</strong> Secure, enterprise-ready AI Chat using the version of Microsoft Copilot Chat included in most M365 licenses.</p>
+            <p><strong>Audience:</strong> Up to 30 users.</p>
+            <p><strong>Includes:</strong> Discovery and strategy session, technical and onboarding plan, interactive user training, and Senior Living use case guide.</p>
+            <div class="bs-price">$8,775</div>
+            <p><span class="bs-red">Only 19 spots left this summer!</span></p>
+            <br>
+          </div>
+
+          <label class="bs-btn" for="bs-standard-modal-toggle">
+            Join the Priority List for Upcoming Launchpad Dates
+          </label>
+        </div>
+
+        <div class="bs-offer-card">
+          <div>
+            <h3>The Premium Launchpad</h3>
+            <p><strong>Focus:</strong> Enhanced productivity for your most high-output roles using Microsoft Copilot Premium.</p>
+            <p><strong>Audience:</strong> Up to 12 users.</p>
+            <p><strong>Includes:</strong> Everything in Standard, plus additional interactive user training and use case guide for Premium users.</p>
+            <div class="bs-price">$13,775</div>
+            <p><span class="bs-red">Only 19 spots left this summer!</span></p>
+            <br>
+          </div>
+
+          <label class="bs-btn" for="bs-premium-modal-toggle">
+            Join the Priority List for Upcoming Launchpad Dates
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHECKLIST -->
+  <div class="bs-section-soft-red">
+    <div class="bs-container">
+      <div class="bs-checklist">
+        <div class="bs-checklist-content">
+          <h2>Not ready to launch?</h2>
+          <p>If you aren't ready for the full Launchpad, you can still take the first step toward security today.</p>
+          <p>Download our Allow-Guard-Grow Checklist. It contains the essential steps you need to take to bring Shadow AI into the sunlight.</p>
+          <a class="bs-btn bs-btn-outline" href="https://drive.google.com/uc?export=download&id=1F8a147LiM33xWG0vohwxVyfSI2C9gVoz" target="_blank" rel="noopener">
+            Download the Free Checklist
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHY -->
+  <div class="bs-container">
+    <div class="bs-narrow bs-center">
+      <h2>Why Bright Solutions?</h2>
+      <p>Bright Solutions works exclusively with senior living organizations, so we understand the realities you are balancing: resident privacy, staff capacity, security concerns, operational complexity, and the pressure to move up the innovation maturity scale without creating unnecessary risk.</p>
+      <p>We are not here to sell you software or push AI for the sake of innovation. We help you create a practical path forward, one that gives your team permission to use AI safely, puts the right guardrails in place, and builds the confidence and habits needed to turn AI into real organizational value.</p>
+      <p>Our role is to bridge strategy, operations, technology, and adoption so AI becomes something your teams can use responsibly and effectively, not another initiative that creates confusion or stalls after launch.</p>
+      <p><strong>Questions?</strong> Reach out at <a href="mailto:katie@brightsolutions.co">katie@brightsolutions.co</a>.</p>
+    </div>
+  </div>
+
+  <!-- STAY CONNECTED -->
+  <div class="bs-section-light">
+    <div class="bs-container bs-center">
+      <h2>Stay Connected</h2>
+      <p>Want to keep learning about AI, innovation, and technology strategy in senior living?</p>
+
+      <a class="bs-btn" href="https://www.brightsolutions.co/bright-brief">
+        Subscribe to The Bright Brief
+      </a>
+
+      <div class="bs-socials">
+        <a href="https://www.linkedin.com/in/katiebrightsolutions/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://brightsolutions.co" target="_blank" rel="noopener">Website</a>
+        <a href="https://www.facebook.com/katiebrightsolutions/" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://www.youtube.com/@brightsolutionsconsulting" target="_blank" rel="noopener">YouTube</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- STANDARD MODAL -->
+  <input type="checkbox" id="bs-standard-modal-toggle" class="bs-modal-toggle">
+
+  <div class="bs-modal bs-standard-modal">
+    <label class="bs-modal-overlay" for="bs-standard-modal-toggle"></label>
+
+    <div class="bs-modal-content">
+      <label class="bs-modal-close" for="bs-standard-modal-toggle">&times;</label>
+
+      <h3>The Standard Launchpad Priority List</h3>
+      <p>Join the priority list for upcoming Standard Launchpad dates.</p>
+
+      <form action="https://brightsolutions.us18.list-manage.com/subscribe/post?u=e02cc6a18bc549eceabe2e7be&amp;id=bbbe94cc6a&amp;f_id=0032b0e6f0" method="post" id="mc-embedded-subscribe-form-standard" name="mc-embedded-subscribe-form-standard" class="validate" target="bs-mailchimp-frame" onsubmit="document.getElementById('bs-standard-modal-toggle').checked=false; document.getElementById('bs-mailchimp-frame-modal-toggle').checked=true;">
+        <label class="bs-field-label">Email Address *</label>
+        <input type="email" name="EMAIL" required>
+
+        <label class="bs-field-label">Company</label>
+        <input type="text" name="MMERGE5">
+
+        <input type="hidden" name="tags" value="3210101">
+
+        <div aria-hidden="true" style="position:absolute; left:-5000px;">
+          <input type="text" name="b_e02cc6a18bc549eceabe2e7be_bbbe94cc6a" tabindex="-1">
+        </div>
+
+        <input type="submit" value="Subscribe">
+      </form>
+    </div>
+  </div>
+
+  <!-- PREMIUM MODAL -->
+  <input type="checkbox" id="bs-premium-modal-toggle" class="bs-modal-toggle">
+
+  <div class="bs-modal bs-premium-modal">
+    <label class="bs-modal-overlay" for="bs-premium-modal-toggle"></label>
+
+    <div class="bs-modal-content">
+      <label class="bs-modal-close" for="bs-premium-modal-toggle">&times;</label>
+
+      <h3>The Premium Launchpad Priority List</h3>
+      <p>Join the priority list for upcoming Premium Launchpad dates.</p>
+
+      <form action="https://brightsolutions.us18.list-manage.com/subscribe/post?u=e02cc6a18bc549eceabe2e7be&amp;id=bbbe94cc6a&amp;f_id=0031b0e6f0" method="post" id="mc-embedded-subscribe-form-premium" name="mc-embedded-subscribe-form-premium" class="validate" target="bs-mailchimp-frame" onsubmit="document.getElementById('bs-premium-modal-toggle').checked=false; document.getElementById('bs-mailchimp-frame-modal-toggle').checked=true;">
+        <label class="bs-field-label">Email Address *</label>
+        <input type="email" name="EMAIL" required>
+
+        <label class="bs-field-label">Company</label>
+        <input type="text" name="MMERGE5">
+
+        <input type="hidden" name="tags" value="3210102">
+
+        <div aria-hidden="true" style="position:absolute; left:-5000px;">
+          <input type="text" name="b_e02cc6a18bc549eceabe2e7be_bbbe94cc6a" tabindex="-1">
+        </div>
+
+        <input type="submit" value="Subscribe">
+      </form>
+    </div>
+  </div>
+
+  <!-- MAILCHIMP CAPTCHA / CONFIRMATION IFRAME MODAL -->
+  <input type="checkbox" id="bs-mailchimp-frame-modal-toggle" class="bs-modal-toggle">
+
+  <div class="bs-modal bs-mailchimp-frame-modal">
+    <label class="bs-modal-overlay" for="bs-mailchimp-frame-modal-toggle"></label>
+
+    <div class="bs-modal-content bs-modal-content-large">
+      <label class="bs-modal-close" for="bs-mailchimp-frame-modal-toggle">&times;</label>
+      <iframe name="bs-mailchimp-frame" class="bs-mailchimp-frame"></iframe>
+    </div>
+  </div>
+</section>
